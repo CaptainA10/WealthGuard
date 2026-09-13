@@ -1,0 +1,29 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Java / Maven
+target/
+*.class
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Node / React (future frontend/)
+node_modules/
+dist/
+build/
+
+# Local secrets
+.env
+
+# OS
+.DS_Store
+Thumbs.db

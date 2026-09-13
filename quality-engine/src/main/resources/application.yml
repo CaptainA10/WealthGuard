@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: wealthguard-quality-engine
+  config:
+    import: "classpath:quality-rules.yml"
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs

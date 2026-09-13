@@ -1,0 +1,143 @@
+# Configured identity of every quality rule the engine runs.
+#
+# This is the file that makes the engine's controls "configurable, not
+# hardcoded" (cahier des charges §2.2): tightening POS_CONCENTRATION_LIMIT from
+# 40% to 25%, or downgrading a control from BLOQUANT to AVERTISSEMENT, is a
+# one-line change here with no recompilation. Every `id` must have a matching
+# constructor registered in QualityRuleFactory, and every id here must also
+# appear in RuleIds and in the Python seed's anomaly catalogue
+# (data-pipeline/wealthguard_pipeline/seed/anomalies.py) -- the three are a
+# single contract, see RuleIds' javadoc.
+wealthguard:
+  quality:
+    rules:
+      - id: POS_REQUIRED_FIELDS
+        label: "Champs obligatoires d'une position"
+        category: COMPLETUDE
+        severity: BLOQUANT
+        description: >
+          Une position doit porter un identifiant, un client, un ticker, une
+          quantite, un prix d'achat, une date d'achat et une devise.
+        parameters:
+          fields: "positionId,clientId,ticker,quantity,purchasePrice,purchaseDate,currency"
+
+      - id: POS_UNIQUE_ID
+        label: "Unicite de l'identifiant de position"
+        category: UNICITE
+        severity: BLOQUANT
+        description: "Un position_id ne doit apparaitre qu'une seule fois dans le lot."
+
+      - id: CLI_UNIQUE_ID
+        label: "Unicite de l'identifiant client"
+        category: UNICITE
+        severity: BLOQUANT
+        description: "Un client_id ne doit identifier qu'une seule fiche client."
+
+      - id: POS_KNOWN_CLIENT
+        label: "Client connu"
+        category: REFERENTIEL
+        severity: BLOQUANT
+        description: "Le client_id d'une position doit exister dans le referentiel clients."
+
+      - id: POS_KNOWN_INSTRUMENT
+        label: "Instrument connu"
+        category: REFERENTIEL
+        severity: BLOQUANT
+        description: "Le ticker d'une position doit exister dans le referentiel instruments."
+
+      - id: ALLOC_KNOWN_CLIENT
+        label: "Client connu (allocation cible)"
+        category: REFERENTIEL
+        severity: BLOQUANT
+        description: >
+          Le client_id d'une ligne d'allocation cible doit exister dans le
+          referentiel clients.
+
+      - id: POS_POSITIVE_QUANTITY
+        label: "Quantite strictement positive"
+        category: COHERENCE_METIER
+        severity: BLOQUANT
+        description: "Sur un mandat long-only, une quantite doit etre strictement positive."
+        parameters:
+          minExclusive: "0"
+
+      - id: POS_POSITIVE_PURCHASE_PRICE
+        label: "Prix d'achat strictement positif"
+        category: COHERENCE_METIER
+        severity: BLOQUANT
+        description: "Un prix d'achat nul ou negatif rend la plus-value latente incalculable."
+        parameters:
+          minExclusive: "0"
+
+      - id: POS_PURCHASE_DATE_NOT_FUTURE
+        label: "Date d'achat non future"
+        category: COHERENCE_METIER
+        severity: BLOQUANT
+        description: >
+          Une position ne peut pas avoir ete achetee apres la date de
+          valorisation.
+        parameters:
+          toleranceDays: "0"
+
+      - id: POS_PURCHASE_AFTER_ONBOARDING
+        label: "Achat posterieur a l'entree en relation"
+        category: COHERENCE_METIER
+        severity: AVERTISSEMENT
+        description: >
+          Un achat anterieur a l'onboarding du client est suspect, sauf
+          transfert de titres depuis un autre etablissement.
+        parameters:
+          toleranceDays: "0"
+
+      - id: POS_CURRENCY_MATCHES_INSTRUMENT
+        label: "Devise coherente avec l'instrument"
+        category: COHERENCE_METIER
+        severity: AVERTISSEMENT
+        description: >
+          La devise d'une position doit correspondre a la devise de cotation
+          de l'instrument.
+
+      - id: POS_CONCENTRATION_LIMIT
+        label: "Limite de concentration"
+        category: COHERENCE_METIER
+        severity: AVERTISSEMENT
+        description: >
+          Une ligne ne devrait pas depasser une part maximale du prix de
+          revient du portefeuille du client.
+        parameters:
+          maxWeightPct: "40"
+
+      - id: POS_QUANTITY_PRECISION
+        label: "Precision de la quantite"
+        category: COHERENCE_METIER
+        severity: INFO
+        description: "Une quantite avec trop de decimales signale un export amont degrade."
+        parameters:
+          maxDecimals: "4"
+
+      - id: CLI_KNOWN_RISK_PROFILE
+        label: "Profil de risque connu"
+        category: COHERENCE_METIER
+        severity: AVERTISSEMENT
+        description: "Le profil de risque d'un client doit appartenir a la nomenclature du cabinet."
+        parameters:
+          allowedProfiles: "PRUDENT,EQUILIBRE,DYNAMIQUE,OFFENSIF"
+
+      - id: ALLOC_SUM_EQUALS_100
+        label: "Somme des allocations cibles egale a 100%"
+        category: COHERENCE_METIER
+        severity: AVERTISSEMENT
+        description: >
+          Les poids cibles d'un client doivent sommer a 100%, aux arrondis
+          pres.
+        parameters:
+          tolerancePct: "0.5"
+
+      - id: ALLOC_WEIGHT_IN_RANGE
+        label: "Poids cible dans l'intervalle [0, 100]"
+        category: COHERENCE_METIER
+        severity: BLOQUANT
+        description: "Un poids cible ne peut pas etre negatif ni superieur a 100%."
+        parameters:
+          minInclusive: "0"
+          maxInclusive: "100"
