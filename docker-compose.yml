@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: wealthguard-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${AZURE_POSTGRESQL_DATABASE:-wealthguard}
+      POSTGRES_USER: ${AZURE_POSTGRESQL_USER:-wealthguard}
+      POSTGRES_PASSWORD: ${AZURE_POSTGRESQL_PASSWORD:-wealthguard}
+    ports:
+      - "${AZURE_POSTGRESQL_PORT:-5432}:5432"
+    volumes:
+      - wealthguard-postgres-data:/var/lib/postgresql/data
+      - ./data-pipeline/wealthguard_pipeline/sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${AZURE_POSTGRESQL_USER:-wealthguard}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  wealthguard-postgres-data:

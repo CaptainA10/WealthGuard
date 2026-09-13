@@ -32,7 +32,11 @@ architecture polyglotte assumée, pas un exercice académique isolé.
 - `data/seed/` — dataset synthétique versionné (généré, pas écrit à la main).
 - `docs/` — documentation générée ou de référence (`ANOMALIES.md` est **généré**,
   ne pas éditer à la main).
-- `frontend/`, `sql/` — placeholders vides, pas encore commencés.
+- `frontend/`, `sql/` (racine) — placeholders vides, pas encore commencés. Les
+  fichiers SQL réels vivent dans `data-pipeline/wealthguard_pipeline/sql/`
+  (packagés avec le pipeline, `pyproject.toml[tool.setuptools.package-data]`).
+- `docker-compose.yml`, `.env.example` — Postgres local pour le développement ;
+  `cp .env.example .env` puis `docker compose up -d postgres`.
 
 ## État réel d'avancement (à tenir à jour — ne pas décrire l'aspirationnel comme fait)
 
@@ -81,17 +85,65 @@ Phases du cahier des charges §6 :
      complet contre le vrai `quality-rules.yml`), `RuleParametersTest` et
      `RuleDefinitionTest` (dédiés, car ce sont ces deux classes qui font
      l'essentiel des branches du package racine `com.wealthguard.quality.rules`).
-   - **Pas encore fait** : rien côté Java pour la Phase 2 elle-même ; ce qui
-     reste est la Phase 3 (le pipeline Python doit appeler cette API, ce qu'il
-     ne fait pas encore).
-3. **Pipeline Python** — **PAS COMMENCÉ.** `config.py` existe (lecture d'env
-   complète, voir conventions ci-dessous) mais aucune logique d'ingestion, aucun
-   appel à l'API Java, aucun calcul d'indicateurs, aucun algorithme
-   z-score/IQR maison. `pyproject.toml` déclare un entry point
-   `wg-run-pipeline = wealthguard_pipeline.main:main` — **ce module n'existe pas
-   encore**, ne pas supposer qu'il tourne.
-4. **PostgreSQL + SQL avancé** — pas commencé (`sql/` vide, pas de docker-compose,
-   pas de migration).
+   - **Pas encore fait** : rien côté Java pour la Phase 2 elle-même.
+3. **Pipeline Python — FAIT** (51 tests pytest verts, y compris 10 tests
+   d'intégration réels contre Postgres dockerisé + le moteur Java lancé en
+   local ; `python -m wealthguard_pipeline.main` tourne de bout en bout sur le
+   jeu `data/seed/landing/`).
+   - `ingest.py` : lit CSV et, en fallback, Excel (`load_landing`) ; détecte
+     `INGEST_CLOSE_PRICE_REQUIRED` et `INGEST_UNIQUE_PRICE_PER_DAY` sur
+     `market_prices` (les deux seuls controles cote Python, cf. `docs/ANOMALIES.md`) ;
+     `dedupe_market_prices` deduplique pour le chargement (garde la derniere
+     ligne recue) sans jamais cacher l'anomalie, detectee sur les donnees brutes.
+   - `outliers.py` : detecteur fait maison (§2.3) -- **pas** de z-score/IQR
+     global sur les rendements (ca double-compte un pic ponctuel, voir le
+     docstring), mais un z-score/IQR sur une **fenetre locale de niveaux de
+     prix, le point exclu de sa propre fenetre** (proche d'un filtre de
+     Hampel). Complexite O(n * w log w) documentee. Rappel verifie a 100% sur
+     les 5 `PRICE_SPIKE` injectes (`tests/test_outliers.py::TestDetectPriceOutliersOnTheRealSeedDataset`),
+     plus ~19 mouvements reels detectes sur les vraies donnees Yahoo Finance
+     (attendu, pas un bug -- voir "Bug reel trouve" ci-dessous).
+   - `quality_client.py` : `QualityEngineClient` -- seul endroit qui connait le
+     JSON camelCase du DTO Java ; convertit NaN -> null, dates -> ISO ; retries
+     configurables (`WG_QUALITY_API_RETRIES`).
+   - `quarantine.py` : retire du dataset toute ligne visee par une anomalie
+     **BLOQUANT**, avec cascade par `client_id` (ex. `CLI_UNIQUE_ID` retire
+     aussi les positions/allocations de ce client) -- sinon le chargement
+     Postgres casserait sur les FK. Les anomalies AVERTISSEMENT/INFO ne
+     quarantinent rien.
+   - `db.py` + `sql/schema.sql` + `sql/*.sql` : schema `wealthguard` (5 tables,
+     FK + index), chargement full-refresh (`TRUNCATE ... CASCADE` puis reload,
+     un run = un batch complet, pas d'incrémental). Requêtes avancées :
+     `portfolio_valuation.sql` (CTE + `ROW_NUMBER()` pour le dernier cours),
+     `allocation_vs_target.sql` (`SUM(SUM(...)) OVER (PARTITION BY client_id)`
+     apres un GROUP BY), `top_holdings.sql` (`RANK() OVER (... ORDER BY
+     market_value DESC)`).
+   - `indicators.py` : valorisation totale + plus-value latente par client,
+     allocation reelle vs cible par classe d'actif, top holdings.
+   - `main.py` (`wg-run-pipeline`) : orchestre ingest -> checks Python ->
+     appel Java -> quarantine -> load Postgres -> indicateurs -> écrit
+     `data/reports/{anomalies.json,portfolio_valuation.csv,allocation_vs_target.csv,top_holdings.csv}`.
+   - **Pas encore fait** : Azure Functions/Blob Storage (Phase 9), déploiement.
+
+   ### Bug réel trouvé et corrigé pendant cette phase
+
+   Le test `tests/test_end_to_end.py` (envoie `landing/` au vrai moteur Java,
+   compare au manifest regle par regle) a immediatement trouve une divergence
+   reelle : `POS_CONCENTRATION_LIMIT` remontait 4 anomalies au lieu de 2.
+   Cause : `PositionConcentrationLimitRule` (cote Java) groupait les positions
+   par `clientId` brut sans verifier que ce client existait -- les 2 positions
+   `ORPHAN_CLIENT_REF` (meme `client_id` factice `CLI-9999`) formaient un faux
+   "portefeuille" de 2 lignes ou l'une depassait trivialement 40%. Corrige dans
+   `quality-engine` : la regle ignore desormais un `clientId` qui ne resout
+   pas (`context.hasClient(clientId)`), et declare `isApplicable =
+   context.hasClientReference()`. Voir le javadoc de la regle et
+   `PositionConcentrationLimitRuleTest::skipsPositionsWhoseClientIdDoesNotResolve`.
+   **Cette classe de bug** (une regle d'agregat qui groupe par une cle
+   etrangere sans verifier sa resolution) merite d'etre revue sur toute future
+   regle d'agregat par client.
+4. **PostgreSQL + SQL avancé — FAIT** (schema + requêtes ci-dessus). Local via
+   `docker-compose.yml` (service `postgres`, image `postgres:16-alpine`, monte
+   `data-pipeline/wealthguard_pipeline/sql/schema.sql` en script d'init).
 5. **Dashboards Power BI / Tableau** — pas commencé.
 6. **Frontend React** — pas commencé (`frontend/` vide).
 7. **Assistant LangChain** — pas commencé (`assistant/` existe dans
@@ -145,6 +197,24 @@ Avant de dire qu'une phase est terminée, vérifier l'état réel des fichiers
   lecture d'horloge ambiante tolérée dans le moteur, précisément parce que
   c'est à la frontière HTTP et non dans une règle (voir la conception de
   `ValidationContext.evaluationDate()`).
+- **Une règle d'agrégat par client doit vérifier que le client résout.**
+  `ValidationContext.positionsByClientId()` groupe par `clientId` brut, sans
+  savoir si la clé est réelle. Toute règle qui raisonne sur "le portefeuille du
+  client" (concentration, futures règles similaires) doit explicitement
+  ignorer les groupes dont `context.hasClient(clientId)` est faux — sinon des
+  positions orphelines partageant un même `client_id` factice forment un faux
+  "portefeuille" et déclenchent des faux positifs (bug réel trouvé et corrigé
+  sur `PositionConcentrationLimitRule`, voir Phase 3 ci-dessus).
+- **Seul `quarantine.py` retire des lignes AVANT chargement Postgres, et
+  seulement les BLOQUANT.** Une anomalie AVERTISSEMENT/INFO doit rester
+  chargeable — sauf si elle viole une contrainte physique du schéma (ex.
+  doublon `(ticker, price_date)` sur une clé primaire) : dans ce seul cas,
+  dédupliquer pour le chargement (`ingest.dedupe_market_prices`) tout en
+  gardant la détection sur les données brutes, jamais l'inverse.
+- **Le détecteur d'outliers compare un prix à sa fenêtre locale, pas aux
+  rendements globaux.** Un z-score/IQR global sur les rendements jour-à-jour
+  flague deux fois un pic ponctuel (l'entrée ET la sortie du pic). Voir le
+  docstring de `outliers.py` avant de "simplifier" cet algorithme.
 
 ## Commandes utiles (vérifiées à ce jour)
 
@@ -152,7 +222,7 @@ Avant de dire qu'une phase est terminée, vérifier l'état réel des fichiers
 # Générer / régénérer le dataset synthétique
 cd data-pipeline && python -m wealthguard_pipeline.seed.generate --as-of 2026-09-13
 
-# Java : build + tests -- 104 tests JUnit 5, gate JaCoCo 85% sur les règles
+# Java : build + tests -- 107 tests JUnit 5, gate JaCoCo 85% sur les règles
 cd quality-engine && mvn test
 cd quality-engine && mvn verify
 
@@ -160,24 +230,47 @@ cd quality-engine && mvn verify
 cd quality-engine && mvn spring-boot:run
 # ou : java -jar target/quality-engine-1.0.0.jar
 
-# Python : pas encore de tests écrits dans data-pipeline/tests (vide)
+# Postgres local (une fois : cp .env.example .env)
+docker compose up -d postgres
+
+# Python : installer le package (édition) + extras dev/marché
+cd data-pipeline && pip install -e ".[dev,market]"
+
+# Tests unitaires seuls (pas de Docker/Java requis, tourne toujours vert)
 cd data-pipeline && pytest
+# Tests d'intégration (Postgres + moteur Java doivent tourner)
+cd data-pipeline && pytest -m integration
+
+# Pipeline complet de bout en bout (Postgres + moteur Java doivent tourner)
+cd data-pipeline && python -m wealthguard_pipeline.main --as-of 2026-09-13
 ```
 
-Aucun Maven/JDK n'était installé dans l'environnement au moment de la
-rédaction de ce fichier (`mvn`/`java` absents du PATH) alors qu'un JDK 17
-Adoptium existe sous `C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot` ;
-Maven a été téléchargé à la volée dans le scratchpad pour lancer les tests.
-Si `mvn` échoue avec "command not found", vérifier ce point avant de conclure
-à un problème du projet.
-
-Ne pas inventer d'autres commandes (ex. `wg-run-pipeline`, docker-compose) tant
-que les fichiers correspondants n'existent pas.
+Aucun Maven/JDK/Docker n'était garanti dans le PATH au moment de la rédaction
+de ce fichier. Un JDK 17 Adoptium existe sous
+`C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot` (pas dans le PATH) ;
+Maven a été téléchargé à la volée dans le scratchpad. Docker Desktop, lui,
+était bien disponible et fonctionnel (`docker compose`, `docker exec`). Si une
+commande échoue avec "command not found", vérifier ce point avant de conclure
+à un problème du projet. Le port 8080 est régulièrement pris par un autre
+conteneur local (Airflow) sur cette machine — utiliser `SERVER_PORT=8099` (ou
+autre) pour le moteur Java si besoin, et `WG_QUALITY_API_URL` assorti côté
+Python.
 
 ## Pièges connus
 
-- Un `.gitignore` racine existe désormais (exclut `.venv/`, `__pycache__/`,
-  `*.egg-info/`, `target/`, `node_modules/`, `.env`) — vérifier qu'il reste à
-  jour si un nouvel outil ajoute son propre dossier de build.
-- Aucun commit n'existe encore sur `master` au moment de la rédaction de ce
-  fichier — tout le travail listé ci-dessus est untracked.
+- Un `.gitignore` racine existe (exclut `.venv/`, `__pycache__/`,
+  `*.egg-info/`, `target/`, `node_modules/`, `.env`, `data/reports/`) — vérifier
+  qu'il reste à jour si un nouvel outil ajoute son propre dossier de build.
+- Le dépôt est poussé sur `https://github.com/CaptainA10/WealthGuard.git`,
+  branche `main` — malgré le cahier des charges §2.7 qui demandait GitLab
+  ("pour une fois") ; l'utilisateur a explicitement donné une URL GitHub le
+  2026-09-14, donc GitHub prime sur la préférence écrite dans le cahier des
+  charges. Si le CI/CD GitLab (Phase 8) est abordé plus tard, clarifier avec
+  l'utilisateur s'il veut un miroir GitLab ou adapter la Phase 8 à GitHub
+  Actions.
+- `docker-compose.yml` monte `data-pipeline/wealthguard_pipeline/sql/schema.sql`
+  dans `/docker-entrypoint-initdb.d/` — ce script ne s'exécute qu'à la
+  **création** du volume Postgres. Après une modification du schéma, il faut
+  soit `docker compose down -v` (perd les données locales) soit appliquer le
+  nouveau SQL manuellement ; `db.init_schema()` côté Python ne fait que du
+  `CREATE TABLE IF NOT EXISTS`, il ne migre pas un schéma existant.

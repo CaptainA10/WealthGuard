@@ -1,6 +1,7 @@
 package com.wealthguard.quality.rules.business;
 
 import com.wealthguard.quality.domain.Anomaly;
+import com.wealthguard.quality.domain.Client;
 import com.wealthguard.quality.domain.Position;
 import com.wealthguard.quality.domain.Severity;
 import com.wealthguard.quality.domain.ValidationContext;
@@ -27,7 +28,7 @@ class PositionConcentrationLimitRuleTest {
         // Client C1: 900 vs 100 cost basis -> the first line is 90% of the portfolio.
         Position dominant = position("C1", "AAPL", "9", "100");
         Position small = position("C1", "MSFT", "1", "100");
-        ValidationContext context = context(dominant, small);
+        ValidationContext context = context(List.of(client("C1")), dominant, small);
 
         List<Anomaly> anomalies = rule.evaluate(context);
 
@@ -42,7 +43,7 @@ class PositionConcentrationLimitRuleTest {
         Position second = position("C1", "MSFT", "1", "100");
         Position third = position("C1", "GOOG", "1", "100");
 
-        assertThat(rule.evaluate(context(first, second, third))).isEmpty();
+        assertThat(rule.evaluate(context(List.of(client("C1")), first, second, third))).isEmpty();
     }
 
     @Test
@@ -50,7 +51,7 @@ class PositionConcentrationLimitRuleTest {
         Position dominant = position("C1", "AAPL", "9", "100");
         Position unusable = new Position("P2", "C1", "MSFT", BigDecimal.ZERO, BigDecimal.TEN, LocalDate.of(2024, 1, 1), "USD");
 
-        List<Anomaly> anomalies = rule.evaluate(context(dominant, unusable));
+        List<Anomaly> anomalies = rule.evaluate(context(List.of(client("C1")), dominant, unusable));
 
         // Denominator is only the dominant line's own cost basis -> 100%, still a breach,
         // but the unusable line itself must not appear in the report.
@@ -64,7 +65,34 @@ class PositionConcentrationLimitRuleTest {
         Position clientB = position("B", "MSFT", "10", "100");
 
         // Each client has a single line -> 100% of their own portfolio, both breach independently.
-        assertThat(rule.evaluate(context(clientA, clientB))).hasSize(2);
+        assertThat(rule.evaluate(context(List.of(client("A"), client("B")), clientA, clientB))).hasSize(2);
+    }
+
+    @Test
+    void skipsPositionsWhoseClientIdDoesNotResolve() {
+        // Two orphan positions sharing one bad client id: with only two lines,
+        // whichever is larger trivially exceeds 40% of their combined total --
+        // a real bug this test pins down (see PositionConcentrationLimitRule's
+        // javadoc): an unresolved client is not a portfolio to score.
+        Position orphanA = position("CLI-9999", "AAPL", "6", "100");
+        Position orphanB = position("CLI-9999", "MSFT", "4", "100");
+
+        assertThat(rule.evaluate(context(List.of(client("C1")), orphanA, orphanB))).isEmpty();
+    }
+
+    @Test
+    void isNotApplicableWithoutAnyClientReferenceAtAll() {
+        Position dominant = position("C1", "AAPL", "9", "100");
+        ValidationContext context = context(List.of(), dominant);
+
+        assertThat(rule.isApplicable(context)).isFalse();
+    }
+
+    @Test
+    void isApplicableAssoonAsAClientReferenceIsPresent() {
+        ValidationContext context = context(List.of(client("C1")));
+
+        assertThat(rule.isApplicable(context)).isTrue();
     }
 
     private static Position position(String clientId, String ticker, String quantity, String price) {
@@ -73,7 +101,11 @@ class PositionConcentrationLimitRuleTest {
                 new BigDecimal(quantity), new BigDecimal(price), LocalDate.of(2024, 1, 1), "USD");
     }
 
-    private static ValidationContext context(Position... positions) {
-        return new ValidationContext(List.of(positions), List.of(), List.of(), List.of(), LocalDate.of(2024, 1, 1));
+    private static Client client(String clientId) {
+        return new Client(clientId, "Jane Doe", "EQUILIBRE", "EUR", LocalDate.of(2020, 1, 1), "advisor-1");
+    }
+
+    private static ValidationContext context(List<Client> clients, Position... positions) {
+        return new ValidationContext(List.of(positions), clients, List.of(), List.of(), LocalDate.of(2024, 1, 1));
     }
 }

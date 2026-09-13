@@ -26,6 +26,17 @@ import java.util.List;
  * denominator: including them would either crash the division or silently dilute
  * every other line's computed share.
  *
+ * <p><strong>An unresolved client is not a portfolio.</strong> {@link
+ * ValidationContext#positionsByClientId()} groups strictly by the raw {@code
+ * clientId} string, with no idea whether it resolves to a real client -- so a
+ * batch of orphan positions that all happen to share one bad id (the common
+ * case: a stale placeholder, or several rows corrupted the same way) would
+ * otherwise be scored as "one client's portfolio" and can easily trip this
+ * rule by accident. Those positions already get their own finding from
+ * {@code POS_KNOWN_CLIENT}; scoring them here too would be noise, not signal,
+ * so a {@code clientId} that does not resolve is skipped entirely, mirroring
+ * how {@link PurchaseAfterOnboardingRule} treats an unresolved client.
+ *
  * <p>Complexity: O(P) -- one pass per client to sum the denominator, one pass to
  * evaluate each line, both driven by the {@link ValidationContext#positionsByClientId()}
  * index built once at context construction.
@@ -39,10 +50,20 @@ public class PositionConcentrationLimitRule extends AbstractQualityRule {
         this.maxWeightPct = parameters().requireDecimal("maxWeightPct");
     }
 
+    /** Without any client reference at all, a real client cannot be told apart
+     * from a typo, so this control cannot say anything meaningful. */
+    @Override
+    public boolean isApplicable(ValidationContext context) {
+        return context.hasClientReference();
+    }
+
     @Override
     public List<Anomaly> evaluate(ValidationContext context) {
         List<Anomaly> found = new ArrayList<>();
         context.positionsByClientId().forEach((clientId, positions) -> {
+            if (!context.hasClient(clientId)) {
+                return;
+            }
             BigDecimal totalCostBasis = positions.stream()
                     .filter(Position::hasUsableCostBasis)
                     .map(Position::costBasis)
