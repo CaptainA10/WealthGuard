@@ -60,3 +60,22 @@ CREATE TABLE IF NOT EXISTS target_allocations (
 CREATE INDEX IF NOT EXISTS idx_positions_client_id ON positions(client_id);
 CREATE INDEX IF NOT EXISTS idx_positions_ticker ON positions(ticker);
 CREATE INDEX IF NOT EXISTS idx_market_prices_ticker_date ON market_prices(ticker, price_date);
+
+-- Append-only run history, for the Grafana monitoring dashboard (ops view of
+-- the pipeline itself, distinct from the Power BI/Tableau business dashboards
+-- built on the tables above). Never truncated by db.load_dataset(): a full
+-- refresh replaces the day's data but must never erase yesterday's trend.
+CREATE TABLE IF NOT EXISTS pipeline_runs (
+    run_id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    run_at               TIMESTAMPTZ NOT NULL DEFAULT now(),
+    as_of_date           DATE NOT NULL,
+    anomaly_count        INTEGER NOT NULL,
+    bloquant_count       INTEGER NOT NULL,
+    avertissement_count  INTEGER NOT NULL,
+    info_count           INTEGER NOT NULL,
+    clients_valued       INTEGER NOT NULL,
+    total_market_value   NUMERIC NOT NULL,
+    duration_ms          BIGINT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_pipeline_runs_run_at ON pipeline_runs(run_at);

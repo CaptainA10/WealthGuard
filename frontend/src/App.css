@@ -1,0 +1,182 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.page-header h1 {
+  margin: 0 0 4px;
+  font-size: 28px;
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  color: var(--text);
+  opacity: 0.75;
+}
+
+.status-message {
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--bg-subtle);
+}
+
+.status-error {
+  background: var(--bloquant-bg);
+  color: var(--bloquant);
+}
+
+/* --- Summary bar --- */
+
+.summary-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.summary-stat {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.summary-stat dt {
+  font-size: 13px;
+  opacity: 0.7;
+  margin: 0 0 4px;
+}
+
+.summary-stat dd {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.summary-stat-critical dd {
+  color: var(--bloquant);
+}
+
+/* --- Severity badges & filter --- */
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-bloquant {
+  background: var(--bloquant-bg);
+  color: var(--bloquant);
+}
+
+.badge-avertissement {
+  background: var(--avertissement-bg);
+  color: var(--avertissement);
+}
+
+.badge-info {
+  background: var(--info-bg);
+  color: var(--info);
+}
+
+.severity-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 20px;
+}
+
+.filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+.filter-chip-active {
+  opacity: 1;
+}
+
+.filter-chip:hover {
+  opacity: 0.85;
+}
+
+.filter-chip-active:hover {
+  opacity: 1;
+}
+
+.filter-count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+/* --- Anomaly table --- */
+
+.anomaly-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.anomaly-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.anomaly-table th {
+  text-align: left;
+  padding: 10px 12px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.anomaly-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.anomaly-table tr:last-child td {
+  border-bottom: none;
+}
+
+.rule-label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.rule-id {
+  display: block;
+  font-size: 12px;
+  opacity: 0.6;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.record-key {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.empty-state {
+  padding: 24px;
+  text-align: center;
+  opacity: 0.7;
+}

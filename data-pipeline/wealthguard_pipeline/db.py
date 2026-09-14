@@ -81,3 +81,25 @@ def read_sql_file(filename: str, engine: Engine, params: dict) -> pd.DataFrame:
     sql = _sql_resource(filename)
     with engine.connect() as conn:
         return pd.read_sql(text(sql), conn, params=params)
+
+
+def record_run(engine: Engine, run: dict) -> None:
+    """Append one row to ``pipeline_runs`` -- the source table for the Grafana
+    monitoring dashboard. Unlike :func:`load_dataset`, this never truncates:
+    the whole point is a history to plot a trend over.
+
+    ``run`` keys: ``as_of_date``, ``anomaly_count``, ``bloquant_count``,
+    ``avertissement_count``, ``info_count``, ``clients_valued``,
+    ``total_market_value``, ``duration_ms``.
+    """
+    with engine.begin() as conn:
+        conn.execute(
+            text(
+                f"INSERT INTO {SCHEMA}.pipeline_runs "
+                "(as_of_date, anomaly_count, bloquant_count, avertissement_count, info_count, "
+                " clients_valued, total_market_value, duration_ms) "
+                "VALUES (:as_of_date, :anomaly_count, :bloquant_count, :avertissement_count, :info_count, "
+                " :clients_valued, :total_market_value, :duration_ms)"
+            ),
+            run,
+        )

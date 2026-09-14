@@ -1,0 +1,12 @@
+# Tells Grafana to load every dashboard JSON file under
+# grafana/dashboards/ automatically at startup, instead of importing by hand.
+apiVersion: 1
+
+providers:
+  - name: WealthGuard
+    folder: WealthGuard
+    type: file
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards

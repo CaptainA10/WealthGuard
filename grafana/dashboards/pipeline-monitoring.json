@@ -1,0 +1,134 @@
+{
+  "title": "WealthGuard — Pipeline monitoring",
+  "uid": "wealthguard-pipeline-monitoring",
+  "editable": true,
+  "schemaVersion": 39,
+  "time": { "from": "now-30d", "to": "now" },
+  "refresh": "",
+  "tags": ["wealthguard"],
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Dernier run — anomalies",
+      "gridPos": { "h": 6, "w": 6, "x": 0, "y": 0 },
+      "datasource": { "type": "postgres", "uid": "wealthguard-postgres" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" } }, "overrides": [] },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "table",
+          "rawSql": "SELECT anomaly_count FROM wealthguard.pipeline_runs ORDER BY run_at DESC LIMIT 1"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Dernier run — bloquantes",
+      "gridPos": { "h": 6, "w": 6, "x": 6, "y": 0 },
+      "datasource": { "type": "postgres", "uid": "wealthguard-postgres" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "red", "value": 1 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "table",
+          "rawSql": "SELECT bloquant_count FROM wealthguard.pipeline_runs ORDER BY run_at DESC LIMIT 1"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Dernier run — clients valorisés",
+      "gridPos": { "h": 6, "w": 6, "x": 12, "y": 0 },
+      "datasource": { "type": "postgres", "uid": "wealthguard-postgres" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" } }, "overrides": [] },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "table",
+          "rawSql": "SELECT clients_valued FROM wealthguard.pipeline_runs ORDER BY run_at DESC LIMIT 1"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Dernier run — durée",
+      "gridPos": { "h": 6, "w": 6, "x": 18, "y": 0 },
+      "datasource": { "type": "postgres", "uid": "wealthguard-postgres" },
+      "fieldConfig": {
+        "defaults": { "unit": "ms", "color": { "mode": "thresholds" } },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "table",
+          "rawSql": "SELECT duration_ms FROM wealthguard.pipeline_runs ORDER BY run_at DESC LIMIT 1"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Anomalies par run et par criticité",
+      "gridPos": { "h": 10, "w": 12, "x": 0, "y": 6 },
+      "datasource": { "type": "postgres", "uid": "wealthguard-postgres" },
+      "fieldConfig": {
+        "defaults": { "custom": { "drawStyle": "bars", "stacking": { "mode": "normal" } } },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "time_series",
+          "rawSql": "SELECT run_at AS \"time\", bloquant_count AS \"Bloquant\", avertissement_count AS \"Avertissement\", info_count AS \"Info\" FROM wealthguard.pipeline_runs ORDER BY run_at"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Valorisation totale par run",
+      "gridPos": { "h": 10, "w": 12, "x": 12, "y": 6 },
+      "datasource": { "type": "postgres", "uid": "wealthguard-postgres" },
+      "fieldConfig": { "defaults": { "unit": "currencyEUR" }, "overrides": [] },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "time_series",
+          "rawSql": "SELECT run_at AS \"time\", total_market_value AS \"Valorisation totale\" FROM wealthguard.pipeline_runs ORDER BY run_at"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "table",
+      "title": "Historique des runs",
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 16 },
+      "datasource": { "type": "postgres", "uid": "wealthguard-postgres" },
+      "fieldConfig": { "defaults": {}, "overrides": [] },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "table",
+          "rawSql": "SELECT run_at, as_of_date, anomaly_count, bloquant_count, avertissement_count, info_count, clients_valued, total_market_value, duration_ms FROM wealthguard.pipeline_runs ORDER BY run_at DESC LIMIT 50"
+        }
+      ]
+    }
+  ]
+}

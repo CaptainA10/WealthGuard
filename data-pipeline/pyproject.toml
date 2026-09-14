@@ -39,6 +39,7 @@ dev = [
 [project.scripts]
 wg-generate-seed = "wealthguard_pipeline.seed.generate:main"
 wg-run-pipeline = "wealthguard_pipeline.main:main"
+wg-export-frontend-fixture = "wealthguard_pipeline.seed.export_frontend_fixture:main"
 
 [tool.setuptools.packages.find]
 include = ["wealthguard_pipeline*"]

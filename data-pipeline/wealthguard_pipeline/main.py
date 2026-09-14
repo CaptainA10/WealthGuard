@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import time
 from dataclasses import asdict, replace
 from datetime import date
 from pathlib import Path
@@ -21,13 +22,14 @@ import pandas as pd
 from . import db, indicators, ingest, outliers
 from . import quarantine as qtn
 from .config import REPO_ROOT, get_settings
-from .models import BLOQUANT, Anomaly
+from .models import AVERTISSEMENT, BLOQUANT, INFO, Anomaly
 from .quality_client import QualityEngineClient
 
 LOGGER = logging.getLogger(__name__)
 
 
 def run(landing_dir: Path, as_of: date, reports_dir: Path) -> dict:
+    started_at = time.perf_counter()
     settings = get_settings()
 
     dataset = ingest.load_landing(landing_dir)
@@ -77,12 +79,26 @@ def run(landing_dir: Path, as_of: date, reports_dir: Path) -> dict:
     reports_dir.mkdir(parents=True, exist_ok=True)
     _write_reports(reports_dir, as_of, all_anomalies, valuation, allocation, holdings)
 
-    return {
-        "as_of": as_of.isoformat(),
+    duration_ms = int((time.perf_counter() - started_at) * 1000)
+    summary = {
+        "as_of_date": as_of,
         "anomaly_count": len(all_anomalies),
-        "blocking_count": sum(1 for a in all_anomalies if a.severity == BLOQUANT),
+        "bloquant_count": sum(1 for a in all_anomalies if a.severity == BLOQUANT),
+        "avertissement_count": sum(1 for a in all_anomalies if a.severity == AVERTISSEMENT),
+        "info_count": sum(1 for a in all_anomalies if a.severity == INFO),
         "clients_valued": int(len(valuation)),
         "total_market_value": float(valuation["total_market_value"].sum()) if not valuation.empty else 0.0,
+        "duration_ms": duration_ms,
+    }
+    db.record_run(engine, summary)
+    LOGGER.info("Recorded this run in wealthguard.pipeline_runs (duration=%d ms)", duration_ms)
+
+    return {
+        "as_of": as_of.isoformat(),
+        "anomaly_count": summary["anomaly_count"],
+        "blocking_count": summary["bloquant_count"],
+        "clients_valued": summary["clients_valued"],
+        "total_market_value": summary["total_market_value"],
     }
 
 

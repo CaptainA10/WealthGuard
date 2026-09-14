@@ -1,0 +1,28 @@
+# Auto-provisioned Postgres datasource -- no manual "Add data source" click
+# needed after `docker compose up`, matching the "clone and run" bar the
+# cahier des charges sets for the README.
+#
+# Credentials match docker-compose.yml's own postgres service defaults
+# (wealthguard/wealthguard/wealthguard) -- a local-dev-only placeholder, not a
+# real secret (see .env.example). A deployed Grafana would get its own
+# provisioning file with real credentials injected at deploy time, never
+# committed.
+apiVersion: 1
+
+datasources:
+  - name: WealthGuard Postgres
+    uid: wealthguard-postgres
+    type: postgres
+    access: proxy
+    url: postgres:5432
+    database: wealthguard
+    user: wealthguard
+    isDefault: true
+    editable: false
+    jsonData:
+      sslmode: disable
+      postgresVersion: 1600
+      # pipeline_runs.run_at is TIMESTAMPTZ; the panels group by it directly.
+      timescaledb: false
+    secureJsonData:
+      password: wealthguard

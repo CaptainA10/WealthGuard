@@ -14,11 +14,14 @@ l'algorithme de détection statistique doivent être écrits, pas importés.
 ## Architecture cible
 
 ```
-Sources (CSV/API) → Pipeline Python (data-pipeline/) → API REST → Moteur Qualité Java (quality-engine/)
-                                ↓                                          ↓
-                          PostgreSQL  ←───────────────────────────────────┘
-                                ↓
-                    Power BI / Tableau · Frontend React (frontend/) · Assistant LangChain
+Sources (CSV/API) → Pipeline Python (data-pipeline/) ──POST /api/v1/validate──► Moteur Qualité Java (quality-engine/)
+                                │
+                                ▼
+                          PostgreSQL ──► Power BI / Tableau (métier, fait par l'utilisateur)
+                                │
+                                └──► Grafana (monitoring ops, table pipeline_runs, append-only)
+
+Frontend React (frontend/) ──POST /api/v1/validate (CORS, appel direct navigateur)──► Moteur Qualité Java
 ```
 
 Le pipeline Python appelle le moteur Java via HTTP (`POST /api/v1/validate`) —
@@ -32,11 +35,16 @@ architecture polyglotte assumée, pas un exercice académique isolé.
 - `data/seed/` — dataset synthétique versionné (généré, pas écrit à la main).
 - `docs/` — documentation générée ou de référence (`ANOMALIES.md` est **généré**,
   ne pas éditer à la main).
-- `frontend/`, `sql/` (racine) — placeholders vides, pas encore commencés. Les
-  fichiers SQL réels vivent dans `data-pipeline/wealthguard_pipeline/sql/`
-  (packagés avec le pipeline, `pyproject.toml[tool.setuptools.package-data]`).
-- `docker-compose.yml`, `.env.example` — Postgres local pour le développement ;
-  `cp .env.example .env` puis `docker compose up -d postgres`.
+- `frontend/` — app React (Vite + TypeScript), appelle le moteur Java
+  directement depuis le navigateur. `sql/` (racine) — placeholder vide, pas
+  utilisé ; les fichiers SQL réels vivent dans
+  `data-pipeline/wealthguard_pipeline/sql/` (packagés avec le pipeline,
+  `pyproject.toml[tool.setuptools.package-data]`).
+- `grafana/` — provisioning (datasources/dashboards) monté par
+  `docker-compose.yml` dans le conteneur Grafana ; pas un module applicatif,
+  juste de la config.
+- `docker-compose.yml`, `.env.example` — Postgres + Grafana pour le
+  développement local ; `cp .env.example .env` puis `docker compose up -d`.
 
 ## État réel d'avancement (à tenir à jour — ne pas décrire l'aspirationnel comme fait)
 
@@ -144,8 +152,45 @@ Phases du cahier des charges §6 :
 4. **PostgreSQL + SQL avancé — FAIT** (schema + requêtes ci-dessus). Local via
    `docker-compose.yml` (service `postgres`, image `postgres:16-alpine`, monte
    `data-pipeline/wealthguard_pipeline/sql/schema.sql` en script d'init).
-5. **Dashboards Power BI / Tableau** — pas commencé.
-6. **Frontend React** — pas commencé (`frontend/` vide).
+5. **Dashboards Power BI / Tableau** — **délégué à l'utilisateur** (déjà
+   maîtrisés, faits en cours — décision explicite du 2026-09-14, ne pas les
+   construire soi-même). Les indicateurs SQL de la Phase 4 (`indicators.py`,
+   `sql/*.sql`) sont la source de données prévue pour ces dashboards.
+6. **Frontend React — FAIT** (`frontend/`, Vite + React 19 + TypeScript).
+   Appelle **directement** le moteur Java depuis le navigateur (cahier des
+   charges §2.5 : "en temps reel via l'API Java"), pas un rapport pré-calculé :
+   - `src/api.ts` : charge `public/data/validate-request.json` (fixture
+     statique exportée du jeu `landing/` par
+     `wg-export-frontend-fixture` = `wealthguard_pipeline.seed.export_frontend_fixture`,
+     qui réutilise `quality_client.build_validate_payload` — un seul endroit
+     connaît le mapping snake_case -> camelCase) puis `POST` ce JSON vers
+     `VITE_QUALITY_API_URL` (`.env`, défaut `http://localhost:8080`).
+   - `src/types.ts` : miroir TypeScript de `ValidationReport`/`Anomaly`.
+   - `src/components/` : `SummaryBar`, `SeverityFilter` (filtre par
+     BLOQUANT/AVERTISSEMENT/INFO), `AnomalyTable`, `SeverityBadge`.
+   - Côté Java : `config/WebConfig.java` ajoute le CORS sur `/api/**`
+     (`wealthguard.cors.allowed-origins`, défaut `localhost:5173`/`:4173` —
+     sans ça le navigateur bloque l'appel avant qu'il n'atteigne Spring), testé
+     par `WebConfigTest` (vraie requête preflight via MockMvc).
+   - **Vérifié** : `npx tsc -b` sans erreur ; flux de données confirmé de bout
+     en bout par un `curl -X POST ... -H "Origin: http://localhost:5173"` qui
+     reproduit exactement l'appel du navigateur (CORS + payload + réponse) --
+     **pas** de capture d'écran navigateur réelle prise (voir "Incident disque"
+     ci-dessous, `chromium-cli`/Playwright non installé pour ne pas risquer un
+     nouveau `ENOSPC`). À refaire avec le skill `run` une fois de l'espace
+     disque disponible.
+   - **Grafana (monitoring ops du pipeline, pas du métier)** : ajouté en plus
+     du React/Tableau/PowerBI demandés, à la demande explicite de
+     l'utilisateur. `docker-compose.yml` service `grafana`
+     (`grafana/grafana-oss:11.3.1`), provisioning auto (aucun clic UI) via
+     `grafana/provisioning/{datasources,dashboards}/` et
+     `grafana/dashboards/pipeline-monitoring.json`. Source : nouvelle table
+     **append-only** `wealthguard.pipeline_runs` (jamais tronquée par
+     `db.load_dataset`, écrite par `db.record_run()` à la fin de
+     `main.run()` — un run = une ligne, historique dans le temps).
+     **Non testé avec un vrai Grafana** (Docker Desktop était en panne pendant
+     cette session, cf. incident disque) ; `tests/test_pipeline_runs.py`
+     (intégration) teste `record_run`/l'accumulation mais pas Grafana lui-même.
 7. **Assistant LangChain** — pas commencé (`assistant/` existe dans
    `wealthguard_pipeline/` mais est vide ; dépendances déclarées dans
    `pyproject.toml[assistant]`).
@@ -230,11 +275,19 @@ cd quality-engine && mvn verify
 cd quality-engine && mvn spring-boot:run
 # ou : java -jar target/quality-engine-1.0.0.jar
 
-# Postgres local (une fois : cp .env.example .env)
-docker compose up -d postgres
+# Postgres + Grafana en local (une fois : cp .env.example .env)
+docker compose up -d
+# Grafana : http://localhost:3000 (identifiants dans .env, defaut admin/admin,
+# anonyme autorise en lecture) ; dashboard "WealthGuard" provisionne au demarrage.
 
 # Python : installer le package (édition) + extras dev/marché
 cd data-pipeline && pip install -e ".[dev,market]"
+
+# Exporter la fixture pour le frontend (a refaire si le seed dataset change)
+cd data-pipeline && wg-export-frontend-fixture --as-of 2026-09-13
+
+# Frontend React (le moteur Java doit tourner ; VITE_QUALITY_API_URL dans frontend/.env)
+cd frontend && npm install && npm run dev
 
 # Tests unitaires seuls (pas de Docker/Java requis, tourne toujours vert)
 cd data-pipeline && pytest
@@ -274,3 +327,24 @@ Python.
   soit `docker compose down -v` (perd les données locales) soit appliquer le
   nouveau SQL manuellement ; `db.init_schema()` côté Python ne fait que du
   `CREATE TABLE IF NOT EXISTS`, il ne migre pas un schéma existant.
+
+### Incident disque du 2026-09-14 — vérifier avant de lancer npm/Docker/Maven
+
+Le disque `C:` s'est retrouvé à **0 octet libre sur 260 Go** en pleine session
+(scaffolding React + `npm install`), faisant planter **Docker Desktop**
+("Docker Desktop is unable to start") et échouer `npm install` (`ENOSPC`), et
+même des commandes basiques comme `cat` ("No space left on device"). Le
+répertoire WealthGuard ne pesait que ~230 Mo — la cause est ailleurs sur la
+machine (le dossier `AppData\Local\Docker` a été mesuré à lui seul à ~23 Go,
+et il y a d'autres projets/WSL/OneDrive non liés à ce dépôt). Vider le cache
+npm (`npm cache clean --force`) a libéré ~1,3 Go, juste assez pour terminer
+l'install (27 paquets) mais **pas assez pour relancer Docker Desktop**, qui
+est resté indisponible jusqu'à la fin de cette session — donc **Grafana n'a
+jamais pu être testé avec un vrai conteneur**.
+
+**Avant toute commande `npm install`, `docker compose up` ou `mvn` dans une
+future session** : vérifier `df -h /c/Users/Lenovo/wealthguard` (ou
+`Get-PSDrive C`). Si l'espace disponible est à nouveau proche de zéro, ne pas
+retenter une installation lourde sans en informer l'utilisateur d'abord — ce
+n'est pas un problème du projet WealthGuard, c'est un problème d'espace disque
+machine plus large qui dépasse le périmètre de ce dépôt.

@@ -1,0 +1,5343 @@
+{
+  "positions": [
+    {
+      "positionId": "POS-00001",
+      "clientId": "CLI-1000",
+      "ticker": "TLT",
+      "quantity": 591.4954,
+      "purchasePrice": 82.7894,
+      "purchaseDate": "2024-02-22",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00002",
+      "clientId": "CLI-1000",
+      "ticker": "NVDA",
+      "quantity": 213.1263,
+      "purchasePrice": 108.6818,
+      "purchaseDate": "2024-09-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00003",
+      "clientId": "CLI-1000",
+      "ticker": "IWDA.AS",
+      "quantity": 93.3029,
+      "purchasePrice": 107.2087,
+      "purchaseDate": "2025-02-18",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00004",
+      "clientId": "CLI-1000",
+      "ticker": "AAPL",
+      "quantity": 103.9118,
+      "purchasePrice": 241.407,
+      "purchaseDate": "2025-01-07",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00005",
+      "clientId": "CLI-1000",
+      "ticker": "QQQ",
+      "quantity": 47.5377,
+      "purchasePrice": 425.8253,
+      "purchaseDate": "2024-04-18",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00006",
+      "clientId": "CLI-1000",
+      "ticker": "AGG",
+      "quantity": 3290.82,
+      "purchasePrice": 89.1537,
+      "purchaseDate": "2024-03-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00007",
+      "clientId": "CLI-1000",
+      "ticker": "ASML.AS",
+      "quantity": 41.8232,
+      "purchasePrice": 907.1139,
+      "purchaseDate": "2024-04-16",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00008",
+      "clientId": "CLI-1000",
+      "ticker": "SPY",
+      "quantity": 41.7347,
+      "purchasePrice": 723.4014,
+      "purchaseDate": "2026-06-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00009",
+      "clientId": "CLI-1001",
+      "ticker": "BND",
+      "quantity": 68.9031,
+      "purchasePrice": 71.9092,
+      "purchaseDate": "2026-01-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00010",
+      "clientId": "CLI-1001",
+      "ticker": "BND",
+      "quantity": 837.3407,
+      "purchasePrice": 72.959,
+      "purchaseDate": "2026-08-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00011",
+      "clientId": "CLI-1001",
+      "ticker": "SAN.PA",
+      "quantity": 501.4284,
+      "purchasePrice": 77.3413,
+      "purchaseDate": "2026-01-16",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00012",
+      "clientId": "CLI-1001",
+      "ticker": "BND",
+      "quantity": 303.6272,
+      "purchasePrice": 71.6608,
+      "purchaseDate": "2025-11-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00013",
+      "clientId": "CLI-1001",
+      "ticker": "BND",
+      "quantity": 250.5766,
+      "purchasePrice": 71.4966,
+      "purchaseDate": "2026-08-14",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00014",
+      "clientId": "CLI-1001",
+      "ticker": "GLD",
+      "quantity": 80.6594,
+      "purchasePrice": 408.0038,
+      "purchaseDate": "2026-08-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00015",
+      "clientId": "CLI-1001",
+      "ticker": "TLT",
+      "quantity": 547.7907,
+      "purchasePrice": 84.1741,
+      "purchaseDate": "2026-04-26",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00016",
+      "clientId": "CLI-1001",
+      "ticker": "IWDA.AS",
+      "quantity": 3820.8327,
+      "purchasePrice": 128.3231,
+      "purchaseDate": "2026-08-05",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00017",
+      "clientId": "CLI-1001",
+      "ticker": "BND",
+      "quantity": 531.3854,
+      "purchasePrice": 71.505,
+      "purchaseDate": "2025-12-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00018",
+      "clientId": "CLI-1001",
+      "ticker": "TTE.PA",
+      "quantity": 433.7968,
+      "purchasePrice": 54.7071,
+      "purchaseDate": "2026-01-13",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00019",
+      "clientId": "CLI-1001",
+      "ticker": "MSFT",
+      "quantity": 86.732,
+      "purchasePrice": 479.8554,
+      "purchaseDate": "2025-12-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00020",
+      "clientId": "CLI-1002",
+      "ticker": "TLT",
+      "quantity": 182.4371,
+      "purchasePrice": 81.579,
+      "purchaseDate": "2025-04-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00021",
+      "clientId": "CLI-1002",
+      "ticker": "TLT",
+      "quantity": 108.822,
+      "purchasePrice": 83.3751,
+      "purchaseDate": "2025-06-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00022",
+      "clientId": "CLI-1002",
+      "ticker": "AAPL",
+      "quantity": 14.8679,
+      "purchasePrice": 272.0694,
+      "purchaseDate": "2025-12-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00023",
+      "clientId": "CLI-1002",
+      "ticker": "SPY",
+      "quantity": 9.1506,
+      "purchasePrice": 764.0489,
+      "purchaseDate": "2026-08-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00024",
+      "clientId": "CLI-1002",
+      "ticker": "VNQ",
+      "quantity": 166.4688,
+      "purchasePrice": 86.089,
+      "purchaseDate": "2025-03-29",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00025",
+      "clientId": "CLI-1002",
+      "ticker": "TTE.PA",
+      "quantity": 101.1241,
+      "purchasePrice": 70.4851,
+      "purchaseDate": "2026-06-20",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00026",
+      "clientId": "CLI-1002",
+      "ticker": "SAN.PA",
+      "quantity": 60.5975,
+      "purchasePrice": 73.7348,
+      "purchaseDate": "2024-04-24",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00027",
+      "clientId": "CLI-1002",
+      "ticker": "AAPL",
+      "quantity": 29.9714,
+      "purchasePrice": 296.4993,
+      "purchaseDate": "2026-05-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00028",
+      "clientId": "CLI-1002",
+      "ticker": "BND",
+      "quantity": 107.1046,
+      "purchasePrice": 73.1015,
+      "purchaseDate": "2026-04-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00029",
+      "clientId": "CLI-1002",
+      "ticker": "ASML.AS",
+      "quantity": 9.1033,
+      "purchasePrice": 1452.8205,
+      "purchaseDate": "2026-09-07",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00030",
+      "clientId": "CLI-1002",
+      "ticker": "AGG",
+      "quantity": 113.2633,
+      "purchasePrice": 97.7901,
+      "purchaseDate": "2025-10-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00031",
+      "clientId": "CLI-1002",
+      "ticker": "BND",
+      "quantity": 92.2241,
+      "purchasePrice": 73.0365,
+      "purchaseDate": "2026-05-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00032",
+      "clientId": "CLI-1003",
+      "ticker": "AGG",
+      "quantity": 33.9308,
+      "purchasePrice": 97.8755,
+      "purchaseDate": "2026-01-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00033",
+      "clientId": "CLI-1003",
+      "ticker": "SAN.PA",
+      "quantity": 651.9318,
+      "purchasePrice": 77.7587,
+      "purchaseDate": "2024-03-23",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00034",
+      "clientId": "CLI-1003",
+      "ticker": "GLD",
+      "quantity": 111.1692,
+      "purchasePrice": 324.9498,
+      "purchaseDate": "2025-09-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00035",
+      "clientId": "CLI-1003",
+      "ticker": "MC.PA",
+      "quantity": 109.635,
+      "purchasePrice": 635.7067,
+      "purchaseDate": "2025-12-01",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00036",
+      "clientId": "CLI-1003",
+      "ticker": "JPM",
+      "quantity": 103.0568,
+      "purchasePrice": 173.0558,
+      "purchaseDate": "2024-04-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00037",
+      "clientId": "CLI-1003",
+      "ticker": "JPM",
+      "quantity": -83.704,
+      "purchasePrice": 353.7538,
+      "purchaseDate": "2026-08-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00038",
+      "clientId": "CLI-1003",
+      "ticker": "SAN.PA",
+      "quantity": 432.2218,
+      "purchasePrice": 77.9665,
+      "purchaseDate": "2026-02-11",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00039",
+      "clientId": null,
+      "ticker": "QQQ",
+      "quantity": 36.3648,
+      "purchasePrice": 564.5139,
+      "purchaseDate": "2025-07-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00040",
+      "clientId": "CLI-1003",
+      "ticker": "AGG",
+      "quantity": 166.4544,
+      "purchasePrice": 97.0192,
+      "purchaseDate": "2026-07-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00041",
+      "clientId": "CLI-1003",
+      "ticker": "MC.PA",
+      "quantity": 107.9833,
+      "purchasePrice": 484.3759,
+      "purchaseDate": "2025-07-27",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00042",
+      "clientId": "CLI-1004",
+      "ticker": "IWDA.AS",
+      "quantity": 505.3841567,
+      "purchasePrice": 111.2905,
+      "purchaseDate": "2026-02-09",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00043",
+      "clientId": "CLI-1004",
+      "ticker": "SAN.PA",
+      "quantity": 704.0624,
+      "purchasePrice": 78.9032,
+      "purchaseDate": "2026-04-10",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00044",
+      "clientId": "CLI-1004",
+      "ticker": "ASML.AS",
+      "quantity": 7.7483,
+      "purchasePrice": 1529.7957,
+      "purchaseDate": "2026-08-26",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00045",
+      "clientId": "CLI-1004",
+      "ticker": "TTE.PA",
+      "quantity": 258.8257,
+      "purchasePrice": 72.7983,
+      "purchaseDate": "2026-04-19",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00046",
+      "clientId": "CLI-1004",
+      "ticker": "QQQ",
+      "quantity": 52.0243,
+      "purchasePrice": 707.1578,
+      "purchaseDate": "2026-07-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00047",
+      "clientId": "CLI-1004",
+      "ticker": "TTE.PA",
+      "quantity": 1582.2055,
+      "purchasePrice": 55.8698,
+      "purchaseDate": "2026-01-16",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00048",
+      "clientId": "CLI-1004",
+      "ticker": "SPY",
+      "quantity": 85.4963,
+      "purchasePrice": 663.7985,
+      "purchaseDate": "2026-04-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00049",
+      "clientId": "CLI-1004",
+      "ticker": "SPY",
+      "quantity": 49.8231,
+      "purchasePrice": 743.1535,
+      "purchaseDate": "2026-07-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00050",
+      "clientId": "CLI-1004",
+      "ticker": "SPY",
+      "quantity": 99.8859,
+      "purchasePrice": 670.9467,
+      "purchaseDate": "2025-11-15",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00051",
+      "clientId": "CLI-1005",
+      "ticker": "QQQ",
+      "quantity": 24.3539,
+      "purchasePrice": 708.4975,
+      "purchaseDate": "2026-09-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00052",
+      "clientId": "CLI-1005",
+      "ticker": "AGG",
+      "quantity": 410.4161,
+      "purchasePrice": 98.725,
+      "purchaseDate": "2026-07-26",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00053",
+      "clientId": "CLI-1005",
+      "ticker": "ASML.AS",
+      "quantity": 67.1453,
+      "purchasePrice": 1186.1266,
+      "purchaseDate": "2026-01-18",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00054",
+      "clientId": "CLI-1005",
+      "ticker": "GLD",
+      "quantity": 211.9593,
+      "purchasePrice": 382.8066,
+      "purchaseDate": "2026-07-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00055",
+      "clientId": "CLI-1005",
+      "ticker": "GLD",
+      "quantity": 117.3172,
+      "purchasePrice": 415.5179,
+      "purchaseDate": "2026-03-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00056",
+      "clientId": "CLI-1005",
+      "ticker": "AAPL",
+      "quantity": 218.6928,
+      "purchasePrice": 258.9876,
+      "purchaseDate": "2026-04-07",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00057",
+      "clientId": "CLI-1005",
+      "ticker": "ZZZZ.XX",
+      "quantity": 125.8732,
+      "purchasePrice": 598.0639,
+      "purchaseDate": "2026-01-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00058",
+      "clientId": "CLI-1005",
+      "ticker": "JNJ",
+      "quantity": 137.6378,
+      "purchasePrice": 262.5633,
+      "purchaseDate": "2026-08-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00059",
+      "clientId": "CLI-1006",
+      "ticker": "AGG",
+      "quantity": 222.3002,
+      "purchasePrice": 97.1963,
+      "purchaseDate": "2026-03-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00060",
+      "clientId": "CLI-1006",
+      "ticker": "BND",
+      "quantity": 304.3442,
+      "purchasePrice": 71.6633,
+      "purchaseDate": "2026-06-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00061",
+      "clientId": "CLI-1006",
+      "ticker": "TLT",
+      "quantity": 176.3055,
+      "purchasePrice": 83.7059,
+      "purchaseDate": "2026-05-26",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00062",
+      "clientId": "CLI-1006",
+      "ticker": "MSFT",
+      "quantity": 63.829,
+      "purchasePrice": 500.0833,
+      "purchaseDate": "2026-09-07",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00063",
+      "clientId": "CLI-1006",
+      "ticker": "QQQ",
+      "quantity": 45.6818,
+      "purchasePrice": 665.6972,
+      "purchaseDate": "2026-04-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00064",
+      "clientId": "CLI-1006",
+      "ticker": "AGG",
+      "quantity": 407.8367,
+      "purchasePrice": 97.4144,
+      "purchaseDate": "2026-04-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00065",
+      "clientId": "CLI-1006",
+      "ticker": "AGG",
+      "quantity": 206.5185,
+      "purchasePrice": 98.5528,
+      "purchaseDate": "2026-06-14",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00066",
+      "clientId": "CLI-1007",
+      "ticker": "TLT",
+      "quantity": 776.7693,
+      "purchasePrice": 81.3651,
+      "purchaseDate": "2025-01-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00067",
+      "clientId": "CLI-1007",
+      "ticker": "SAP.DE",
+      "quantity": 92.4717,
+      "purchasePrice": 172.0436,
+      "purchaseDate": "2026-02-22",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00068",
+      "clientId": "CLI-1007",
+      "ticker": "AGG",
+      "quantity": 494.2736,
+      "purchasePrice": 95.2953,
+      "purchaseDate": "2026-06-07",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00069",
+      "clientId": "CLI-1007",
+      "ticker": "TLT",
+      "quantity": 178.8899,
+      "purchasePrice": 85.2168,
+      "purchaseDate": "2026-04-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00070",
+      "clientId": "CLI-1007",
+      "ticker": "BND",
+      "quantity": 1608.6845,
+      "purchasePrice": 70.5995,
+      "purchaseDate": "2025-03-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00071",
+      "clientId": "CLI-1007",
+      "ticker": "VNQ",
+      "quantity": 347.9896,
+      "purchasePrice": 85.5662,
+      "purchaseDate": "2025-03-29",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00072",
+      "clientId": "CLI-1007",
+      "ticker": "BND",
+      "quantity": 201.5688,
+      "purchasePrice": 71.535,
+      "purchaseDate": "2026-08-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00073",
+      "clientId": "CLI-1007",
+      "ticker": "TLT",
+      "quantity": 317.4716,
+      "purchasePrice": 87.1411,
+      "purchaseDate": "2025-10-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00074",
+      "clientId": "CLI-1007",
+      "ticker": "AGG",
+      "quantity": 469.8037,
+      "purchasePrice": 100.661,
+      "purchaseDate": "2026-02-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00075",
+      "clientId": "CLI-1007",
+      "ticker": "BND",
+      "quantity": 855.2594,
+      "purchasePrice": 65.6284,
+      "purchaseDate": "2025-04-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00076",
+      "clientId": "CLI-1007",
+      "ticker": "AGG",
+      "quantity": 855.2758,
+      "purchasePrice": 100.8355,
+      "purchaseDate": "2025-10-15",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00077",
+      "clientId": "CLI-1007",
+      "ticker": "VNQ",
+      "quantity": 296.5967,
+      "purchasePrice": 85.1851,
+      "purchaseDate": "2025-06-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00078",
+      "clientId": "CLI-1007",
+      "ticker": "BND",
+      "quantity": 903.0068,
+      "purchasePrice": 71.9956,
+      "purchaseDate": "2025-11-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00079",
+      "clientId": "CLI-1007",
+      "ticker": "AGG",
+      "quantity": 102.4983,
+      "purchasePrice": 92.9425,
+      "purchaseDate": "2025-04-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00080",
+      "clientId": "CLI-1008",
+      "ticker": "MSFT",
+      "quantity": 41.7718,
+      "purchasePrice": 455.8973,
+      "purchaseDate": "2026-10-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00081",
+      "clientId": "CLI-1008",
+      "ticker": "AGG",
+      "quantity": 220.7134,
+      "purchasePrice": 100.9511,
+      "purchaseDate": "2026-01-24",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00082",
+      "clientId": "CLI-1008",
+      "ticker": "AGG",
+      "quantity": 108.5453,
+      "purchasePrice": 97.731,
+      "purchaseDate": "2025-12-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00083",
+      "clientId": "CLI-1008",
+      "ticker": "VNQ",
+      "quantity": 324.4797,
+      "purchasePrice": 95.536,
+      "purchaseDate": "2026-05-10",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00084",
+      "clientId": "CLI-1008",
+      "ticker": "ASML.AS",
+      "quantity": 24.226,
+      "purchasePrice": 1167.8938,
+      "purchaseDate": "2026-04-06",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00085",
+      "clientId": "CLI-1008",
+      "ticker": "IWDA.AS",
+      "quantity": 158.2182,
+      "purchasePrice": 126.4434,
+      "purchaseDate": "2026-09-06",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00086",
+      "clientId": "CLI-1008",
+      "ticker": "JNJ",
+      "quantity": 99.4031,
+      "purchasePrice": 249.9064,
+      "purchaseDate": "2026-07-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00087",
+      "clientId": "CLI-1008",
+      "ticker": "JNJ",
+      "quantity": 77.7325,
+      "purchasePrice": 253.8811,
+      "purchaseDate": "2026-07-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00088",
+      "clientId": "CLI-1008",
+      "ticker": "VNQ",
+      "quantity": -64.0134,
+      "purchasePrice": 90.7955,
+      "purchaseDate": "2026-01-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00089",
+      "clientId": "CLI-1008",
+      "ticker": "TLT",
+      "quantity": 405.4895,
+      "purchasePrice": 84.6019,
+      "purchaseDate": "2026-04-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00090",
+      "clientId": "CLI-1008",
+      "ticker": "ASML.AS",
+      "quantity": 1.1611,
+      "purchasePrice": 1594.9707,
+      "purchaseDate": "2026-07-09",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00091",
+      "clientId": "CLI-1008",
+      "ticker": "TTE.PA",
+      "quantity": 558.3494,
+      "purchasePrice": 53.882,
+      "purchaseDate": "2026-01-14",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00092",
+      "clientId": "CLI-1009",
+      "ticker": "NVDA",
+      "quantity": 209.4558,
+      "purchasePrice": 185.208,
+      "purchaseDate": "2026-01-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00093",
+      "clientId": "CLI-1009",
+      "ticker": "JNJ",
+      "quantity": 205.315,
+      "purchasePrice": 213.9453,
+      "purchaseDate": "2026-05-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00094",
+      "clientId": "CLI-1009",
+      "ticker": "MC.PA",
+      "quantity": 49.9802,
+      "purchasePrice": 457.5287,
+      "purchaseDate": "2026-04-27",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00095",
+      "clientId": "CLI-1009",
+      "ticker": "TTE.PA",
+      "quantity": 839.5087,
+      "purchasePrice": 76.3098,
+      "purchaseDate": "2026-08-01",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00096",
+      "clientId": "CLI-1009",
+      "ticker": "NVDA",
+      "quantity": 389.9122,
+      "purchasePrice": 170.9305,
+      "purchaseDate": "2026-04-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00097",
+      "clientId": "CLI-1009",
+      "ticker": "QQQ",
+      "quantity": 95.1278,
+      "purchasePrice": 700.6142,
+      "purchaseDate": "2026-05-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00098",
+      "clientId": "CLI-1010",
+      "ticker": "GLD",
+      "quantity": 40.3053,
+      "purchasePrice": 297.239,
+      "purchaseDate": "2025-07-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00099",
+      "clientId": "CLI-1010",
+      "ticker": "JPM",
+      "quantity": 828.6668,
+      "purchasePrice": 249.4282,
+      "purchaseDate": "2025-01-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00100",
+      "clientId": "CLI-1010",
+      "ticker": "TLT",
+      "quantity": 227.6693,
+      "purchasePrice": 86.1636,
+      "purchaseDate": "2026-03-24",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00101",
+      "clientId": "CLI-1010",
+      "ticker": "AGG",
+      "quantity": 1803.7572567,
+      "purchasePrice": 99.5489,
+      "purchaseDate": "2026-04-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00102",
+      "clientId": "CLI-1010",
+      "ticker": "MSFT",
+      "quantity": 354.434,
+      "purchasePrice": 397.6525,
+      "purchaseDate": "2026-07-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00103",
+      "clientId": "CLI-1010",
+      "ticker": "JNJ",
+      "quantity": 330.3172,
+      "purchasePrice": 155.4666,
+      "purchaseDate": "2025-03-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00104",
+      "clientId": "CLI-1010",
+      "ticker": "ASML.AS",
+      "quantity": 68.9227,
+      "purchasePrice": 1188.9985,
+      "purchaseDate": "2026-03-05",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00105",
+      "clientId": "CLI-1010",
+      "ticker": "GLD",
+      "quantity": 490.1939,
+      "purchasePrice": 410.0971,
+      "purchaseDate": "2026-05-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00106",
+      "clientId": "CLI-1010",
+      "ticker": "TTE.PA",
+      "quantity": 3384.3407,
+      "purchasePrice": 50.828,
+      "purchaseDate": "2025-06-18",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00107",
+      "clientId": "CLI-1010",
+      "ticker": "AGG",
+      "quantity": 1368.5287,
+      "purchasePrice": 98.4364,
+      "purchaseDate": "2025-12-10",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00108",
+      "clientId": "CLI-1010",
+      "ticker": "IWDA.AS",
+      "quantity": 1438.8535,
+      "purchasePrice": 105.2212,
+      "purchaseDate": "2025-09-01",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00109",
+      "clientId": "CLI-1010",
+      "ticker": "MSFT",
+      "quantity": 395.7256,
+      "purchasePrice": 382.9319,
+      "purchaseDate": "2025-03-04",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00110",
+      "clientId": "CLI-1011",
+      "ticker": "MSFT",
+      "quantity": 66.3522,
+      "purchasePrice": 396.2184,
+      "purchaseDate": "2026-05-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00111",
+      "clientId": "CLI-1011",
+      "ticker": "TTE.PA",
+      "quantity": 557.2187,
+      "purchasePrice": 81.1277,
+      "purchaseDate": "2026-05-21",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00112",
+      "clientId": "CLI-1011",
+      "ticker": "MC.PA",
+      "quantity": 42.7996,
+      "purchasePrice": 447.5476,
+      "purchaseDate": "2025-06-14",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00113",
+      "clientId": "CLI-1011",
+      "ticker": "SAP.DE",
+      "quantity": 119.8386,
+      "purchasePrice": 139.8188,
+      "purchaseDate": "2026-07-02",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00114",
+      "clientId": "CLI-1011",
+      "ticker": "TTE.PA",
+      "quantity": 349.8817,
+      "purchasePrice": 52.1118,
+      "purchaseDate": "2025-06-12",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00115",
+      "clientId": "CLI-1011",
+      "ticker": "MC.PA",
+      "quantity": 55.2173,
+      "purchasePrice": 449.1254,
+      "purchaseDate": "2026-05-02",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00116",
+      "clientId": "CLI-1011",
+      "ticker": "NVDA",
+      "quantity": 60.9112,
+      "purchasePrice": 217.4228,
+      "purchaseDate": "2026-08-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00117",
+      "clientId": "CLI-1011",
+      "ticker": "SPY",
+      "quantity": 22.2799,
+      "purchasePrice": 707.3239,
+      "purchaseDate": "2026-04-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00118",
+      "clientId": "CLI-1011",
+      "ticker": "ASML.AS",
+      "quantity": 28.8318,
+      "purchasePrice": 871.4217,
+      "purchaseDate": "2025-11-07",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00119",
+      "clientId": "CLI-1011",
+      "ticker": "TLT",
+      "quantity": 167.7033,
+      "purchasePrice": 88.5135,
+      "purchaseDate": "2026-02-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00120",
+      "clientId": "CLI-1011",
+      "ticker": "MC.PA",
+      "quantity": 13.3156,
+      "purchasePrice": 630.4482,
+      "purchaseDate": "2025-11-14",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00121",
+      "clientId": "CLI-1011",
+      "ticker": "SAN.PA",
+      "quantity": 55.0392,
+      "purchasePrice": 73.7641,
+      "purchaseDate": "2026-08-06",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00122",
+      "clientId": "CLI-1011",
+      "ticker": "AAPL",
+      "quantity": 102.9485,
+      "purchasePrice": 208.1415,
+      "purchaseDate": "2025-07-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00123",
+      "clientId": "CLI-1012",
+      "ticker": "MSFT",
+      "quantity": 92.3995,
+      "purchasePrice": 424.3595,
+      "purchaseDate": "2026-05-22",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00124",
+      "clientId": "CLI-1012",
+      "ticker": "NVDA",
+      "quantity": 346.4466,
+      "purchasePrice": 208.2882,
+      "purchaseDate": "2026-05-07",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00125",
+      "clientId": "CLI-1012",
+      "ticker": "SAN.PA",
+      "quantity": 1253.4657,
+      "purchasePrice": 75.5585,
+      "purchaseDate": "2026-07-18",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00126",
+      "clientId": "CLI-1012",
+      "ticker": "VNQ",
+      "quantity": 117.9887,
+      "purchasePrice": 95.0296,
+      "purchaseDate": "2026-04-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00127",
+      "clientId": "CLI-1012",
+      "ticker": "MSFT",
+      "quantity": 153.1837,
+      "purchasePrice": 388.7449,
+      "purchaseDate": "2026-07-22",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00128",
+      "clientId": "CLI-1012",
+      "ticker": "AAPL",
+      "quantity": 220.9952,
+      "purchasePrice": 253.0798,
+      "purchaseDate": "2026-04-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00129",
+      "clientId": "CLI-1012",
+      "ticker": "MC.PA",
+      "quantity": 150.573,
+      "purchasePrice": 463.1017,
+      "purchaseDate": "2026-03-17",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00130",
+      "clientId": "CLI-1012",
+      "ticker": "GLD",
+      "quantity": 67.5281,
+      "purchasePrice": 372.7405,
+      "purchaseDate": "2026-07-15",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00131",
+      "clientId": "CLI-1012",
+      "ticker": "MSFT",
+      "quantity": 72.8074,
+      "purchasePrice": 351.3232,
+      "purchaseDate": "2026-03-29",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00132",
+      "clientId": "CLI-1012",
+      "ticker": "QQQ",
+      "quantity": 170.3675,
+      "purchasePrice": 742.537,
+      "purchaseDate": "2026-06-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00133",
+      "clientId": "CLI-1012",
+      "ticker": "MC.PA",
+      "quantity": 69.2784,
+      "purchasePrice": 462.968,
+      "purchaseDate": "2026-03-30",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00134",
+      "clientId": "CLI-1012",
+      "ticker": "JNJ",
+      "quantity": 188.6695,
+      "purchasePrice": 237.8928,
+      "purchaseDate": "2026-03-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00135",
+      "clientId": "CLI-1013",
+      "ticker": "AGG",
+      "quantity": 513.0849,
+      "purchasePrice": 95.6331,
+      "purchaseDate": "2026-08-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00136",
+      "clientId": "CLI-1013",
+      "ticker": "AGG",
+      "quantity": 975.2312,
+      "purchasePrice": 97.4487,
+      "purchaseDate": "2026-04-07",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00137",
+      "clientId": "CLI-1013",
+      "ticker": "SAN.PA",
+      "quantity": 703.8145,
+      "purchasePrice": 75.9674,
+      "purchaseDate": "2026-09-05",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00138",
+      "clientId": "CLI-1013",
+      "ticker": "VNQ",
+      "quantity": 340.8457,
+      "purchasePrice": 101.4068,
+      "purchaseDate": "2026-07-18",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00139",
+      "clientId": "CLI-1013",
+      "ticker": "GLD",
+      "quantity": 201.9574,
+      "purchasePrice": 311.0714,
+      "purchaseDate": "2025-08-04",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00140",
+      "clientId": "CLI-1013",
+      "ticker": "TLT",
+      "quantity": 736.9129,
+      "purchasePrice": 86.2447,
+      "purchaseDate": "2025-09-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00141",
+      "clientId": "CLI-1013",
+      "ticker": "TLT",
+      "quantity": 881.5041,
+      "purchasePrice": 85.6766,
+      "purchaseDate": "2025-12-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00142",
+      "clientId": "CLI-1013",
+      "ticker": "TLT",
+      "quantity": 336.3526,
+      "purchasePrice": 84.8406,
+      "purchaseDate": "2025-11-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00143",
+      "clientId": "CLI-1013",
+      "ticker": "BND",
+      "quantity": 685.4502,
+      "purchasePrice": 71.7371,
+      "purchaseDate": "2026-01-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00144",
+      "clientId": "CLI-1013",
+      "ticker": "TLT",
+      "quantity": 173.9081,
+      "purchasePrice": 84.4258,
+      "purchaseDate": "2026-03-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00145",
+      "clientId": "CLI-1013",
+      "ticker": "TLT",
+      "quantity": 1043.2376,
+      "purchasePrice": 79.1788,
+      "purchaseDate": "2026-08-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00146",
+      "clientId": "CLI-1013",
+      "ticker": "SAN.PA",
+      "quantity": 1638.6041,
+      "purchasePrice": 76.8203,
+      "purchaseDate": "2025-09-22",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00147",
+      "clientId": "CLI-1013",
+      "ticker": "IWDA.AS",
+      "quantity": 377.0424,
+      "purchasePrice": 126.932,
+      "purchaseDate": "2026-07-04",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00148",
+      "clientId": "CLI-1014",
+      "ticker": "BND",
+      "quantity": 269.4522,
+      "purchasePrice": 73.4299,
+      "purchaseDate": "2026-07-29",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00149",
+      "clientId": "CLI-1014",
+      "ticker": "VNQ",
+      "quantity": 396.0802,
+      "purchasePrice": 87.0912,
+      "purchaseDate": "2026-01-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00150",
+      "clientId": "CLI-1014",
+      "ticker": "BND",
+      "quantity": 327.8309,
+      "purchasePrice": 71.0414,
+      "purchaseDate": "2026-07-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00151",
+      "clientId": "CLI-1014",
+      "ticker": "BND",
+      "quantity": 283.7441,
+      "purchasePrice": 72.2111,
+      "purchaseDate": "2026-05-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00152",
+      "clientId": "CLI-1014",
+      "ticker": "QQQ",
+      "quantity": 25.7089,
+      "purchasePrice": 617.5087,
+      "purchaseDate": "2025-12-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00153",
+      "clientId": "CLI-1014",
+      "ticker": "VNQ",
+      "quantity": 244.358,
+      "purchasePrice": 87.4977,
+      "purchaseDate": "2025-12-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00154",
+      "clientId": "CLI-1014",
+      "ticker": "JNJ",
+      "quantity": 125.5973,
+      "purchasePrice": 259.5535,
+      "purchaseDate": "2026-08-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00155",
+      "clientId": "CLI-1014",
+      "ticker": "BND",
+      "quantity": 490.9256,
+      "purchasePrice": 69.8362,
+      "purchaseDate": "2026-08-24",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00156",
+      "clientId": "CLI-1015",
+      "ticker": "TLT",
+      "quantity": 1024.6931,
+      "purchasePrice": 82.9526,
+      "purchaseDate": "2026-08-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00157",
+      "clientId": "CLI-1015",
+      "ticker": "JNJ",
+      "quantity": 295.4969,
+      "purchasePrice": 259.7788,
+      "purchaseDate": "2026-07-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00158",
+      "clientId": "CLI-1015",
+      "ticker": "TLT",
+      "quantity": 260.8985,
+      "purchasePrice": 85.6885,
+      "purchaseDate": "2026-07-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00159",
+      "clientId": "CLI-1015",
+      "ticker": "ASML.AS",
+      "quantity": 47.0992,
+      "purchasePrice": 1531.5772,
+      "purchaseDate": "2026-08-23",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00160",
+      "clientId": "CLI-1015",
+      "ticker": "VNQ",
+      "quantity": 265.9993,
+      "purchasePrice": 98.8606,
+      "purchaseDate": "2026-08-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00161",
+      "clientId": "CLI-1015",
+      "ticker": "NVDA",
+      "quantity": 148.4364,
+      "purchasePrice": 211.8909,
+      "purchaseDate": "2026-06-18",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00162",
+      "clientId": "CLI-1015",
+      "ticker": "TLT",
+      "quantity": 258.9883,
+      "purchasePrice": 86.2582,
+      "purchaseDate": "2026-06-26",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00163",
+      "clientId": "CLI-1015",
+      "ticker": "SPY",
+      "quantity": 22.5444,
+      "purchasePrice": 764.8744,
+      "purchaseDate": "2026-08-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00164",
+      "clientId": "CLI-1015",
+      "ticker": "SPY",
+      "quantity": 69.8264,
+      "purchasePrice": 715.7215,
+      "purchaseDate": "2026-06-24",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00165",
+      "clientId": "CLI-1015",
+      "ticker": "TLT",
+      "quantity": 179.8407,
+      "purchasePrice": 84.115,
+      "purchaseDate": "2026-07-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00166",
+      "clientId": "CLI-1016",
+      "ticker": "JPM",
+      "quantity": 595.3827,
+      "purchasePrice": 326.8142,
+      "purchaseDate": "2025-12-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00167",
+      "clientId": "CLI-1016",
+      "ticker": "GLD",
+      "quantity": 155.2611,
+      "purchasePrice": 371.424,
+      "purchaseDate": "2025-10-31",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00168",
+      "clientId": "CLI-1016",
+      "ticker": "VNQ",
+      "quantity": 3045.397,
+      "purchasePrice": 89.7489,
+      "purchaseDate": "2026-02-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00169",
+      "clientId": "CLI-1016",
+      "ticker": "SAP.DE",
+      "quantity": 570.7848,
+      "purchasePrice": 204.8899,
+      "purchaseDate": "2026-01-05",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00170",
+      "clientId": "CLI-1016",
+      "ticker": "ASML.AS",
+      "quantity": 184.7393,
+      "purchasePrice": 1607.0559,
+      "purchaseDate": "2026-07-06",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00171",
+      "clientId": "CLI-1016",
+      "ticker": "IWDA.AS",
+      "quantity": 1529.8835,
+      "purchasePrice": 112.804,
+      "purchaseDate": "2026-01-29",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00172",
+      "clientId": "CLI-1016",
+      "ticker": "JNJ",
+      "quantity": 1098.7175,
+      "purchasePrice": 226.1249,
+      "purchaseDate": "2026-06-04",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00173",
+      "clientId": "CLI-1017",
+      "ticker": "QQQ",
+      "quantity": 66.9111,
+      "purchasePrice": 572.3253,
+      "purchaseDate": "2024-02-26",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00174",
+      "clientId": "CLI-1017",
+      "ticker": "GLD",
+      "quantity": 73.7474,
+      "purchasePrice": 458.2558,
+      "purchaseDate": "2026-01-24",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00175",
+      "clientId": "CLI-1017",
+      "ticker": "NVDA",
+      "quantity": 208.7912,
+      "purchasePrice": 158.9593,
+      "purchaseDate": "2025-07-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00176",
+      "clientId": "CLI-1017",
+      "ticker": "SAP.DE",
+      "quantity": 143.9234,
+      "purchasePrice": 252.365,
+      "purchaseDate": "2025-06-01",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00177",
+      "clientId": "CLI-1017",
+      "ticker": "TLT",
+      "quantity": 159.2532,
+      "purchasePrice": 83.0766,
+      "purchaseDate": "2024-11-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00178",
+      "clientId": "CLI-1017",
+      "ticker": "ASML.AS",
+      "quantity": 28.8181,
+      "purchasePrice": 1155.9921,
+      "purchaseDate": "2026-02-05",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00179",
+      "clientId": "CLI-1017",
+      "ticker": "SAP.DE",
+      "quantity": 296.4409,
+      "purchasePrice": 179.0115,
+      "purchaseDate": "2024-07-09",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00180",
+      "clientId": "CLI-1018",
+      "ticker": "BND",
+      "quantity": 2893.223,
+      "purchasePrice": 71.6879,
+      "purchaseDate": "2025-11-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00181",
+      "clientId": "CLI-1018",
+      "ticker": "VNQ",
+      "quantity": 1604.9398,
+      "purchasePrice": 83.8916,
+      "purchaseDate": "2025-03-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00182",
+      "clientId": "CLI-1018",
+      "ticker": "JPM",
+      "quantity": 541.3331,
+      "purchasePrice": 293.3126,
+      "purchaseDate": "2025-11-24",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00183",
+      "clientId": "CLI-1018",
+      "ticker": "AGG",
+      "quantity": 1999.0468,
+      "purchasePrice": 97.2098,
+      "purchaseDate": "2025-10-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00184",
+      "clientId": "CLI-1018",
+      "ticker": "AGG",
+      "quantity": 1708.3774,
+      "purchasePrice": 96.5825,
+      "purchaseDate": "2026-06-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00185",
+      "clientId": "CLI-1018",
+      "ticker": "AGG",
+      "quantity": 2509.1052,
+      "purchasePrice": 96.6911,
+      "purchaseDate": "2025-09-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00186",
+      "clientId": "CLI-1019",
+      "ticker": "JPM",
+      "quantity": 369.8501,
+      "purchasePrice": 283.1567,
+      "purchaseDate": "2025-07-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00187",
+      "clientId": "CLI-1019",
+      "ticker": "AGG",
+      "quantity": 1648.5463,
+      "purchasePrice": 96.5879,
+      "purchaseDate": "2025-10-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00188",
+      "clientId": "CLI-1019",
+      "ticker": "QQQ",
+      "quantity": null,
+      "purchasePrice": 520.6221,
+      "purchaseDate": "2025-01-22",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00189",
+      "clientId": "CLI-1019",
+      "ticker": "JPM",
+      "quantity": 545.7933,
+      "purchasePrice": 291.7398,
+      "purchaseDate": "2025-07-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00190",
+      "clientId": "CLI-1019",
+      "ticker": "JPM",
+      "quantity": null,
+      "purchasePrice": 335.2424,
+      "purchaseDate": "2026-07-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00191",
+      "clientId": "CLI-1019",
+      "ticker": "GLD",
+      "quantity": 470.7678,
+      "purchasePrice": 338.2339,
+      "purchaseDate": "2025-09-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00192",
+      "clientId": "CLI-1019",
+      "ticker": "AGG",
+      "quantity": 389.1734,
+      "purchasePrice": 94.0803,
+      "purchaseDate": "2026-07-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00193",
+      "clientId": "CLI-1020",
+      "ticker": "MSFT",
+      "quantity": 90.0665,
+      "purchasePrice": 503.0638,
+      "purchaseDate": "2026-08-11",
+      "currency": "CHF"
+    },
+    {
+      "positionId": "POS-00194",
+      "clientId": "CLI-1020",
+      "ticker": "SAN.PA",
+      "quantity": 570.9863,
+      "purchasePrice": 76.735,
+      "purchaseDate": "2026-07-24",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00195",
+      "clientId": "CLI-1020",
+      "ticker": "GLD",
+      "quantity": 56.1507,
+      "purchasePrice": 399.8767,
+      "purchaseDate": "2026-06-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00196",
+      "clientId": "CLI-9999",
+      "ticker": "BND",
+      "quantity": 632.7053,
+      "purchasePrice": 70.896,
+      "purchaseDate": "2026-08-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00197",
+      "clientId": "CLI-1020",
+      "ticker": "GLD",
+      "quantity": 42.5037,
+      "purchasePrice": 364.2059,
+      "purchaseDate": "2026-07-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00198",
+      "clientId": "CLI-1020",
+      "ticker": "JPM",
+      "quantity": 101.9215,
+      "purchasePrice": 333.9573,
+      "purchaseDate": "2026-06-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00199",
+      "clientId": "CLI-1021",
+      "ticker": "VNQ",
+      "quantity": 485.9646,
+      "purchasePrice": 96.3337,
+      "purchaseDate": "2026-09-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00200",
+      "clientId": "CLI-1021",
+      "ticker": "SAN.PA",
+      "quantity": 1023.2904,
+      "purchasePrice": 76.3104,
+      "purchaseDate": "2026-08-05",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00201",
+      "clientId": "CLI-1021",
+      "ticker": "AAPL",
+      "quantity": 168.3461,
+      "purchasePrice": 315.8138,
+      "purchaseDate": "2026-08-31",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00202",
+      "clientId": "CLI-1021",
+      "ticker": "SAN.PA",
+      "quantity": 642.6347,
+      "purchasePrice": 73.748,
+      "purchaseDate": "2026-07-11",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00203",
+      "clientId": "CLI-1021",
+      "ticker": "BND",
+      "quantity": 379.3538,
+      "purchasePrice": 73.4665,
+      "purchaseDate": "2026-07-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00204",
+      "clientId": "CLI-1021",
+      "ticker": "TTE.PA",
+      "quantity": 210.161,
+      "purchasePrice": 73.0835,
+      "purchaseDate": "2026-07-21",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00205",
+      "clientId": "CLI-1021",
+      "ticker": "AGG",
+      "quantity": 449.6886,
+      "purchasePrice": 96.8063,
+      "purchaseDate": "2026-09-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00206",
+      "clientId": "CLI-1021",
+      "ticker": "AGG",
+      "quantity": 719.2049,
+      "purchasePrice": 98.1992,
+      "purchaseDate": "2026-09-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00207",
+      "clientId": "CLI-1021",
+      "ticker": "JPM",
+      "quantity": 66.9901,
+      "purchasePrice": 329.7782,
+      "purchaseDate": "2026-06-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00208",
+      "clientId": "CLI-1022",
+      "ticker": "BND",
+      "quantity": 154.0564,
+      "purchasePrice": 71.2885,
+      "purchaseDate": "2026-06-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00209",
+      "clientId": "CLI-1022",
+      "ticker": "TLT",
+      "quantity": 788.7503,
+      "purchasePrice": 81.5787,
+      "purchaseDate": "2026-07-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00210",
+      "clientId": "CLI-1022",
+      "ticker": "VNQ",
+      "quantity": 88.7039,
+      "purchasePrice": 97.7974,
+      "purchaseDate": "2026-07-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00211",
+      "clientId": "CLI-1022",
+      "ticker": "VNQ",
+      "quantity": 846.5224,
+      "purchasePrice": 97.1479,
+      "purchaseDate": "2026-07-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00212",
+      "clientId": "CLI-1022",
+      "ticker": "GLD",
+      "quantity": 79.7232,
+      "purchasePrice": 429.3212,
+      "purchaseDate": "2026-05-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00213",
+      "clientId": "CLI-1022",
+      "ticker": "AAPL",
+      "quantity": 208.3486,
+      "purchasePrice": 317.2151,
+      "purchaseDate": "2026-09-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00214",
+      "clientId": "CLI-1022",
+      "ticker": "TLT",
+      "quantity": 616.5829,
+      "purchasePrice": 86.2901,
+      "purchaseDate": "2026-06-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00215",
+      "clientId": "CLI-1022",
+      "ticker": "GLD",
+      "quantity": 219.3016,
+      "purchasePrice": 411.2591,
+      "purchaseDate": "2026-05-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00216",
+      "clientId": "CLI-1023",
+      "ticker": "IWDA.AS",
+      "quantity": 150.4238,
+      "purchasePrice": 100.037,
+      "purchaseDate": "2025-07-16",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00217",
+      "clientId": "CLI-9999",
+      "ticker": "JPM",
+      "quantity": 190.7479,
+      "purchasePrice": 293.7072,
+      "purchaseDate": "2025-11-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00218",
+      "clientId": "CLI-1023",
+      "ticker": "VNQ",
+      "quantity": 147.9755,
+      "purchasePrice": 88.705,
+      "purchaseDate": "2025-07-14",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00219",
+      "clientId": "CLI-1023",
+      "ticker": "ASML.AS",
+      "quantity": 11.6831,
+      "purchasePrice": 1679.6394,
+      "purchaseDate": "2026-06-21",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00220",
+      "clientId": "CLI-1023",
+      "ticker": "SAN.PA",
+      "quantity": 381.4077,
+      "purchasePrice": 76.2264,
+      "purchaseDate": "2026-05-30",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00221",
+      "clientId": "CLI-1023",
+      "ticker": "ASML.AS",
+      "quantity": 18.1207,
+      "purchasePrice": 1425.2751,
+      "purchaseDate": "2026-06-07",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00222",
+      "clientId": "CLI-1023",
+      "ticker": "ZZZZ.XX",
+      "quantity": 48.0502,
+      "purchasePrice": 573.3722,
+      "purchaseDate": "2025-04-11",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00223",
+      "clientId": "CLI-1023",
+      "ticker": "JNJ",
+      "quantity": 73.0049,
+      "purchasePrice": 208.7844,
+      "purchaseDate": "2025-12-14",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00224",
+      "clientId": "CLI-1023",
+      "ticker": "IWDA.AS",
+      "quantity": 139.0623,
+      "purchasePrice": 128.9384,
+      "purchaseDate": "2026-07-10",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00225",
+      "clientId": "CLI-1023",
+      "ticker": "MC.PA",
+      "quantity": 79.803,
+      "purchasePrice": 441.2052,
+      "purchaseDate": "2026-03-18",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00226",
+      "clientId": "CLI-1024",
+      "ticker": "TLT",
+      "quantity": 263.9931,
+      "purchasePrice": 85.307,
+      "purchaseDate": "2026-01-22",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00227",
+      "clientId": "CLI-1024",
+      "ticker": "AGG",
+      "quantity": 85.7393,
+      "purchasePrice": 94.0435,
+      "purchaseDate": "2025-05-04",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00228",
+      "clientId": "CLI-1024",
+      "ticker": "ASML.AS",
+      "quantity": 15.4321,
+      "purchasePrice": 1317.8435,
+      "purchaseDate": "2026-05-16",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00229",
+      "clientId": "CLI-1024",
+      "ticker": "NVDA",
+      "quantity": 85.4734,
+      "purchasePrice": 209.8678,
+      "purchaseDate": "2026-07-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00230",
+      "clientId": "CLI-1024",
+      "ticker": "AGG",
+      "quantity": 408.9173,
+      "purchasePrice": 96.8909,
+      "purchaseDate": "2026-04-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00231",
+      "clientId": "CLI-1024",
+      "ticker": "AGG",
+      "quantity": 395.2925,
+      "purchasePrice": 97.7262,
+      "purchaseDate": "2026-01-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00232",
+      "clientId": "CLI-1024",
+      "ticker": "GLD",
+      "quantity": 92.962,
+      "purchasePrice": 382.3907,
+      "purchaseDate": "2025-11-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00233",
+      "clientId": "CLI-1024",
+      "ticker": "BND",
+      "quantity": 1272.9674,
+      "purchasePrice": 68.4389,
+      "purchaseDate": "2025-10-07",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00234",
+      "clientId": "CLI-1024",
+      "ticker": "MSFT",
+      "quantity": 108.3189,
+      "purchasePrice": 501.3327,
+      "purchaseDate": "2025-11-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00235",
+      "clientId": "CLI-1024",
+      "ticker": "QQQ",
+      "quantity": 22.5031,
+      "purchasePrice": 597.0128,
+      "purchaseDate": "2025-09-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00236",
+      "clientId": "CLI-1024",
+      "ticker": "SAP.DE",
+      "quantity": 226.7533,
+      "purchasePrice": 207.4357,
+      "purchaseDate": "2026-01-08",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00237",
+      "clientId": "CLI-1024",
+      "ticker": "VNQ",
+      "quantity": 297.8809,
+      "purchasePrice": 87.4513,
+      "purchaseDate": "2026-03-25",
+      "currency": "CHF"
+    },
+    {
+      "positionId": "POS-00238",
+      "clientId": "CLI-1024",
+      "ticker": "ASML.AS",
+      "quantity": 20.0678,
+      "purchasePrice": 1100.957,
+      "purchaseDate": "2026-01-11",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00239",
+      "clientId": "CLI-1025",
+      "ticker": "BND",
+      "quantity": 570.9729,
+      "purchasePrice": 71.3122,
+      "purchaseDate": "2026-03-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00240",
+      "clientId": "CLI-1025",
+      "ticker": "MC.PA",
+      "quantity": 51.3234,
+      "purchasePrice": 605.7019,
+      "purchaseDate": "2025-11-10",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00241",
+      "clientId": "CLI-1025",
+      "ticker": "TLT",
+      "quantity": 115.9129,
+      "purchasePrice": 86.4701,
+      "purchaseDate": "2026-04-14",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00242",
+      "clientId": "CLI-1025",
+      "ticker": "AGG",
+      "quantity": 67.4313,
+      "purchasePrice": 96.765,
+      "purchaseDate": "2025-10-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00243",
+      "clientId": "CLI-1025",
+      "ticker": "AGG",
+      "quantity": 625.7419,
+      "purchasePrice": 95.5103,
+      "purchaseDate": "2025-06-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00244",
+      "clientId": "CLI-1025",
+      "ticker": "NVDA",
+      "quantity": 200.755,
+      "purchasePrice": 134.6305,
+      "purchaseDate": "2025-05-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00245",
+      "clientId": "CLI-1025",
+      "ticker": "TLT",
+      "quantity": 110.3919,
+      "purchasePrice": 82.4296,
+      "purchaseDate": "2025-09-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00246",
+      "clientId": "CLI-1025",
+      "ticker": "BND",
+      "quantity": 1078.9544,
+      "purchasePrice": 74.6997,
+      "purchaseDate": "2026-04-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00247",
+      "clientId": "CLI-1025",
+      "ticker": "AGG",
+      "quantity": 462.8802,
+      "purchasePrice": 93.693,
+      "purchaseDate": "2025-07-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00248",
+      "clientId": "CLI-1025",
+      "ticker": "AAPL",
+      "quantity": 150.2976,
+      "purchasePrice": 249.8513,
+      "purchaseDate": "2025-10-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00249",
+      "clientId": "CLI-1025",
+      "ticker": "BND",
+      "quantity": 236.8462,
+      "purchasePrice": 69.5748,
+      "purchaseDate": "2025-09-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00250",
+      "clientId": "CLI-1025",
+      "ticker": "TLT",
+      "quantity": 117.8367,
+      "purchasePrice": 83.9985,
+      "purchaseDate": "2026-04-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00251",
+      "clientId": "CLI-1025",
+      "ticker": "VNQ",
+      "quantity": 391.8442,
+      "purchasePrice": 86.963,
+      "purchaseDate": "2025-09-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00252",
+      "clientId": "CLI-1025",
+      "ticker": "TTE.PA",
+      "quantity": 560.792,
+      "purchasePrice": 53.1176,
+      "purchaseDate": "2025-02-16",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00253",
+      "clientId": "CLI-1026",
+      "ticker": "BND",
+      "quantity": 38.5112,
+      "purchasePrice": 71.0453,
+      "purchaseDate": "2026-06-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00254",
+      "clientId": "CLI-1026",
+      "ticker": "GLD",
+      "quantity": 34.0175,
+      "purchasePrice": 406.6176,
+      "purchaseDate": "2026-08-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00255",
+      "clientId": "CLI-1026",
+      "ticker": "AGG",
+      "quantity": 97.7079,
+      "purchasePrice": 98.4505,
+      "purchaseDate": "2026-02-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00256",
+      "clientId": "CLI-1026",
+      "ticker": "JNJ",
+      "quantity": 19.5661,
+      "purchasePrice": 271.2922,
+      "purchaseDate": "2026-09-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00257",
+      "clientId": "CLI-1026",
+      "ticker": "MC.PA",
+      "quantity": 10.1555,
+      "purchasePrice": 476.2271,
+      "purchaseDate": "2026-05-20",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00258",
+      "clientId": "CLI-1026",
+      "ticker": "SPY",
+      "quantity": 4.7126,
+      "purchasePrice": 662.8928,
+      "purchaseDate": "2026-02-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00259",
+      "clientId": "CLI-1026",
+      "ticker": "JPM",
+      "quantity": 22.7838,
+      "purchasePrice": 323.9044,
+      "purchaseDate": "2026-06-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00260",
+      "clientId": "CLI-1026",
+      "ticker": "NVDA",
+      "quantity": 18.6382,
+      "purchasePrice": 178.8335,
+      "purchaseDate": "2026-02-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00261",
+      "clientId": "CLI-1026",
+      "ticker": "SAN.PA",
+      "quantity": 56.744,
+      "purchasePrice": 77.5903,
+      "purchaseDate": "2026-07-12",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00262",
+      "clientId": "CLI-1026",
+      "ticker": "AAPL",
+      "quantity": 10.7075,
+      "purchasePrice": 336.2044,
+      "purchaseDate": "2026-07-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00263",
+      "clientId": "CLI-1026",
+      "ticker": "TTE.PA",
+      "quantity": 119.2289,
+      "purchasePrice": 77.5714,
+      "purchaseDate": "2026-05-16",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00264",
+      "clientId": "CLI-1026",
+      "ticker": "AGG",
+      "quantity": 54.8552,
+      "purchasePrice": 94.0411,
+      "purchaseDate": "2025-10-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00265",
+      "clientId": "CLI-1026",
+      "ticker": "SAP.DE",
+      "quantity": 27.356,
+      "purchasePrice": 229.0202,
+      "purchaseDate": "2025-08-27",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00266",
+      "clientId": "CLI-1027",
+      "ticker": "TLT",
+      "quantity": 750.2892,
+      "purchasePrice": 81.5656,
+      "purchaseDate": "2025-06-14",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00267",
+      "clientId": "CLI-1027",
+      "ticker": "GLD",
+      "quantity": 96.3183,
+      "purchasePrice": 313.073,
+      "purchaseDate": "2025-06-15",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00268",
+      "clientId": "CLI-1027",
+      "ticker": "AGG",
+      "quantity": 854.3753,
+      "purchasePrice": 101.1528,
+      "purchaseDate": "2025-11-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00269",
+      "clientId": "CLI-1027",
+      "ticker": "TLT",
+      "quantity": 302.7464,
+      "purchasePrice": 82.2765,
+      "purchaseDate": "2025-09-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00270",
+      "clientId": "CLI-1027",
+      "ticker": "VNQ",
+      "quantity": 917.6871,
+      "purchasePrice": 94.1742,
+      "purchaseDate": "2026-06-04",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00271",
+      "clientId": "CLI-1027",
+      "ticker": "AGG",
+      "quantity": 635.8949,
+      "purchasePrice": 94.0867,
+      "purchaseDate": "2025-04-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00272",
+      "clientId": "CLI-1027",
+      "ticker": "TLT",
+      "quantity": 507.0569,
+      "purchasePrice": 86.5658,
+      "purchaseDate": "2026-04-26",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00273",
+      "clientId": "CLI-1028",
+      "ticker": "GLD",
+      "quantity": 261.5683,
+      "purchasePrice": 386.4393,
+      "purchaseDate": "2026-07-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00274",
+      "clientId": "CLI-1028",
+      "ticker": "SPY",
+      "quantity": 61.4767,
+      "purchasePrice": 784.7978,
+      "purchaseDate": "2026-08-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00275",
+      "clientId": "CLI-1028",
+      "ticker": "MC.PA",
+      "quantity": 123.5395,
+      "purchasePrice": 621.9829,
+      "purchaseDate": "2025-12-04",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00276",
+      "clientId": "CLI-1028",
+      "ticker": "GLD",
+      "quantity": 89.088,
+      "purchasePrice": 448.3314,
+      "purchaseDate": "2026-04-15",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00277",
+      "clientId": "CLI-1028",
+      "ticker": "TTE.PA",
+      "quantity": 334.1475,
+      "purchasePrice": 48.291,
+      "purchaseDate": "2025-10-10",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00278",
+      "clientId": "CLI-1028",
+      "ticker": "AGG",
+      "quantity": 528.1833,
+      "purchasePrice": 96.9609,
+      "purchaseDate": "2025-05-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00279",
+      "clientId": "CLI-1028",
+      "ticker": "BND",
+      "quantity": 672.3767,
+      "purchasePrice": 73.0474,
+      "purchaseDate": "2026-02-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00280",
+      "clientId": "CLI-1028",
+      "ticker": "SPY",
+      "quantity": 58.7562,
+      "purchasePrice": 656.4601,
+      "purchaseDate": "2026-03-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00281",
+      "clientId": "CLI-1028",
+      "ticker": "BND",
+      "quantity": 1091.4961,
+      "purchasePrice": 71.8355,
+      "purchaseDate": "2026-06-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00282",
+      "clientId": "CLI-1028",
+      "ticker": "VNQ",
+      "quantity": 549.1022,
+      "purchasePrice": 85.8365,
+      "purchaseDate": "2025-11-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00283",
+      "clientId": "CLI-1028",
+      "ticker": "AGG",
+      "quantity": 733.8239,
+      "purchasePrice": 97.5632,
+      "purchaseDate": "2026-03-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00284",
+      "clientId": "CLI-1029",
+      "ticker": "AAPL",
+      "quantity": 60.2214,
+      "purchasePrice": 238.5562,
+      "purchaseDate": "2025-01-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00285",
+      "clientId": "CLI-1029",
+      "ticker": "MSFT",
+      "quantity": 65.3293,
+      "purchasePrice": 416.516,
+      "purchaseDate": "2024-10-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00286",
+      "clientId": "CLI-1029",
+      "ticker": "IWDA.AS",
+      "quantity": 763.6814,
+      "purchasePrice": 93.645,
+      "purchaseDate": "2024-09-13",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00287",
+      "clientId": "CLI-1029",
+      "ticker": "MSFT",
+      "quantity": 60.3714,
+      "purchasePrice": 396.0615,
+      "purchaseDate": "2026-02-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00288",
+      "clientId": "CLI-1029",
+      "ticker": "SAN.PA",
+      "quantity": 158.5326,
+      "purchasePrice": 93.2675,
+      "purchaseDate": "2024-09-18",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00289",
+      "clientId": "CLI-1029",
+      "ticker": "ASML.AS",
+      "quantity": 4.5341,
+      "purchasePrice": 564.9742,
+      "purchaseDate": "2025-04-08",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00290",
+      "clientId": "CLI-1029",
+      "ticker": "GLD",
+      "quantity": 157.5101,
+      "purchasePrice": 384.7343,
+      "purchaseDate": "2025-12-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00291",
+      "clientId": "CLI-1029",
+      "ticker": "MC.PA",
+      "quantity": 53.823,
+      "purchasePrice": 460.3912,
+      "purchaseDate": "2025-07-22",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00292",
+      "clientId": "CLI-1029",
+      "ticker": "NVDA",
+      "quantity": 104.9402,
+      "purchasePrice": 178.4722,
+      "purchaseDate": "2025-08-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00293",
+      "clientId": "CLI-1029",
+      "ticker": "VNQ",
+      "quantity": 31.3764,
+      "purchasePrice": 86.712,
+      "purchaseDate": "2025-07-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00294",
+      "clientId": "CLI-1029",
+      "ticker": "SPY",
+      "quantity": 30.6777,
+      "purchasePrice": 632.1932,
+      "purchaseDate": "2025-07-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00295",
+      "clientId": "CLI-1029",
+      "ticker": "AGG",
+      "quantity": 237.6882,
+      "purchasePrice": 95.7268,
+      "purchaseDate": "2026-04-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00296",
+      "clientId": "CLI-1029",
+      "ticker": "SPY",
+      "quantity": 19.2337,
+      "purchasePrice": 748.866,
+      "purchaseDate": "2026-08-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00297",
+      "clientId": "CLI-1029",
+      "ticker": "GLD",
+      "quantity": 17.57,
+      "purchasePrice": 417.6438,
+      "purchaseDate": "2026-01-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00298",
+      "clientId": "CLI-1030",
+      "ticker": "JNJ",
+      "quantity": 642.1266,
+      "purchasePrice": 230.6174,
+      "purchaseDate": "2026-04-18",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00299",
+      "clientId": "CLI-1030",
+      "ticker": "JNJ",
+      "quantity": 464.4022,
+      "purchasePrice": 185.7098,
+      "purchaseDate": "2025-10-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00300",
+      "clientId": "CLI-1030",
+      "ticker": "VNQ",
+      "quantity": 938.1811,
+      "purchasePrice": 87.0494,
+      "purchaseDate": "2025-11-29",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00301",
+      "clientId": "CLI-1030",
+      "ticker": "SAN.PA",
+      "quantity": 1191.1895,
+      "purchasePrice": 84.8073,
+      "purchaseDate": "2025-10-30",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00302",
+      "clientId": "CLI-1030",
+      "ticker": "SAP.DE",
+      "quantity": -622.8033,
+      "purchasePrice": 137.3677,
+      "purchaseDate": "2026-07-25",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00303",
+      "clientId": "CLI-1030",
+      "ticker": "IWDA.AS",
+      "quantity": 755.7933,
+      "purchasePrice": 106.4635,
+      "purchaseDate": "2025-11-18",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00304",
+      "clientId": "CLI-1030",
+      "ticker": "IWDA.AS",
+      "quantity": 827.7844,
+      "purchasePrice": 108.82,
+      "purchaseDate": "2026-03-28",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00305",
+      "clientId": "CLI-1031",
+      "ticker": "VNQ",
+      "quantity": 509.1233,
+      "purchasePrice": 88.6091,
+      "purchaseDate": "2025-09-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00306",
+      "clientId": "CLI-1031",
+      "ticker": "JPM",
+      "quantity": 216.4423,
+      "purchasePrice": 236.7804,
+      "purchaseDate": "2025-03-22",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00307",
+      "clientId": "CLI-1031",
+      "ticker": "ASML.AS",
+      "quantity": 32.4083,
+      "purchasePrice": 1275.643,
+      "purchaseDate": "2026-05-18",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00308",
+      "clientId": "CLI-1031",
+      "ticker": "VNQ",
+      "quantity": 731.7988,
+      "purchasePrice": 103.3104,
+      "purchaseDate": "2026-07-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00309",
+      "clientId": "CLI-1031",
+      "ticker": "MC.PA",
+      "quantity": 83.7231,
+      "purchasePrice": 506.3329,
+      "purchaseDate": "2025-09-03",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00310",
+      "clientId": "CLI-1031",
+      "ticker": "IWDA.AS",
+      "quantity": 92.1907,
+      "purchasePrice": 111.0656,
+      "purchaseDate": "2025-12-01",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00311",
+      "clientId": "CLI-1031",
+      "ticker": "SPY",
+      "quantity": 95.5223,
+      "purchasePrice": 594.0929,
+      "purchaseDate": "2024-12-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00312",
+      "clientId": "CLI-1031",
+      "ticker": "JPM",
+      "quantity": 41.4958,
+      "purchasePrice": 231.3825,
+      "purchaseDate": "2024-12-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00313",
+      "clientId": "CLI-1031",
+      "ticker": "SAN.PA",
+      "quantity": 697.2631,
+      "purchasePrice": 81.0265,
+      "purchaseDate": "2025-11-27",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00314",
+      "clientId": "CLI-1031",
+      "ticker": "ASML.AS",
+      "quantity": 36.3865,
+      "purchasePrice": 1119.8543,
+      "purchaseDate": "2026-02-04",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00315",
+      "clientId": "CLI-1031",
+      "ticker": "SAP.DE",
+      "quantity": 432.7761,
+      "purchasePrice": 233.0831,
+      "purchaseDate": "2025-08-17",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00316",
+      "clientId": "CLI-1031",
+      "ticker": "JPM",
+      "quantity": 169.1627,
+      "purchasePrice": 279.5749,
+      "purchaseDate": "2025-08-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00317",
+      "clientId": "CLI-1032",
+      "ticker": "SAN.PA",
+      "quantity": 220.5922,
+      "purchasePrice": 90.4417,
+      "purchaseDate": "2024-11-03",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00318",
+      "clientId": "CLI-1032",
+      "ticker": "TLT",
+      "quantity": 385.5074,
+      "purchasePrice": 83.07,
+      "purchaseDate": "2025-09-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00319",
+      "clientId": "CLI-1032",
+      "ticker": "QQQ",
+      "quantity": 43.6664,
+      "purchasePrice": 0.0,
+      "purchaseDate": "2024-11-23",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00320",
+      "clientId": "CLI-1032",
+      "ticker": "MSFT",
+      "quantity": 67.1839,
+      "purchasePrice": 454.7175,
+      "purchaseDate": "2026-01-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00321",
+      "clientId": "CLI-1032",
+      "ticker": "IWDA.AS",
+      "quantity": 293.4705,
+      "purchasePrice": 120.8229,
+      "purchaseDate": "2026-07-31",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00322",
+      "clientId": "CLI-1032",
+      "ticker": "SAN.PA",
+      "quantity": 491.9977,
+      "purchasePrice": 96.5625,
+      "purchaseDate": "2025-02-11",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00323",
+      "clientId": "CLI-1032",
+      "ticker": "BND",
+      "quantity": 425.7947,
+      "purchasePrice": 67.5297,
+      "purchaseDate": "2025-03-31",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00324",
+      "clientId": "CLI-1033",
+      "ticker": "JPM",
+      "quantity": 382.9621,
+      "purchasePrice": 290.4749,
+      "purchaseDate": "2025-08-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00325",
+      "clientId": "CLI-1033",
+      "ticker": "IWDA.AS",
+      "quantity": 1857.8437,
+      "purchasePrice": 106.2823,
+      "purchaseDate": "2025-09-12",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00326",
+      "clientId": "CLI-1033",
+      "ticker": "IWDA.AS",
+      "quantity": 1235.7174,
+      "purchasePrice": 104.0461,
+      "purchaseDate": "2024-12-06",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00327",
+      "clientId": "CLI-1033",
+      "ticker": "IWDA.AS",
+      "quantity": 1818.5582,
+      "purchasePrice": 99.4643,
+      "purchaseDate": "2025-06-13",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00328",
+      "clientId": "CLI-1033",
+      "ticker": "AAPL",
+      "quantity": 406.2541,
+      "purchasePrice": 274.7099,
+      "purchaseDate": "2025-12-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00329",
+      "clientId": "CLI-1033",
+      "ticker": "IWDA.AS",
+      "quantity": 1717.927,
+      "purchasePrice": 97.6612,
+      "purchaseDate": "2024-10-02",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00330",
+      "clientId": "CLI-1034",
+      "ticker": "AGG",
+      "quantity": 242.6992,
+      "purchasePrice": 98.2651,
+      "purchaseDate": "2026-07-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00331",
+      "clientId": "CLI-1034",
+      "ticker": "BND",
+      "quantity": 1151.7428,
+      "purchasePrice": -12.5,
+      "purchaseDate": "2026-08-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00332",
+      "clientId": "CLI-1034",
+      "ticker": "AGG",
+      "quantity": 401.4384,
+      "purchasePrice": 97.747,
+      "purchaseDate": "2026-01-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00333",
+      "clientId": "CLI-1034",
+      "ticker": "BND",
+      "quantity": 1568.823,
+      "purchasePrice": 72.0678,
+      "purchaseDate": "2026-05-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00334",
+      "clientId": "CLI-1034",
+      "ticker": "AGG",
+      "quantity": 1370.2825,
+      "purchasePrice": 96.7273,
+      "purchaseDate": "2026-02-06",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00335",
+      "clientId": "CLI-1034",
+      "ticker": "MSFT",
+      "quantity": 43.7909,
+      "purchasePrice": 477.9615,
+      "purchaseDate": "2026-01-10",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00336",
+      "clientId": null,
+      "ticker": "TLT",
+      "quantity": 341.6533,
+      "purchasePrice": 83.9497,
+      "purchaseDate": "2026-02-03",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00337",
+      "clientId": "CLI-1034",
+      "ticker": "ASML.AS",
+      "quantity": 44.5655,
+      "purchasePrice": 1251.0673,
+      "purchaseDate": "2026-04-13",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00338",
+      "clientId": "CLI-1034",
+      "ticker": "AGG",
+      "quantity": 69.0826,
+      "purchasePrice": 98.2448,
+      "purchaseDate": "2026-03-10",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00339",
+      "clientId": "CLI-1034",
+      "ticker": "BND",
+      "quantity": 152.677,
+      "purchasePrice": 70.9909,
+      "purchaseDate": "2026-06-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00340",
+      "clientId": "CLI-1034",
+      "ticker": "AGG",
+      "quantity": 275.8487,
+      "purchasePrice": 94.9729,
+      "purchaseDate": "2026-06-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00341",
+      "clientId": "CLI-1034",
+      "ticker": "TLT",
+      "quantity": 1857.1407,
+      "purchasePrice": 86.4302,
+      "purchaseDate": "2026-01-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00342",
+      "clientId": "CLI-1034",
+      "ticker": "TLT",
+      "quantity": 721.4198,
+      "purchasePrice": 85.2836,
+      "purchaseDate": "2026-04-24",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00343",
+      "clientId": "CLI-1034",
+      "ticker": "VNQ",
+      "quantity": 332.177,
+      "purchasePrice": 97.3653,
+      "purchaseDate": "2026-07-10",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00344",
+      "clientId": "CLI-1035",
+      "ticker": "QQQ",
+      "quantity": 37.6186,
+      "purchasePrice": 650.2295,
+      "purchaseDate": "2026-04-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00345",
+      "clientId": "CLI-1035",
+      "ticker": "NVDA",
+      "quantity": 464.4846,
+      "purchasePrice": 189.7952,
+      "purchaseDate": "2026-04-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00346",
+      "clientId": "CLI-1035",
+      "ticker": "MC.PA",
+      "quantity": 33.5994,
+      "purchasePrice": 474.7583,
+      "purchaseDate": "2026-07-30",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00347",
+      "clientId": "CLI-1035",
+      "ticker": "JPM",
+      "quantity": 98.5106,
+      "purchasePrice": 312.2805,
+      "purchaseDate": "2026-05-04",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00348",
+      "clientId": "CLI-1035",
+      "ticker": "NVDA",
+      "quantity": 266.8769,
+      "purchasePrice": 192.5701,
+      "purchaseDate": "2026-01-31",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00349",
+      "clientId": "CLI-1035",
+      "ticker": "NVDA",
+      "quantity": 60.3704,
+      "purchasePrice": 180.8756,
+      "purchaseDate": "2025-12-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00350",
+      "clientId": "CLI-1035",
+      "ticker": "SAN.PA",
+      "quantity": 503.6033,
+      "purchasePrice": 76.9688,
+      "purchaseDate": "2026-02-04",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00351",
+      "clientId": "CLI-1035",
+      "ticker": "GLD",
+      "quantity": 165.5929,
+      "purchasePrice": 433.8947,
+      "purchaseDate": "2026-04-15",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00352",
+      "clientId": "CLI-1035",
+      "ticker": "NVDA",
+      "quantity": 148.0743,
+      "purchasePrice": 174.6907,
+      "purchaseDate": "2026-03-22",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00353",
+      "clientId": "CLI-1035",
+      "ticker": "JNJ",
+      "quantity": 117.3704,
+      "purchasePrice": 246.817,
+      "purchaseDate": "2026-03-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00354",
+      "clientId": "CLI-1035",
+      "ticker": "JPM",
+      "quantity": 53.7216,
+      "purchasePrice": 298.2575,
+      "purchaseDate": "2026-04-15",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00355",
+      "clientId": "CLI-1035",
+      "ticker": "TTE.PA",
+      "quantity": 672.362,
+      "purchasePrice": 52.6859,
+      "purchaseDate": "2026-01-08",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00356",
+      "clientId": "CLI-1035",
+      "ticker": "QQQ",
+      "quantity": 23.7046,
+      "purchasePrice": 608.3074,
+      "purchaseDate": "2026-02-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00357",
+      "clientId": "CLI-1036",
+      "ticker": "JNJ",
+      "quantity": 178.5767,
+      "purchasePrice": 152.9302,
+      "purchaseDate": "2025-02-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00358",
+      "clientId": "CLI-1036",
+      "ticker": "SAP.DE",
+      "quantity": 104.71,
+      "purchasePrice": 242.6595,
+      "purchaseDate": "2025-06-19",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00359",
+      "clientId": "CLI-1036",
+      "ticker": "SPY",
+      "quantity": 23.7671,
+      "purchasePrice": 594.2797,
+      "purchaseDate": "2025-02-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00360",
+      "clientId": "CLI-1036",
+      "ticker": "JNJ",
+      "quantity": 298.1128,
+      "purchasePrice": 146.8238,
+      "purchaseDate": "2025-05-22",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00361",
+      "clientId": "CLI-1036",
+      "ticker": "TLT",
+      "quantity": 369.3139,
+      "purchasePrice": 83.2278,
+      "purchaseDate": "2025-09-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00362",
+      "clientId": "CLI-1036",
+      "ticker": "JPM",
+      "quantity": 190.008,
+      "purchasePrice": 285.0704,
+      "purchaseDate": "2025-08-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00363",
+      "clientId": "CLI-1036",
+      "ticker": "TLT",
+      "quantity": 634.3974,
+      "purchasePrice": 79.9053,
+      "purchaseDate": "2025-02-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00364",
+      "clientId": "CLI-1037",
+      "ticker": "VNQ",
+      "quantity": 777.6771,
+      "purchasePrice": 96.8196,
+      "purchaseDate": "2026-09-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00365",
+      "clientId": "CLI-1037",
+      "ticker": "SAP.DE",
+      "quantity": 380.3513,
+      "purchasePrice": 136.6727,
+      "purchaseDate": "2026-04-23",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00366",
+      "clientId": "CLI-1037",
+      "ticker": "TTE.PA",
+      "quantity": 411.088,
+      "purchasePrice": 62.8932,
+      "purchaseDate": "2026-02-15",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00367",
+      "clientId": "CLI-1037",
+      "ticker": "AAPL",
+      "quantity": 136.9653,
+      "purchasePrice": 263.2709,
+      "purchaseDate": "2026-01-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00368",
+      "clientId": "CLI-1037",
+      "ticker": "TLT",
+      "quantity": 1182.9085,
+      "purchasePrice": 84.7814,
+      "purchaseDate": "2026-05-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00369",
+      "clientId": "CLI-1037",
+      "ticker": "TLT",
+      "quantity": 290.246,
+      "purchasePrice": 83.1283,
+      "purchaseDate": "2026-07-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00370",
+      "clientId": "CLI-1037",
+      "ticker": "GLD",
+      "quantity": 143.23,
+      "purchasePrice": 395.0172,
+      "purchaseDate": "2026-06-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00371",
+      "clientId": "CLI-1037",
+      "ticker": "VNQ",
+      "quantity": 788.3768,
+      "purchasePrice": 97.7127,
+      "purchaseDate": "2026-08-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00372",
+      "clientId": "CLI-1037",
+      "ticker": "SAN.PA",
+      "quantity": 795.2545,
+      "purchasePrice": 75.6291,
+      "purchaseDate": "2026-07-25",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00373",
+      "clientId": "CLI-1037",
+      "ticker": "BND",
+      "quantity": 625.5254,
+      "purchasePrice": 73.1785,
+      "purchaseDate": "2026-04-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00374",
+      "clientId": "CLI-1037",
+      "ticker": "AGG",
+      "quantity": 509.3356,
+      "purchasePrice": 99.3624,
+      "purchaseDate": "2026-07-19",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00375",
+      "clientId": "CLI-1038",
+      "ticker": "IWDA.AS",
+      "quantity": 745.2798,
+      "purchasePrice": 103.6471,
+      "purchaseDate": "2025-07-24",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00376",
+      "clientId": "CLI-1038",
+      "ticker": "TTE.PA",
+      "quantity": 1406.2134,
+      "purchasePrice": 79.1022,
+      "purchaseDate": "2026-07-26",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00377",
+      "clientId": "CLI-1038",
+      "ticker": "AGG",
+      "quantity": 321.2328,
+      "purchasePrice": 96.2823,
+      "purchaseDate": "2026-01-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00378",
+      "clientId": "CLI-1038",
+      "ticker": "IWDA.AS",
+      "quantity": 988.4896,
+      "purchasePrice": 105.0865,
+      "purchaseDate": "2025-09-11",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00379",
+      "clientId": "CLI-1038",
+      "ticker": "JPM",
+      "quantity": 137.6121,
+      "purchasePrice": 282.1522,
+      "purchaseDate": "2026-03-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00380",
+      "clientId": "CLI-1038",
+      "ticker": "TLT",
+      "quantity": 495.1789,
+      "purchasePrice": 82.7252,
+      "purchaseDate": "2025-08-21",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00381",
+      "clientId": "CLI-1038",
+      "ticker": "NVDA",
+      "quantity": 488.4406,
+      "purchasePrice": 209.9206,
+      "purchaseDate": "2026-06-22",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00382",
+      "clientId": "CLI-1039",
+      "ticker": "AAPL",
+      "quantity": 351.8565,
+      "purchasePrice": 242.2312,
+      "purchaseDate": "2025-02-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00383",
+      "clientId": "CLI-1039",
+      "ticker": "AGG",
+      "quantity": 1751.6183,
+      "purchasePrice": 96.8329,
+      "purchaseDate": "2026-08-07",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00384",
+      "clientId": "CLI-1039",
+      "ticker": "AGG",
+      "quantity": 1343.6959,
+      "purchasePrice": 98.2409,
+      "purchaseDate": "2026-06-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00385",
+      "clientId": "CLI-1039",
+      "ticker": "TLT",
+      "quantity": 672.8372,
+      "purchasePrice": 78.5619,
+      "purchaseDate": "2024-04-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00386",
+      "clientId": "CLI-1039",
+      "ticker": "IWDA.AS",
+      "quantity": 882.168,
+      "purchasePrice": 112.9151,
+      "purchaseDate": "2025-12-04",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00387",
+      "clientId": "CLI-1039",
+      "ticker": "VNQ",
+      "quantity": 876.8707,
+      "purchasePrice": 94.1993,
+      "purchaseDate": "2026-03-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00388",
+      "clientId": "CLI-1039",
+      "ticker": "TLT",
+      "quantity": 986.9364,
+      "purchasePrice": 82.1414,
+      "purchaseDate": "2025-04-14",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00389",
+      "clientId": "CLI-1039",
+      "ticker": "GLD",
+      "quantity": 219.9,
+      "purchasePrice": 309.1623,
+      "purchaseDate": "2025-08-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00390",
+      "clientId": "CLI-1040",
+      "ticker": "BND",
+      "quantity": 1268.4143,
+      "purchasePrice": 71.0892,
+      "purchaseDate": "2026-03-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00391",
+      "clientId": "CLI-1040",
+      "ticker": "SAP.DE",
+      "quantity": 404.0101,
+      "purchasePrice": 257.8217,
+      "purchaseDate": "2025-06-16",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00392",
+      "clientId": "CLI-1040",
+      "ticker": "JNJ",
+      "quantity": 645.2351,
+      "purchasePrice": 142.2831,
+      "purchaseDate": "2025-04-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00393",
+      "clientId": "CLI-1040",
+      "ticker": "BND",
+      "quantity": 769.5254,
+      "purchasePrice": 69.3422,
+      "purchaseDate": "2025-05-09",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00394",
+      "clientId": "CLI-1040",
+      "ticker": "AGG",
+      "quantity": 1152.4765,
+      "purchasePrice": 96.3081,
+      "purchaseDate": "2026-03-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00395",
+      "clientId": "CLI-1040",
+      "ticker": "AGG",
+      "quantity": 554.1939,
+      "purchasePrice": 97.4753,
+      "purchaseDate": "2026-01-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00396",
+      "clientId": "CLI-1041",
+      "ticker": "VNQ",
+      "quantity": 2289.0604,
+      "purchasePrice": 95.4168,
+      "purchaseDate": "2026-05-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00397",
+      "clientId": "CLI-1041",
+      "ticker": "TTE.PA",
+      "quantity": 3576.4802,
+      "purchasePrice": 75.1667,
+      "purchaseDate": "2026-06-07",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00398",
+      "clientId": "CLI-1041",
+      "ticker": "AAPL",
+      "quantity": 204.3546,
+      "purchasePrice": 243.3244,
+      "purchaseDate": "2025-02-13",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00399",
+      "clientId": "CLI-1041",
+      "ticker": "MC.PA",
+      "quantity": 447.4796,
+      "purchasePrice": 439.9897,
+      "purchaseDate": "2025-07-19",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00400",
+      "clientId": "CLI-1041",
+      "ticker": "JNJ",
+      "quantity": 1358.838,
+      "purchasePrice": 173.5249,
+      "purchaseDate": "2025-08-11",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00401",
+      "clientId": "CLI-1041",
+      "ticker": "NVDA",
+      "quantity": 2568.8264,
+      "purchasePrice": 98.2217,
+      "purchaseDate": "2025-04-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00402",
+      "clientId": "CLI-1042",
+      "ticker": "MSFT",
+      "quantity": 260.3553,
+      "purchasePrice": 512.178,
+      "purchaseDate": "2026-10-28",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00403",
+      "clientId": "CLI-1042",
+      "ticker": "SAP.DE",
+      "quantity": 664.2783,
+      "purchasePrice": 196.7218,
+      "purchaseDate": "2024-09-15",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00404",
+      "clientId": "CLI-1042",
+      "ticker": "AAPL",
+      "quantity": 1005.0536,
+      "purchasePrice": 255.3001,
+      "purchaseDate": "2024-12-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00405",
+      "clientId": "CLI-1042",
+      "ticker": "JNJ",
+      "quantity": 279.5763,
+      "purchasePrice": 160.5575,
+      "purchaseDate": "2025-03-29",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00406",
+      "clientId": "CLI-1042",
+      "ticker": "SAP.DE",
+      "quantity": 211.1031,
+      "purchasePrice": 215.4518,
+      "purchaseDate": "2024-10-26",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00407",
+      "clientId": "CLI-1042",
+      "ticker": "QQQ",
+      "quantity": 6.4079,
+      "purchasePrice": 530.1209,
+      "purchaseDate": "2024-12-24",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00408",
+      "clientId": "CLI-1042",
+      "ticker": "SPY",
+      "quantity": 111.6512,
+      "purchasePrice": 737.8276,
+      "purchaseDate": "2026-05-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00409",
+      "clientId": "CLI-1042",
+      "ticker": "SAN.PA",
+      "quantity": 2309.8584,
+      "purchasePrice": 83.3877,
+      "purchaseDate": "2024-05-11",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00410",
+      "clientId": "CLI-1042",
+      "ticker": "IWDA.AS",
+      "quantity": 1266.3154,
+      "purchasePrice": 110.349,
+      "purchaseDate": "2026-04-11",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00411",
+      "clientId": "CLI-1042",
+      "ticker": "MC.PA",
+      "quantity": 150.5287,
+      "purchasePrice": 719.5327,
+      "purchaseDate": "2024-05-27",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00412",
+      "clientId": "CLI-1042",
+      "ticker": "MSFT",
+      "quantity": 366.7048,
+      "purchasePrice": 396.8491,
+      "purchaseDate": "2024-02-16",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00413",
+      "clientId": "CLI-1043",
+      "ticker": "AGG",
+      "quantity": 2846.6862,
+      "purchasePrice": 98.5094,
+      "purchaseDate": "2026-02-08",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00414",
+      "clientId": "CLI-1043",
+      "ticker": "MC.PA",
+      "quantity": 1538.4935,
+      "purchasePrice": 495.7677,
+      "purchaseDate": "2026-08-04",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00415",
+      "clientId": "CLI-1043",
+      "ticker": "TTE.PA",
+      "quantity": 8959.8355,
+      "purchasePrice": 53.4478,
+      "purchaseDate": "2025-12-23",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00416",
+      "clientId": "CLI-1043",
+      "ticker": "AGG",
+      "quantity": 3174.2218,
+      "purchasePrice": 97.33,
+      "purchaseDate": "2025-09-07",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00417",
+      "clientId": "CLI-1043",
+      "ticker": "AAPL",
+      "quantity": 399.438,
+      "purchasePrice": 310.676,
+      "purchaseDate": "2026-05-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00418",
+      "clientId": "CLI-1043",
+      "ticker": "MSFT",
+      "quantity": 818.954,
+      "purchasePrice": 427.7659,
+      "purchaseDate": "2026-05-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00419",
+      "clientId": "CLI-1043",
+      "ticker": "SAP.DE",
+      "quantity": 3130.198,
+      "purchasePrice": 209.2658,
+      "purchaseDate": "2025-09-14",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00420",
+      "clientId": "CLI-1043",
+      "ticker": "VNQ",
+      "quantity": 7791.836,
+      "purchasePrice": 101.3008,
+      "purchaseDate": "2026-07-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00421",
+      "clientId": "CLI-1044",
+      "ticker": "TLT",
+      "quantity": 107.6549,
+      "purchasePrice": -1.0,
+      "purchaseDate": "2025-12-17",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00422",
+      "clientId": "CLI-1044",
+      "ticker": "GLD",
+      "quantity": 67.7873,
+      "purchasePrice": 272.912,
+      "purchaseDate": "2025-03-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00423",
+      "clientId": "CLI-1044",
+      "ticker": "TLT",
+      "quantity": 317.8378,
+      "purchasePrice": 83.1572,
+      "purchaseDate": "2025-05-30",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00424",
+      "clientId": "CLI-1044",
+      "ticker": "JPM",
+      "quantity": 128.3289,
+      "purchasePrice": 176.0795,
+      "purchaseDate": "2024-03-01",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00425",
+      "clientId": "CLI-1044",
+      "ticker": "JPM",
+      "quantity": 126.7432,
+      "purchasePrice": 207.8817,
+      "purchaseDate": "2024-07-18",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00426",
+      "clientId": "CLI-1044",
+      "ticker": "BND",
+      "quantity": 603.6828,
+      "purchasePrice": 72.2935,
+      "purchaseDate": "2026-07-15",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00427",
+      "clientId": "CLI-1044",
+      "ticker": "VNQ",
+      "quantity": 194.2655,
+      "purchasePrice": 96.9838,
+      "purchaseDate": "2026-08-25",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00428",
+      "clientId": "CLI-1044",
+      "ticker": "JNJ",
+      "quantity": 297.5502,
+      "purchasePrice": 147.5696,
+      "purchaseDate": "2024-08-18",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00429",
+      "clientId": "CLI-1044",
+      "ticker": "TLT",
+      "quantity": 42.2475,
+      "purchasePrice": 85.0887,
+      "purchaseDate": "2026-04-20",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00430",
+      "clientId": "CLI-1044",
+      "ticker": "JPM",
+      "quantity": 62.4046,
+      "purchasePrice": 293.045,
+      "purchaseDate": "2026-02-27",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00431",
+      "clientId": "CLI-1044",
+      "ticker": "BND",
+      "quantity": 123.5032,
+      "purchasePrice": 68.1007,
+      "purchaseDate": "2024-07-12",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00432",
+      "clientId": "CLI-1044",
+      "ticker": "VNQ",
+      "quantity": 822.7958,
+      "purchasePrice": 86.3648,
+      "purchaseDate": "2025-02-05",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00433",
+      "clientId": "CLI-1044",
+      "ticker": "IWDA.AS",
+      "quantity": 171.5745,
+      "purchasePrice": 121.4215,
+      "purchaseDate": "2026-05-18",
+      "currency": "EUR"
+    },
+    {
+      "positionId": "POS-00030",
+      "clientId": "CLI-1002",
+      "ticker": "AGG",
+      "quantity": 169.8949,
+      "purchasePrice": 97.7901,
+      "purchaseDate": "2025-10-02",
+      "currency": "USD"
+    },
+    {
+      "positionId": "POS-00422",
+      "clientId": "CLI-1044",
+      "ticker": "GLD",
+      "quantity": 101.6809,
+      "purchasePrice": 272.912,
+      "purchaseDate": "2025-03-20",
+      "currency": "USD"
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "CLI-1000",
+      "fullName": "Claire Delaunay",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-01-11",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1001",
+      "fullName": "Julien Cheval",
+      "riskProfile": "EQUILIBRE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-12-28",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1002",
+      "fullName": "Amelie Meunier",
+      "riskProfile": "AGRESSIF",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2024-01-08",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1003",
+      "fullName": "Thibault Salvador",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-01-16",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1004",
+      "fullName": "Ines Oliveira",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-10-22",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1005",
+      "fullName": "Mathieu Nguyen-Roux",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-12-11",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1006",
+      "fullName": "Soraya Barbier",
+      "riskProfile": "EQUILIBRE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2026-02-03",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1007",
+      "fullName": "Gregoire Aubry",
+      "riskProfile": "PRUDENT",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-10-20",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1008",
+      "fullName": "Helene Moretti",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-12-07",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1009",
+      "fullName": "Benoit Ferrand",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2026-01-17",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1010",
+      "fullName": "Nadia Lacombe",
+      "riskProfile": "PRUDENT",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-01-08",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1011",
+      "fullName": "Vincent Kowalski",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-04-23",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1012",
+      "fullName": "Camille Thevenot",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2026-02-22",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1013",
+      "fullName": "Olivier Fabre",
+      "riskProfile": "PRUDENT",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-07-09",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1014",
+      "fullName": "Farida Dumas-Perrin",
+      "riskProfile": "EQUILIBRE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-09-17",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1015",
+      "fullName": "Damien Berthier",
+      "riskProfile": "EQUILIBRE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2026-06-15",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1016",
+      "fullName": "Sylvie Vasseur",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-08-25",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1017",
+      "fullName": "Xavier Rambert",
+      "riskProfile": "EQUILIBRE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2024-04-26",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1018",
+      "fullName": "Leila Delaunay",
+      "riskProfile": "PRUDENT",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-02-25",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1019",
+      "fullName": "Pascal Cheval",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-03-17",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1020",
+      "fullName": "Margaux Meunier",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2026-04-28",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1021",
+      "fullName": "Antoine Salvador",
+      "riskProfile": "EQUILIBRE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2026-06-12",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1022",
+      "fullName": "Sabine Oliveira",
+      "riskProfile": "EQUILIBRE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2026-04-11",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1023",
+      "fullName": "Renaud Nguyen-Roux",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-01-27",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1024",
+      "fullName": "Claire Barbier",
+      "riskProfile": "PRUDENT",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-01-21",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1025",
+      "fullName": "Julien Aubry",
+      "riskProfile": "EQUILIBRE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-02-03",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1026",
+      "fullName": "Amelie Moretti",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-05-03",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1027",
+      "fullName": "Thibault Ferrand",
+      "riskProfile": "PRUDENT",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-12-26",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1028",
+      "fullName": "Ines Lacombe",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-07-07",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1029",
+      "fullName": "Mathieu Kowalski",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-08-22",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1030",
+      "fullName": "Soraya Thevenot",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-12-24",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1031",
+      "fullName": "Gregoire Fabre",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2024-11-06",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1032",
+      "fullName": "Helene Dumas-Perrin",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-06-10",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1033",
+      "fullName": "Benoit Berthier",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2024-03-02",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1034",
+      "fullName": "Nadia Vasseur",
+      "riskProfile": "PRUDENT",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-12-30",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1035",
+      "fullName": "Vincent Rambert",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-12-12",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1036",
+      "fullName": "Camille Delaunay",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-01-29",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1037",
+      "fullName": "Olivier Cheval",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-12-06",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1038",
+      "fullName": "Farida Meunier",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2025-03-05",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1039",
+      "fullName": "Damien Salvador",
+      "riskProfile": "AGRESSIF",
+      "referenceCurrency": "EUR",
+      "onboardingDate": "2024-03-02",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1040",
+      "fullName": "Sylvie Oliveira",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-12-28",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1041",
+      "fullName": "Xavier Nguyen-Roux",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-01-29",
+      "advisor": "M. Oustric"
+    },
+    {
+      "clientId": "CLI-1042",
+      "fullName": "Leila Barbier",
+      "riskProfile": "OFFENSIF",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-01-01",
+      "advisor": "P. Vandenberghe"
+    },
+    {
+      "clientId": "CLI-1043",
+      "fullName": "Pascal Aubry",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2025-07-12",
+      "advisor": "L. Traore"
+    },
+    {
+      "clientId": "CLI-1044",
+      "fullName": "Margaux Moretti",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-01-13",
+      "advisor": "A. Kessler"
+    },
+    {
+      "clientId": "CLI-1040",
+      "fullName": "Sylvie Oliveira (doublon)",
+      "riskProfile": "DYNAMIQUE",
+      "referenceCurrency": "USD",
+      "onboardingDate": "2024-12-28",
+      "advisor": "A. Kessler"
+    }
+  ],
+  "instruments": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "USD",
+      "exchange": "NASDAQ"
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "USD",
+      "exchange": "NASDAQ"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "USD",
+      "exchange": "NASDAQ"
+    },
+    {
+      "ticker": "JNJ",
+      "name": "Johnson & Johnson",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "USD",
+      "exchange": "NYSE"
+    },
+    {
+      "ticker": "JPM",
+      "name": "JPMorgan Chase & Co.",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "USD",
+      "exchange": "NYSE"
+    },
+    {
+      "ticker": "MC.PA",
+      "name": "LVMH Moet Hennessy Louis Vuitton",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "EUR",
+      "exchange": "EURONEXT_PARIS"
+    },
+    {
+      "ticker": "TTE.PA",
+      "name": "TotalEnergies SE",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "EUR",
+      "exchange": "EURONEXT_PARIS"
+    },
+    {
+      "ticker": "SAN.PA",
+      "name": "Sanofi S.A.",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "EUR",
+      "exchange": "EURONEXT_PARIS"
+    },
+    {
+      "ticker": "ASML.AS",
+      "name": "ASML Holding N.V.",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "EUR",
+      "exchange": "EURONEXT_AMSTERDAM"
+    },
+    {
+      "ticker": "SAP.DE",
+      "name": "SAP SE",
+      "instrumentType": "STOCK",
+      "assetClass": "ACTIONS",
+      "currency": "EUR",
+      "exchange": "XETRA"
+    },
+    {
+      "ticker": "SPY",
+      "name": "SPDR S&P 500 ETF Trust",
+      "instrumentType": "ETF",
+      "assetClass": "ACTIONS",
+      "currency": "USD",
+      "exchange": "NYSEARCA"
+    },
+    {
+      "ticker": "QQQ",
+      "name": "Invesco QQQ Trust",
+      "instrumentType": "ETF",
+      "assetClass": "ACTIONS",
+      "currency": "USD",
+      "exchange": "NASDAQ"
+    },
+    {
+      "ticker": "IWDA.AS",
+      "name": "iShares Core MSCI World UCITS ETF",
+      "instrumentType": "ETF",
+      "assetClass": "ACTIONS",
+      "currency": "EUR",
+      "exchange": "EURONEXT_AMSTERDAM"
+    },
+    {
+      "ticker": "AGG",
+      "name": "iShares Core U.S. Aggregate Bond ETF",
+      "instrumentType": "ETF",
+      "assetClass": "OBLIGATIONS",
+      "currency": "USD",
+      "exchange": "NYSEARCA"
+    },
+    {
+      "ticker": "TLT",
+      "name": "iShares 20+ Year Treasury Bond ETF",
+      "instrumentType": "ETF",
+      "assetClass": "OBLIGATIONS",
+      "currency": "USD",
+      "exchange": "NASDAQ"
+    },
+    {
+      "ticker": "BND",
+      "name": "Vanguard Total Bond Market ETF",
+      "instrumentType": "ETF",
+      "assetClass": "OBLIGATIONS",
+      "currency": "USD",
+      "exchange": "NASDAQ"
+    },
+    {
+      "ticker": "GLD",
+      "name": "SPDR Gold Shares",
+      "instrumentType": "ETF",
+      "assetClass": "MATIERES_PREMIERES",
+      "currency": "USD",
+      "exchange": "NYSEARCA"
+    },
+    {
+      "ticker": "VNQ",
+      "name": "Vanguard Real Estate ETF",
+      "instrumentType": "ETF",
+      "assetClass": "IMMOBILIER",
+      "currency": "USD",
+      "exchange": "NYSEARCA"
+    }
+  ],
+  "targetAllocations": [
+    {
+      "clientId": "CLI-1000",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": -5.0
+    },
+    {
+      "clientId": "CLI-1000",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 89.93
+    },
+    {
+      "clientId": "CLI-1000",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 10.62
+    },
+    {
+      "clientId": "CLI-1000",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 4.45
+    },
+    {
+      "clientId": "CLI-1001",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 44.99
+    },
+    {
+      "clientId": "CLI-1001",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 40.0
+    },
+    {
+      "clientId": "CLI-1001",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 4.64
+    },
+    {
+      "clientId": "CLI-1001",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 10.37
+    },
+    {
+      "clientId": "CLI-1002",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 64.35
+    },
+    {
+      "clientId": "CLI-1002",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 21.7
+    },
+    {
+      "clientId": "CLI-1002",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 5.62
+    },
+    {
+      "clientId": "CLI-1002",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.33
+    },
+    {
+      "clientId": "CLI-1003",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 66.66
+    },
+    {
+      "clientId": "CLI-1003",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 19.01
+    },
+    {
+      "clientId": "CLI-1003",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.34
+    },
+    {
+      "clientId": "CLI-1003",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 5.99
+    },
+    {
+      "clientId": "CLI-1004",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 84.6
+    },
+    {
+      "clientId": "CLI-1004",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 4.03
+    },
+    {
+      "clientId": "CLI-1004",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 4.61
+    },
+    {
+      "clientId": "CLI-1004",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 6.76
+    },
+    {
+      "clientId": "CLI-1005",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 62.71
+    },
+    {
+      "clientId": "CLI-1005",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 19.76
+    },
+    {
+      "clientId": "CLI-1005",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.32
+    },
+    {
+      "clientId": "CLI-1005",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 9.21
+    },
+    {
+      "clientId": "CLI-1006",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 46.9
+    },
+    {
+      "clientId": "CLI-1006",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 39.63
+    },
+    {
+      "clientId": "CLI-1006",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 5.72
+    },
+    {
+      "clientId": "CLI-1006",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.75
+    },
+    {
+      "clientId": "CLI-1007",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 17.86
+    },
+    {
+      "clientId": "CLI-1007",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 72.53
+    },
+    {
+      "clientId": "CLI-1007",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 4.82
+    },
+    {
+      "clientId": "CLI-1007",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 4.79
+    },
+    {
+      "clientId": "CLI-1008",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 65.39
+    },
+    {
+      "clientId": "CLI-1008",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 17.07
+    },
+    {
+      "clientId": "CLI-1008",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 5.79
+    },
+    {
+      "clientId": "CLI-1008",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 11.75
+    },
+    {
+      "clientId": "CLI-1009",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 65.41
+    },
+    {
+      "clientId": "CLI-1009",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 22.73
+    },
+    {
+      "clientId": "CLI-1009",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 4.3
+    },
+    {
+      "clientId": "CLI-1009",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.56
+    },
+    {
+      "clientId": "CLI-1010",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 18.35
+    },
+    {
+      "clientId": "CLI-1010",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 68.44
+    },
+    {
+      "clientId": "CLI-1010",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 11.26
+    },
+    {
+      "clientId": "CLI-1010",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 1.95
+    },
+    {
+      "clientId": "CLI-1011",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 86.56
+    },
+    {
+      "clientId": "CLI-1011",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 5.94
+    },
+    {
+      "clientId": "CLI-1011",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 6.46
+    },
+    {
+      "clientId": "CLI-1011",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 1.04
+    },
+    {
+      "clientId": "CLI-1012",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 89.72
+    },
+    {
+      "clientId": "CLI-1012",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 3.43
+    },
+    {
+      "clientId": "CLI-1012",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.75
+    },
+    {
+      "clientId": "CLI-1012",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 5.1
+    },
+    {
+      "clientId": "CLI-1013",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 24.43
+    },
+    {
+      "clientId": "CLI-1013",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 63.3
+    },
+    {
+      "clientId": "CLI-1013",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 4.85
+    },
+    {
+      "clientId": "CLI-1013",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.42
+    },
+    {
+      "clientId": "CLI-1014",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 42.16
+    },
+    {
+      "clientId": "CLI-1014",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 40.69
+    },
+    {
+      "clientId": "CLI-1014",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.78
+    },
+    {
+      "clientId": "CLI-1014",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.37
+    },
+    {
+      "clientId": "CLI-1015",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 51.38
+    },
+    {
+      "clientId": "CLI-1015",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 37.9
+    },
+    {
+      "clientId": "CLI-1015",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 5.29
+    },
+    {
+      "clientId": "CLI-1015",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 5.43
+    },
+    {
+      "clientId": "CLI-1016",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 84.14
+    },
+    {
+      "clientId": "CLI-1016",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 1.04
+    },
+    {
+      "clientId": "CLI-1016",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 10.31
+    },
+    {
+      "clientId": "CLI-1016",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 4.51
+    },
+    {
+      "clientId": "CLI-1017",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 42.29
+    },
+    {
+      "clientId": "CLI-1017",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 38.49
+    },
+    {
+      "clientId": "CLI-1017",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.27
+    },
+    {
+      "clientId": "CLI-1017",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 10.95
+    },
+    {
+      "clientId": "CLI-1018",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 23.0
+    },
+    {
+      "clientId": "CLI-1018",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 65.25
+    },
+    {
+      "clientId": "CLI-1018",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.18
+    },
+    {
+      "clientId": "CLI-1018",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 3.57
+    },
+    {
+      "clientId": "CLI-1019",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 64.6
+    },
+    {
+      "clientId": "CLI-1019",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 22.93
+    },
+    {
+      "clientId": "CLI-1019",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 5.03
+    },
+    {
+      "clientId": "CLI-1019",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.44
+    },
+    {
+      "clientId": "CLI-1020",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 62.28
+    },
+    {
+      "clientId": "CLI-1020",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 19.31
+    },
+    {
+      "clientId": "CLI-1020",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 10.06
+    },
+    {
+      "clientId": "CLI-1020",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.35
+    },
+    {
+      "clientId": "CLI-1021",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 49.51
+    },
+    {
+      "clientId": "CLI-1021",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 41.02
+    },
+    {
+      "clientId": "CLI-1021",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 2.2
+    },
+    {
+      "clientId": "CLI-1021",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.27
+    },
+    {
+      "clientId": "CLI-1022",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 41.33
+    },
+    {
+      "clientId": "CLI-1022",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 41.77
+    },
+    {
+      "clientId": "CLI-1022",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 6.81
+    },
+    {
+      "clientId": "CLI-1022",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 10.09
+    },
+    {
+      "clientId": "CLI-1023",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 89.57
+    },
+    {
+      "clientId": "CLI-1023",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 1.61
+    },
+    {
+      "clientId": "CLI-1023",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 5.68
+    },
+    {
+      "clientId": "CLI-1023",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 3.14
+    },
+    {
+      "clientId": "CLI-1024",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 25.44
+    },
+    {
+      "clientId": "CLI-1024",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 60.28
+    },
+    {
+      "clientId": "CLI-1024",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 10.14
+    },
+    {
+      "clientId": "CLI-1024",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 4.14
+    },
+    {
+      "clientId": "CLI-1025",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 46.24
+    },
+    {
+      "clientId": "CLI-1025",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 39.82
+    },
+    {
+      "clientId": "CLI-1025",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 6.32
+    },
+    {
+      "clientId": "CLI-1025",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.62
+    },
+    {
+      "clientId": "CLI-1026",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 66.83
+    },
+    {
+      "clientId": "CLI-1026",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 22.62
+    },
+    {
+      "clientId": "CLI-1026",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 5.97
+    },
+    {
+      "clientId": "CLI-1026",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 4.58
+    },
+    {
+      "clientId": "CLI-1027",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 15.86
+    },
+    {
+      "clientId": "CLI-1027",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 64.3
+    },
+    {
+      "clientId": "CLI-1027",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 12.5
+    },
+    {
+      "clientId": "CLI-1027",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.34
+    },
+    {
+      "clientId": "CLI-1028",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 68.52
+    },
+    {
+      "clientId": "CLI-1028",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 19.85
+    },
+    {
+      "clientId": "CLI-1028",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 10.39
+    },
+    {
+      "clientId": "CLI-1028",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.24
+    },
+    {
+      "clientId": "CLI-1029",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 74.8
+    },
+    {
+      "clientId": "CLI-1029",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 7.7
+    },
+    {
+      "clientId": "CLI-1029",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.6
+    },
+    {
+      "clientId": "CLI-1029",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.9
+    },
+    {
+      "clientId": "CLI-1030",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 84.47
+    },
+    {
+      "clientId": "CLI-1030",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 1.36
+    },
+    {
+      "clientId": "CLI-1030",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 3.99
+    },
+    {
+      "clientId": "CLI-1030",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 10.18
+    },
+    {
+      "clientId": "CLI-1031",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 80.81
+    },
+    {
+      "clientId": "CLI-1031",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 4.14
+    },
+    {
+      "clientId": "CLI-1031",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 6.35
+    },
+    {
+      "clientId": "CLI-1031",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.7
+    },
+    {
+      "clientId": "CLI-1032",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 65.1
+    },
+    {
+      "clientId": "CLI-1032",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 18.28
+    },
+    {
+      "clientId": "CLI-1032",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 9.43
+    },
+    {
+      "clientId": "CLI-1032",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.19
+    },
+    {
+      "clientId": "CLI-1033",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 78.27
+    },
+    {
+      "clientId": "CLI-1033",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 4.31
+    },
+    {
+      "clientId": "CLI-1033",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.61
+    },
+    {
+      "clientId": "CLI-1033",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.81
+    },
+    {
+      "clientId": "CLI-1034",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 21.14
+    },
+    {
+      "clientId": "CLI-1034",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 69.78
+    },
+    {
+      "clientId": "CLI-1034",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 1.93
+    },
+    {
+      "clientId": "CLI-1034",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.15
+    },
+    {
+      "clientId": "CLI-1035",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 95.13
+    },
+    {
+      "clientId": "CLI-1035",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 1.49
+    },
+    {
+      "clientId": "CLI-1035",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 5.95
+    },
+    {
+      "clientId": "CLI-1035",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 4.43
+    },
+    {
+      "clientId": "CLI-1036",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 69.55
+    },
+    {
+      "clientId": "CLI-1036",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 16.45
+    },
+    {
+      "clientId": "CLI-1036",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 7.28
+    },
+    {
+      "clientId": "CLI-1036",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 6.72
+    },
+    {
+      "clientId": "CLI-1037",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 59.47
+    },
+    {
+      "clientId": "CLI-1037",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 21.37
+    },
+    {
+      "clientId": "CLI-1037",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.0
+    },
+    {
+      "clientId": "CLI-1037",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 11.16
+    },
+    {
+      "clientId": "CLI-1038",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 66.19
+    },
+    {
+      "clientId": "CLI-1038",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 18.37
+    },
+    {
+      "clientId": "CLI-1038",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 6.49
+    },
+    {
+      "clientId": "CLI-1038",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.95
+    },
+    {
+      "clientId": "CLI-1039",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 20.9
+    },
+    {
+      "clientId": "CLI-1039",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 62.86
+    },
+    {
+      "clientId": "CLI-1039",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 8.42
+    },
+    {
+      "clientId": "CLI-1039",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 7.82
+    },
+    {
+      "clientId": "CLI-1040",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 66.1
+    },
+    {
+      "clientId": "CLI-1040",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 23.35
+    },
+    {
+      "clientId": "CLI-1040",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 4.05
+    },
+    {
+      "clientId": "CLI-1040",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 6.5
+    },
+    {
+      "clientId": "CLI-1041",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 78.87
+    },
+    {
+      "clientId": "CLI-1041",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 3.28
+    },
+    {
+      "clientId": "CLI-1041",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 9.09
+    },
+    {
+      "clientId": "CLI-1041",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.76
+    },
+    {
+      "clientId": "CLI-1042",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 89.76
+    },
+    {
+      "clientId": "CLI-1042",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 3.42
+    },
+    {
+      "clientId": "CLI-1042",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 1.75
+    },
+    {
+      "clientId": "CLI-1042",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 5.07
+    },
+    {
+      "clientId": "CLI-1043",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 66.96
+    },
+    {
+      "clientId": "CLI-1043",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 19.95
+    },
+    {
+      "clientId": "CLI-1043",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 4.73
+    },
+    {
+      "clientId": "CLI-1043",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 8.36
+    },
+    {
+      "clientId": "CLI-1044",
+      "assetClass": "ACTIONS",
+      "targetWeightPct": 64.32
+    },
+    {
+      "clientId": "CLI-1044",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 16.8
+    },
+    {
+      "clientId": "CLI-1044",
+      "assetClass": "MATIERES_PREMIERES",
+      "targetWeightPct": 14.42
+    },
+    {
+      "clientId": "CLI-1044",
+      "assetClass": "IMMOBILIER",
+      "targetWeightPct": 4.46
+    },
+    {
+      "clientId": "CLI-9999",
+      "assetClass": "OBLIGATIONS",
+      "targetWeightPct": 100.0
+    }
+  ],
+  "evaluationDate": "2026-09-13"
+}

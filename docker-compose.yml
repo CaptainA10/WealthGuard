@@ -18,5 +18,29 @@ services:
       timeout: 5s
       retries: 10
 
+  # Ops monitoring of the pipeline itself (wealthguard.pipeline_runs), distinct
+  # from the Power BI/Tableau business dashboards built on the other tables --
+  # see CLAUDE.md's "React dashboard + Grafana" note. Auto-provisioned: no
+  # manual datasource/dashboard setup after `docker compose up`.
+  grafana:
+    image: grafana/grafana-oss:11.3.1
+    container_name: wealthguard-grafana
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+    ports:
+      - "3000:3000"
+    volumes:
+      - wealthguard-grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+
 volumes:
   wealthguard-postgres-data:
+  wealthguard-grafana-data:
