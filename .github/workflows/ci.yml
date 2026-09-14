@@ -170,19 +170,54 @@ jobs:
           name: frontend-dist
           path: frontend/dist
 
-  deploy:
-    name: Deploy (simulated)
+  deploy-azure:
+    name: Deploy — Azure (quality-engine)
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [test-java, test-python, test-frontend]
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: Package the Spring Boot jar
+        working-directory: quality-engine
+        run: mvn -B -DskipTests package
+      # OIDC federated login (azure/setup.sh): no client secret stored anywhere,
+      # GitHub can only obtain a token for this exact repo's main branch.
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy the jar to Azure App Service (free F1 tier)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: wealthguard-quality-engine
+          package: quality-engine/target/quality-engine-*.jar
+
+  # Data-pipeline (Azure Functions) and Blob Storage are documented but not
+  # deployed here -- the F1 App Service above already demonstrates a real,
+  # working Azure deployment (and unblocks live data on the public GitHub
+  # Pages dashboard below) at zero ongoing cost; see ARCHITECTURE.md.
+  deploy-pipeline-simulated:
+    name: Deploy — data-pipeline & storage (simulated)
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     needs: build
     steps:
       - name: Deploy — documented, not wired up
         run: |
-          echo "::notice title=Deployment simulated::No Azure subscription is available for this portfolio project (cahier des charges Phase 9, not yet implemented)."
-          echo "A real deployment from here would:"
+          echo "::notice title=Deployment simulated::Wiring quality-engine to Azure (see deploy-azure above) covers the highest-value case for a portfolio demo without provisioning paid-tier services (PostgreSQL Flexible Server has no free tier)."
+          echo "A real deployment from here would additionally:"
           echo "  - az functionapp deployment source config-zip ... (data-pipeline, as an Azure Function)"
-          echo "  - az webapp deploy ... (quality-engine jar, as an App Service / Container App)"
-          echo "  - az storage blob upload-batch ... (frontend/dist, to Azure Blob Storage static hosting)"
+          echo "  - az storage blob upload-batch ... (landing files / reports, to Azure Blob Storage)"
+          echo "  - Azure Database for PostgreSQL Flexible Server, replacing the local docker-compose Postgres"
 
   deploy-pages:
     name: Deploy — GitHub Pages (frontend demo)
@@ -204,8 +239,10 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - working-directory: frontend
         run: npm ci
-      - name: Build with the /WealthGuard/ base path
+      - name: Build with the /WealthGuard/ base path, pointed at the live engine
         working-directory: frontend
+        env:
+          VITE_QUALITY_API_URL: https://wealthguard-quality-engine.azurewebsites.net
         run: npm run build -- --mode gh-pages
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
