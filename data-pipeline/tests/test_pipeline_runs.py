@@ -63,6 +63,16 @@ class TestRecordRun:
         assert row["run_at"] is not None
 
     def test_loading_a_new_dataset_does_not_erase_run_history(self, engine):
+        # pipeline_runs is append-only and persists across separate test
+        # sessions against the same local Postgres, so this counts a delta
+        # rather than asserting an absolute 0-or-1 -- a prior session may
+        # already have left rows for this same as_of_date.
+        with engine.connect() as conn:
+            before = conn.execute(
+                text("SELECT count(*) FROM wealthguard.pipeline_runs WHERE as_of_date = :d"),
+                {"d": date(2024, 1, 2)},
+            ).scalar_one()
+
         db.record_run(engine, _run(date(2024, 1, 2)))
 
         empty = Dataset(
@@ -75,12 +85,12 @@ class TestRecordRun:
         db.load_dataset(engine, empty)
 
         with engine.connect() as conn:
-            count = conn.execute(
+            after = conn.execute(
                 text("SELECT count(*) FROM wealthguard.pipeline_runs WHERE as_of_date = :d"),
                 {"d": date(2024, 1, 2)},
             ).scalar_one()
 
-        assert count == 1
+        assert after == before + 1
 
     def test_multiple_runs_accumulate_rather_than_overwrite(self, engine):
         with engine.begin() as conn:

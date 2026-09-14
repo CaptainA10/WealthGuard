@@ -89,6 +89,27 @@ python -m wealthguard_pipeline.seed.generate --as-of 2026-09-13
 wg-export-frontend-fixture --as-of 2026-09-13   # regénère la fixture du frontend
 ```
 
+### Assistant en langage naturel (optionnel, coûte de l'argent)
+
+Le reste du projet (pipeline, moteur Java, frontend, Grafana, CI/CD, dashboard
+en ligne) fonctionne entièrement **sans** cette brique — c'est le seul
+composant qui appelle une API payante (Anthropic), donc elle n'est ni dans le
+`docker-compose.yml` par défaut, ni dans la démo GitHub Pages. À utiliser
+seulement si tu as ta propre clé `ANTHROPIC_API_KEY` financée :
+
+```bash
+cd data-pipeline
+export ANTHROPIC_API_KEY=sk-ant-...
+wg-ask "Quels clients ont une allocation obligataire superieure a 60 % ?"
+# ou, en service HTTP :
+uvicorn wealthguard_pipeline.assistant.api:app --port 8090
+```
+
+La sécurité (whitelist de tables, lecture seule, cf. cahier des charges §2.4)
+est testée intégralement en simulant le LLM — voir
+`tests/test_assistant_security.py` et `tests/test_assistant_nl_query.py` —
+aucun de ces tests n'appelle l'API réelle ni ne coûte quoi que ce soit.
+
 ## Tests
 
 ```bash

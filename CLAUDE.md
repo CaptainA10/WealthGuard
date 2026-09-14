@@ -152,6 +152,26 @@ Phases du cahier des charges §6 :
 4. **PostgreSQL + SQL avancé — FAIT** (schema + requêtes ci-dessus). Local via
    `docker-compose.yml` (service `postgres`, image `postgres:16-alpine`, monte
    `data-pipeline/wealthguard_pipeline/sql/schema.sql` en script d'init).
+
+   ### Bug réel trouvé et corrigé : `db.init_schema` supprimait silencieusement des statements
+
+   `db._split_statements()` filtrait un chunk entier des qu'il **commençait**
+   par un commentaire `--`, sans verifier si du vrai SQL suivait ce
+   commentaire dans le meme chunk. Or chaque `CREATE TABLE` de `schema.sql`
+   est precede d'un bloc de commentaire explicatif -- donc **chaque**
+   `CREATE TABLE` (y compris `CREATE SCHEMA` lui-meme) etait silencieusement
+   ignore par `init_schema()`. Masque depuis le debut par le script d'init
+   Docker (qui execute le fichier brut via `psql`, insensible a ce bug) ;
+   demasque uniquement quand `pipeline_runs` (ajoutee apres coup, donc jamais
+   creee par le script d'init du volume Postgres deja existant) a eu besoin
+   que `init_schema()` la cree vraiment -- trouve en relançant le pipeline
+   contre l'infra reelle une fois Docker Desktop de nouveau disponible.
+   Corrige en filtrant les lignes de commentaire **avant** de découper sur
+   `;`, pas après (voir `db.py` et `tests/test_db.py`, qui pin ce cas
+   precis). **Retenue generale** : `_split_statements` n'est exercee par
+   aucun test d'integration qui recree vraiment un schema absent depuis rien
+   -- seule une execution contre une base deja peuplee via le script Docker
+   aurait continue a masquer ce genre de regression.
 5. **Dashboards Power BI / Tableau** — **délégué à l'utilisateur** (déjà
    maîtrisés, faits en cours — décision explicite du 2026-09-14, ne pas les
    construire soi-même). Les indicateurs SQL de la Phase 4 (`indicators.py`,
@@ -172,28 +192,70 @@ Phases du cahier des charges §6 :
      (`wealthguard.cors.allowed-origins`, défaut `localhost:5173`/`:4173` —
      sans ça le navigateur bloque l'appel avant qu'il n'atteigne Spring), testé
      par `WebConfigTest` (vraie requête preflight via MockMvc).
-   - **Vérifié** : `npx tsc -b` sans erreur ; flux de données confirmé de bout
-     en bout par un `curl -X POST ... -H "Origin: http://localhost:5173"` qui
-     reproduit exactement l'appel du navigateur (CORS + payload + réponse) --
-     **pas** de capture d'écran navigateur réelle prise (voir "Incident disque"
-     ci-dessous, `chromium-cli`/Playwright non installé pour ne pas risquer un
-     nouveau `ENOSPC`). À refaire avec le skill `run` une fois de l'espace
-     disque disponible.
-   - **Grafana (monitoring ops du pipeline, pas du métier)** : ajouté en plus
-     du React/Tableau/PowerBI demandés, à la demande explicite de
+   - **Deploiement GitHub Pages** (a la demande explicite de l'utilisateur,
+     2026-09-14) : `.github/workflows/ci.yml` job `deploy-pages`, build avec
+     `npm run build -- --mode gh-pages` (base `/WealthGuard/`, voir
+     `vite.config.ts`), publie sur
+     [captaina10.github.io/WealthGuard](https://captaina10.github.io/WealthGuard/).
+     GitHub Pages ne sert que du statique : `loadReport()` (`src/api.ts`)
+     tente l'appel Java en direct (timeout 4s) puis retombe sur
+     `public/data/demo-report.json` (instantane fige mais **reel**, genere
+     via `curl -X POST` contre un moteur local, voir
+     `public/data/README.md` pour la regenerer) avec une banniere explicite
+     dans l'UI plutot qu'un faux temps reel silencieux. **Necessitait
+     l'activation manuelle, une seule fois, de Settings -> Pages -> Source =
+     "GitHub Actions"** sur le depot -- echoue sinon a l'etape
+     `actions/configure-pages@v5` avec un message clair ; deja fait par
+     l'utilisateur.
+   - **Verifie en conditions reelles** (pas seulement via curl) : `npm run
+     lint`, `npm run build` (les deux modes, defaut et `gh-pages`), le site
+     deploye repond en 200 avec les bons chemins d'assets, et
+     `demo-report.json` est bien accessible derriere la banniere.
+   - **Grafana (monitoring ops du pipeline, pas du metier)** : ajoute en plus
+     du React/Tableau/PowerBI demandes, a la demande explicite de
      l'utilisateur. `docker-compose.yml` service `grafana`
      (`grafana/grafana-oss:11.3.1`), provisioning auto (aucun clic UI) via
      `grafana/provisioning/{datasources,dashboards}/` et
-     `grafana/dashboards/pipeline-monitoring.json`. Source : nouvelle table
-     **append-only** `wealthguard.pipeline_runs` (jamais tronquée par
-     `db.load_dataset`, écrite par `db.record_run()` à la fin de
+     `grafana/dashboards/pipeline-monitoring.json`. Source : table
+     **append-only** `wealthguard.pipeline_runs` (jamais tronquee par
+     `db.load_dataset`, ecrite par `db.record_run()` a la fin de
      `main.run()` — un run = une ligne, historique dans le temps).
-     **Non testé avec un vrai Grafana** (Docker Desktop était en panne pendant
-     cette session, cf. incident disque) ; `tests/test_pipeline_runs.py`
-     (intégration) teste `record_run`/l'accumulation mais pas Grafana lui-même.
-7. **Assistant LangChain** — pas commencé (`assistant/` existe dans
-   `wealthguard_pipeline/` mais est vide ; dépendances déclarées dans
-   `pyproject.toml[assistant]`).
+     **Teste avec un vrai conteneur** une fois Docker Desktop et l'espace
+     disque redevenus disponibles dans la meme session : datasource et
+     dashboard bien provisionnes (verifie via l'API Grafana), pipeline lance
+     deux fois de suite, donnees visibles dans `pipeline_runs`. Voir le bug
+     `db.init_schema` ci-dessous, trouve a cette occasion.
+7. **Assistant LangChain — FAIT** (`data-pipeline/wealthguard_pipeline/assistant/`).
+   - `security.py` : whitelist de tables (CTE nommees exemptees pour
+     elles-memes, mais leur corps reste verifie), rejet de tout mot-cle
+     d'ecriture/DDL, une seule instruction, `LIMIT` impose. Enterement
+     testable sans LLM (`tests/test_assistant_security.py`, exhaustif).
+   - `nl_query.py` (`NaturalLanguageQueryAssistant`) : chaine LangChain
+     (`prompt | ChatAnthropic | StrOutputParser`) **injectable** — le
+     parametre `chain` permet de remplacer le LLM par un faux objet dans les
+     tests, jamais d'appel reseau paye. Execute la requete validee dans une
+     transaction Postgres `READ ONLY` + `statement_timeout` (deuxieme
+     couche de securite, independante de la regex).
+   - `api.py` (FastAPI, `POST /ask`) et `cli.py` (`wg-ask`, entry point
+     `pyproject.toml`).
+   - **Decision explicite de l'utilisateur (2026-09-14)** : ne jamais
+     appeler l'API Anthropic reelle pendant le developpement/tests, pour que
+     le projet reste demontrable sans depense. Tous les tests
+     (`test_assistant_security.py`, `test_assistant_nl_query.py` [integration,
+     vrai Postgres local gratuit + faux LLM], `test_assistant_api.py`
+     [FastAPI TestClient + dependance surchargee]) passent sans
+     `ANTHROPIC_API_KEY` funded ni requete reseau. Volontairement absent du
+     `docker-compose.yml` par defaut et du deploiement GitHub Pages.
+   - **Deux bugs reels trouves et corriges pendant l'ecriture des tests** :
+     (1) un CTE nomme (`WITH totals AS (...) SELECT * FROM totals`) etait
+     rejete comme "table inconnue" — corrige en extrayant les noms de CTE
+     et en les exemptant du whitelist check (mais pas leur corps, sinon un
+     CTE nomme `clients` pourrait servir de porte derobee) ; (2) le pattern
+     regex pour reperer les CTE suivants (`, nom AS (`) utilisait `\b` juste
+     avant la virgule, qui ne matche jamais quand le caractere precedent
+     (ex. `)`) n'est pas alphanumerique — `\b` ne matche qu'entre un
+     caractere de mot et un caractere hors mot, jamais entre deux caracteres
+     hors mot. Voir `security.py` pour le detail.
 8. **CI/CD — FAIT, sur GitHub Actions (pas GitLab)** — `.github/workflows/ci.yml` :
    `test-java` (`mvn verify`), `test-python` (démarre le vrai jar Spring Boot +
    un vrai conteneur service Postgres, lance toute la suite pytest y compris
@@ -293,6 +355,11 @@ docker compose up -d
 
 # Python : installer le package (édition) + extras dev/marché
 cd data-pipeline && pip install -e ".[dev,market]"
+# + extras assistant (LangChain/FastAPI), seulement si besoin :
+cd data-pipeline && pip install -e ".[assistant]"
+
+# Assistant NL (necessite un ANTHROPIC_API_KEY finance -- jamais appele par les tests)
+cd data-pipeline && wg-ask "Quels clients ont une allocation obligataire superieure a 60% ?"
 
 # Exporter la fixture pour le frontend (a refaire si le seed dataset change)
 cd data-pipeline && wg-export-frontend-fixture --as-of 2026-09-13
@@ -348,13 +415,28 @@ Le disque `C:` s'est retrouvé à **0 octet libre sur 260 Go** en pleine session
 (scaffolding React + `npm install`), faisant planter **Docker Desktop**
 ("Docker Desktop is unable to start") et échouer `npm install` (`ENOSPC`), et
 même des commandes basiques comme `cat` ("No space left on device"). Le
-répertoire WealthGuard ne pesait que ~230 Mo — la cause est ailleurs sur la
-machine (le dossier `AppData\Local\Docker` a été mesuré à lui seul à ~23 Go,
-et il y a d'autres projets/WSL/OneDrive non liés à ce dépôt). Vider le cache
-npm (`npm cache clean --force`) a libéré ~1,3 Go, juste assez pour terminer
-l'install (27 paquets) mais **pas assez pour relancer Docker Desktop**, qui
-est resté indisponible jusqu'à la fin de cette session — donc **Grafana n'a
-jamais pu être testé avec un vrai conteneur**.
+répertoire WealthGuard ne pesait que ~230 Mo. **Cause racine identifiée** :
+`C:\Users\Lenovo\OneDrive - Groupe ESAIP` pesait **142,9 Go** (probablement
+Documents/Bureau/Images redirigés par Known Folder Move) -- Docker
+(`AppData\Local\Docker`, ~23 Go) et WSL (~23 Go) ne sont qu'une fraction du
+problème. Nettoyage sûr effectué : cache pip (~2,1 Go), cache yarn/npm,
+corbeille, dossier Temp -- aucun n'a suffi seul, l'espace disponible est
+resté sous les 2 Go pendant une bonne partie de la session, avec des **écarts
+soudains d'plusieurs Go en quelques minutes** observés dans les deux sens
+(très probablement une synchronisation OneDrive active en arrière-plan, pas
+un effet de ce que fait Claude).
+
+**Docker Desktop a fini par redémarrer proprement** une fois quelques Go
+libérés, via `Stop-Process` sur `Docker Desktop`/`com.docker.backend` puis
+relance de `Docker Desktop.exe` (`wsl --shutdown` seul n'avait pas suffi).
+Après redémarrage, Postgres, Grafana et le moteur Java ont tous été testés
+avec succès en conditions réelles dans cette même session (voir Phases 2-4,
+6 ci-dessus) -- donc **si Docker refuse de démarrer dans une future session,
+ce n'est pas forcément définitif** : vérifier l'espace disque, libérer
+quelques Go si besoin, puis tenter ce redémarrage avant de conclure à un
+blocage. Le nettoyage OneDrive ("Libérer de l'espace", clic droit dans
+l'Explorateur -- ne supprime rien, juste des copies locales) reste, lui, non
+fait à la fin de cette session et est la vraie solution durable.
 
 **Avant toute commande `npm install`, `docker compose up` ou `mvn` dans une
 future session** : vérifier `df -h /c/Users/Lenovo/wealthguard` (ou

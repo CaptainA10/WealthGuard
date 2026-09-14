@@ -180,7 +180,50 @@ une dégradation gracieuse, pas un second chemin de code parallèle à
 maintenir — `loadReport()` (`src/api.ts`) est le seul endroit qui connaît les
 deux sources.
 
-## 5. Monitoring vs reporting : deux outils, deux publics
+## 5. Assistant en langage naturel (LangChain)
+
+Traduit une question en français ("Quels clients ont une allocation
+obligataire supérieure à 60 % ?") en SQL, exécute la requête, retourne les
+lignes (`data-pipeline/wealthguard_pipeline/assistant/`).
+
+**Ce que « sécuriser l'exécution » veut dire concrètement** (cahier des
+charges §2.4) : une instruction dans le prompt ("ne réponds qu'avec du
+SELECT") n'est pas une barrière de sécurité — un modèle peut être contourné
+par le prompt de l'utilisateur, et même un modèle honnête peut se tromper sur
+une question complexe. Toute requête générée passe par deux couches
+indépendantes avant d'atteindre PostgreSQL :
+
+1. **`security.validate_and_prepare`** — rejette tout ce qui n'est pas une
+   instruction `SELECT`/`WITH` unique, tout mot-clé d'écriture ou de DDL où
+   qu'il apparaisse dans le texte, et toute table référencée hors d'une
+   liste blanche explicite (CTE nommées incluses, mais leur propre corps
+   reste vérifié — nommer un CTE `clients` ne permet pas d'en faire une
+   porte dérobée vers une table interdite). Plafonne aussi le nombre de
+   lignes (`LIMIT`).
+2. **Transaction PostgreSQL `READ ONLY`** (`nl_query.py`), avec
+   `statement_timeout` — une deuxième couche indépendante de la première :
+   même un bug dans le validateur regex ne peut pas devenir une écriture ni
+   une requête qui tourne indéfiniment.
+
+Le whitelisting de **colonnes** (également demandé par le cahier des
+charges) n'est pas appliqué indépendamment par ce module : le faire
+correctement demanderait un vrai analyseur SQL, pas une regex, et une fausse
+impression de sécurité au niveau colonne serait pire qu'une limite honnête.
+La barrière qui existe à ce niveau est le schéma décrit au modèle dans son
+prompt système, combinée au fait qu'accéder à une colonne hors schéma (une
+table système, par exemple) nécessite de facto une table hors liste blanche
+— déjà rejetée par la couche 1.
+
+**Testé sans jamais appeler l'API réelle** (décision explicite du
+2026-09-14 : ne pas dépenser pour que le projet reste démontrable sans
+abonnement payant). Le "chain" LangChain (`prompt | llm | parser`) est
+injectable ; tous les tests lui substituent un faux objet qui renvoie du SQL
+prédéfini sans appel réseau, y compris les tests d'intégration qui, eux,
+utilisent un vrai PostgreSQL local (gratuit) pour vérifier l'exécution et les
+deux couches de sécurité. Volontairement absent du `docker-compose.yml` par
+défaut et du déploiement GitHub Pages, pour la même raison.
+
+## 6. Monitoring vs reporting : deux outils, deux publics
 
 - **Power BI / Tableau** répondent à une question métier : « comment se
   porte le portefeuille de ce client ? ». Public : les conseillers.
@@ -190,7 +233,7 @@ deux sources.
   rechargement quotidien) — un run = une ligne, pour observer une tendance
   dans le temps plutôt qu'un instantané.
 
-## 6. CI/CD
+## 7. CI/CD
 
 Le dépôt est hébergé sur GitHub (choix du propriétaire du projet), le
 pipeline utilise donc GitHub Actions plutôt que GitLab CI — la forme en trois
@@ -204,18 +247,18 @@ Rien n'est simulé : c'est la même couverture qu'un environnement de
 développement local une fois Postgres et le moteur Java lancés, exécutée sans
 surveillance à chaque push.
 
-## 7. Ce qui n'est pas encore fait, et pourquoi
+## 8. Ce qui n'est pas encore fait, et pourquoi
 
 - **Déploiement Azure réel** : documenté (étape « deploy » du pipeline CI,
   commentée) mais non câblé — aucun abonnement Azure disponible pour ce
   projet portfolio.
-- **Assistant LangChain** (requêtage en langage naturel) : dépendances
-  déclarées, module non écrit.
 - **Dashboards Power BI / Tableau** : délibérément laissés à la charge de
   l'auteur du projet, qui maîtrise déjà ces outils — construits à partir des
   indicateurs exposés par `indicators.py`.
+- **Whitelisting de colonnes** dans l'assistant en langage naturel : limité
+  par conception à ce qu'une regex peut faire raisonnablement — voir §5.
 
-## 8. Correspondance avec les manques identifiés en entretien
+## 9. Correspondance avec les manques identifiés en entretien
 
 | Choix technique | Manque comblé |
 |---|---|
@@ -225,3 +268,4 @@ surveillance à chaque push.
 | Architecture polyglotte (Java + Python + React) | Offres full-stack |
 | GitHub Actions CI/CD complet (test/build/deploy) | Compétences DevOps/CI-CD |
 | Grafana (monitoring) + Power BI/Tableau (métier) | Double compétence dataviz opérationnelle et métier |
+| Assistant LangChain (requêtage NL sécurisé) | Offres mentionnant LangChain / requêtage en langage naturel |
