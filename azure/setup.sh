@@ -52,11 +52,12 @@ az ad app federated-credential create --id "$APP_ID" --parameters '{
   "issuer": "https://token.actions.githubusercontent.com",
   "subject": "repo:'"$REPO"':ref:refs/heads/main",
   "audiences": ["api://AzureADTokenExchange"]
-}' -o none
+}' -o none 2>/dev/null || echo "  (federated credential deja existant, on continue)"
 
 echo "== 3/5 Role Contributor, limite a ce groupe de ressources =="
 az role assignment create --assignee "$APP_ID" --role Contributor \
-  --scope "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP" -o none
+  --scope "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP" -o none 2>/dev/null \
+  || echo "  (role deja attribue, on continue)"
 
 echo "== 4/5 App Service Plan (F1, gratuit) + Web App (Java 17) =="
 az appservice plan create --name "$PLAN_NAME" --resource-group "$RESOURCE_GROUP" \
