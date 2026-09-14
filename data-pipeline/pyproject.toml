@@ -21,6 +21,7 @@ dependencies = [
 market = ["yfinance>=0.2.40"]
 assistant = [
     "langchain>=0.3",
+    "langchain-groq>=0.2",
     "langchain-anthropic>=0.3",
     "langchain-community>=0.3",
     "fastapi>=0.110",

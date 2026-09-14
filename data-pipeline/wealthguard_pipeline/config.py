@@ -144,10 +144,23 @@ class StorageConfig:
         return self.connection_string is not None
 
 
+#: provider -> (env var holding its API key, default model).
+#: Groq first: a genuine free tier (rate-limited, not a trial), so `wg-ask`
+#: works with no spend by default. Anthropic stays available for anyone who
+#: wants Claude specifically -- LangChain's whole point is that swapping the
+#: model underneath the same prompt/parser chain is a one-line change, not a
+#: rewrite (see nl_query.py's _build_chain).
+_ASSISTANT_PROVIDERS: dict[str, tuple[str, str]] = {
+    "groq": ("GROQ_API_KEY", "llama-3.3-70b-versatile"),
+    "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-5"),
+}
+
+
 @dataclass(frozen=True)
 class AssistantConfig:
     """LangChain natural-language querying assistant."""
 
+    provider: str
     api_key: str
     model: str
     max_rows: int
@@ -155,9 +168,17 @@ class AssistantConfig:
 
     @classmethod
     def from_env(cls) -> "AssistantConfig":
+        provider = _optional("WG_ASSISTANT_PROVIDER", "groq")
+        if provider not in _ASSISTANT_PROVIDERS:
+            raise ConfigError(
+                f"WG_ASSISTANT_PROVIDER={provider!r} is not supported. "
+                f"Expected one of: {sorted(_ASSISTANT_PROVIDERS)}"
+            )
+        key_env_var, default_model = _ASSISTANT_PROVIDERS[provider]
         return cls(
-            api_key=_require("ANTHROPIC_API_KEY"),
-            model=_optional("WG_ASSISTANT_MODEL", "claude-sonnet-5"),
+            provider=provider,
+            api_key=_require(key_env_var),
+            model=_optional("WG_ASSISTANT_MODEL", default_model),
             max_rows=_int("WG_ASSISTANT_MAX_ROWS", 200),
             statement_timeout_ms=_int("WG_ASSISTANT_STATEMENT_TIMEOUT_MS", 5000),
         )

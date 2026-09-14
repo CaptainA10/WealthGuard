@@ -35,7 +35,7 @@ def get_assistant() -> NaturalLanguageQueryAssistant:
     """FastAPI dependency, built fresh per call so the DB engine and the LLM
     client always reflect current settings. Overridden in tests with a fake
     chain -- see ``tests/test_assistant_api.py`` -- so importing this module,
-    and running its tests, never requires a funded ANTHROPIC_API_KEY."""
+    and running its tests, never requires a GROQ_API_KEY/ANTHROPIC_API_KEY."""
     settings = get_settings()
     engine = db.build_engine(settings.database)
     return NaturalLanguageQueryAssistant(settings.assistant, engine)

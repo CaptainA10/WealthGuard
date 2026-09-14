@@ -34,7 +34,10 @@ class FakeChain:
 
 
 def _config(**overrides) -> AssistantConfig:
-    defaults = dict(api_key="unused-in-tests", model="unused-in-tests", max_rows=50, statement_timeout_ms=5000)
+    defaults = dict(
+        provider="groq", api_key="unused-in-tests", model="unused-in-tests",
+        max_rows=50, statement_timeout_ms=5000,
+    )
     defaults.update(overrides)
     return AssistantConfig(**defaults)
 

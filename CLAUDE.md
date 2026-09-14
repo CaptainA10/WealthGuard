@@ -235,21 +235,31 @@ Phases du cahier des charges §6 :
      d'ecriture/DDL, une seule instruction, `LIMIT` impose. Enterement
      testable sans LLM (`tests/test_assistant_security.py`, exhaustif).
    - `nl_query.py` (`NaturalLanguageQueryAssistant`) : chaine LangChain
-     (`prompt | ChatAnthropic | StrOutputParser`) **injectable** — le
-     parametre `chain` permet de remplacer le LLM par un faux objet dans les
-     tests, jamais d'appel reseau paye. Execute la requete validee dans une
-     transaction Postgres `READ ONLY` + `statement_timeout` (deuxieme
-     couche de securite, independante de la regex).
+     (`prompt | <ChatGroq ou ChatAnthropic> | StrOutputParser`)
+     **injectable** — le parametre `chain` permet de remplacer le LLM par un
+     faux objet dans les tests, jamais d'appel reseau paye. Execute la
+     requete validee dans une transaction Postgres `READ ONLY` +
+     `statement_timeout` (deuxieme couche de securite, independante de la
+     regex).
    - `api.py` (FastAPI, `POST /ask`) et `cli.py` (`wg-ask`, entry point
      `pyproject.toml`).
-   - **Decision explicite de l'utilisateur (2026-09-14)** : ne jamais
-     appeler l'API Anthropic reelle pendant le developpement/tests, pour que
-     le projet reste demontrable sans depense. Tous les tests
-     (`test_assistant_security.py`, `test_assistant_nl_query.py` [integration,
-     vrai Postgres local gratuit + faux LLM], `test_assistant_api.py`
+   - **Fournisseur LLM configurable, Groq par defaut** (`WG_ASSISTANT_PROVIDER`,
+     defaut `groq`, `config.AssistantConfig._ASSISTANT_PROVIDERS`) —
+     changement demande par l'utilisateur le 2026-09-15 : Groq a un vrai
+     palier gratuit (pas un essai), contrairement a Anthropic. `provider`
+     choisit a la fois la variable d'env de cle (`GROQ_API_KEY` /
+     `ANTHROPIC_API_KEY`) et le modele par defaut ; passer
+     `WG_ASSISTANT_PROVIDER=anthropic` bascule sur Claude sans toucher au
+     code -- c'est precisement l'argument d'entretien pour justifier
+     LangChain plutot qu'un appel SDK direct a un seul fournisseur.
+   - Tous les tests (`test_assistant_security.py`, `test_assistant_nl_query.py`
+     [integration, vrai Postgres local gratuit + faux LLM], `test_assistant_api.py`
      [FastAPI TestClient + dependance surchargee]) passent sans
-     `ANTHROPIC_API_KEY` funded ni requete reseau. Volontairement absent du
-     `docker-compose.yml` par defaut et du deploiement GitHub Pages.
+     `GROQ_API_KEY`/`ANTHROPIC_API_KEY` funded ni requete reseau, quel que
+     soit le fournisseur configure. Volontairement absent du
+     `docker-compose.yml` par defaut et du deploiement GitHub Pages (meme
+     gratuit, un appel LLM reste un appel reseau tiers, pas quelque chose a
+     cabler dans un chemin de demo public).
    - **Deux bugs reels trouves et corriges pendant l'ecriture des tests** :
      (1) un CTE nomme (`WITH totals AS (...) SELECT * FROM totals`) etait
      rejete comme "table inconnue" — corrige en extrayant les noms de CTE
@@ -393,7 +403,8 @@ cd data-pipeline && pip install -e ".[dev,market]"
 # + extras assistant (LangChain/FastAPI), seulement si besoin :
 cd data-pipeline && pip install -e ".[assistant]"
 
-# Assistant NL (necessite un ANTHROPIC_API_KEY finance -- jamais appele par les tests)
+# Assistant NL (necessite GROQ_API_KEY -- gratuit -- ou ANTHROPIC_API_KEY
+# + WG_ASSISTANT_PROVIDER=anthropic ; jamais appele par les tests)
 cd data-pipeline && wg-ask "Quels clients ont une allocation obligataire superieure a 60% ?"
 
 # Exporter la fixture pour le frontend (a refaire si le seed dataset change)

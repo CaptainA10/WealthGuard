@@ -214,14 +214,24 @@ prompt système, combinée au fait qu'accéder à une colonne hors schéma (une
 table système, par exemple) nécessite de facto une table hors liste blanche
 — déjà rejetée par la couche 1.
 
-**Testé sans jamais appeler l'API réelle** (décision explicite du
-2026-09-14 : ne pas dépenser pour que le projet reste démontrable sans
-abonnement payant). Le "chain" LangChain (`prompt | llm | parser`) est
-injectable ; tous les tests lui substituent un faux objet qui renvoie du SQL
-prédéfini sans appel réseau, y compris les tests d'intégration qui, eux,
-utilisent un vrai PostgreSQL local (gratuit) pour vérifier l'exécution et les
-deux couches de sécurité. Volontairement absent du `docker-compose.yml` par
-défaut et du déploiement GitHub Pages, pour la même raison.
+**Fournisseur LLM interchangeable par configuration** (`WG_ASSISTANT_PROVIDER`,
+`config.AssistantConfig`) : **Groq par défaut** (palier gratuit réel, pas un
+essai limité dans le temps), Anthropic en option. C'est l'argument concret
+pour justifier LangChain plutôt qu'un simple appel HTTP direct au SDK d'un
+fournisseur : la chaîne `prompt | llm | parser` (`nl_query.py`) ne change pas
+d'une ligne selon le fournisseur, seule la classe importée dans
+`_build_chain` change. Décision prise le 2026-09-14 à la demande explicite de
+l'utilisateur, qui ne voulait pas dépendre d'une API payante pour que le
+projet reste démontrable.
+
+**Testé sans jamais appeler l'API réelle**, indépendamment du fournisseur
+choisi. Le "chain" LangChain est injectable ; tous les tests lui substituent
+un faux objet qui renvoie du SQL prédéfini sans appel réseau, y compris les
+tests d'intégration qui, eux, utilisent un vrai PostgreSQL local (gratuit)
+pour vérifier l'exécution et les deux couches de sécurité. Volontairement
+absent du `docker-compose.yml` par défaut et du déploiement GitHub Pages,
+pour la même raison — même gratuit, un appel LLM reste un appel réseau à un
+service tiers, pas quelque chose à câbler dans un chemin de démo public.
 
 ## 6. Monitoring vs reporting : deux outils, deux publics
 

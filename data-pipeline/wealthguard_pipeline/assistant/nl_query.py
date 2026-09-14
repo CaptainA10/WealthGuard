@@ -9,6 +9,12 @@ l'execution des requetes generees"). This module keeps LangChain to what it
 is good at -- prompting a chat model and parsing its text output -- and
 routes every result through :mod:`security` before it ever reaches
 PostgreSQL.
+
+The chat model is swappable by configuration alone (``WG_ASSISTANT_PROVIDER``,
+see ``config.AssistantConfig``): Groq by default (a genuine free tier, not a
+trial), Anthropic as an alternative. This is the actual point of building on
+LangChain rather than one vendor's SDK directly -- the prompt/parser chain
+below does not change either way, only which class ``_build_chain`` imports.
 """
 
 from __future__ import annotations
@@ -75,11 +81,21 @@ class NaturalLanguageQueryAssistant:
 
     @staticmethod
     def _build_chain(config: AssistantConfig) -> Runnable:
-        # Imported lazily: langchain-anthropic is an optional extra, and a
-        # caller supplying their own `chain` should not need it installed.
-        from langchain_anthropic import ChatAnthropic
+        # Imported lazily, and only the provider actually configured: a
+        # caller supplying their own `chain` (every test in this repo) needs
+        # neither package installed, and a Groq-only install does not need
+        # langchain-anthropic pulled in just to sit unused.
+        if config.provider == "groq":
+            from langchain_groq import ChatGroq
 
-        llm = ChatAnthropic(model=config.model, api_key=config.api_key, temperature=0)
+            llm = ChatGroq(model=config.model, api_key=config.api_key, temperature=0)
+        elif config.provider == "anthropic":
+            from langchain_anthropic import ChatAnthropic
+
+            llm = ChatAnthropic(model=config.model, api_key=config.api_key, temperature=0)
+        else:
+            raise ValueError(f"Unsupported assistant provider: {config.provider!r}")
+
         prompt = ChatPromptTemplate.from_messages(
             [("system", SYSTEM_PROMPT), ("human", "{question}")]
         )

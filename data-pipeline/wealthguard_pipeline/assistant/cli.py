@@ -2,10 +2,12 @@
 
     wg-ask "Quels clients ont une allocation obligataire superieure a 60 % ?"
 
-Requires a funded ``ANTHROPIC_API_KEY`` -- this is the one WealthGuard
-component that costs money to run live, which is why it is kept out of the
-GitHub Pages demo and out of the default `docker compose up` stack. See
-ARCHITECTURE.md.
+Requires ``GROQ_API_KEY`` (free tier, default provider) or
+``ANTHROPIC_API_KEY`` (set ``WG_ASSISTANT_PROVIDER=anthropic`` to use it
+instead) -- either way, an external LLM call is the one thing this
+component needs that the rest of WealthGuard does not, which is why it is
+kept out of the GitHub Pages demo and out of the default
+`docker compose up` stack. See ARCHITECTURE.md.
 """
 
 from __future__ import annotations
