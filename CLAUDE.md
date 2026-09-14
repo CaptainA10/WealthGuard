@@ -259,7 +259,16 @@ Phases du cahier des charges §6 :
      soit le fournisseur configure. Volontairement absent du
      `docker-compose.yml` par defaut et du deploiement GitHub Pages (meme
      gratuit, un appel LLM reste un appel reseau tiers, pas quelque chose a
-     cabler dans un chemin de demo public).
+     cabler dans un chemin de demo public) -- mais deploye separement sur
+     Azure, voir point 9 ci-dessous.
+   - **Garde-fou `WG_ASSISTANT_DEMO_KEY`** (`api.py`) : ajoute le 2026-09-15
+     avant le deploiement public -- sans lui, `/ask` serait un endpoint
+     public qui declenche un appel LLM par requete, exploitable pour epuiser
+     le quota gratuit Groq. En-tete `X-Demo-Key` compare a une valeur choisie
+     par l'utilisateur ; no-op si la variable d'env est absente (donc aucun
+     test existant ni le dev local n'est affecte -- verifie par
+     `TestDemoKeyGate` dans `test_assistant_api.py`). Nouveau endpoint
+     `GET /health`, sans auth, pour le health check App Service.
    - **Deux bugs reels trouves et corriges pendant l'ecriture des tests** :
      (1) un CTE nomme (`WITH totals AS (...) SELECT * FROM totals`) etait
      rejete comme "table inconnue" — corrige en extrayant les noms de CTE
@@ -312,6 +321,31 @@ Phases du cahier des charges §6 :
      `gh` CLI, pas de `GH_TOKEN`/`GITHUB_TOKEN`, credential.helper=manager
      non exploitable pour l'API) -- chaque "Re-run failed jobs" a du etre
      declenche manuellement par l'utilisateur dans l'UI GitHub.
+   - **Assistant LangChain sur Azure -- CODE/INFRA PRET, DEPLOIEMENT REEL A
+     FINALISER PAR L'UTILISATEUR** (demande explicite du 2026-09-15 : "je
+     veux deployer l'assistant... pour qu'il soit utilisable en ligne").
+     Cote code, tout est fait et teste localement (voir point 7) :
+     `azure/setup.sh` etend maintenant l'etape 6/6 pour creer une deuxieme
+     Web App Linux Python 3.12 (`wealthguard-assistant`) sur le **meme** plan
+     F1 (le quota gratuit est par plan, pas par app) ; `ci.yml` ajoute le job
+     `deploy-azure-assistant` (zippe `wealthguard_pipeline/` +
+     `requirements-azure.txt` -- liste volontairement plus etroite que
+     l'extra `[assistant]` de `pyproject.toml`, sans yfinance/openpyxl/azure
+     -- et applique les secrets a chaque deploiement) ; startup command
+     `gunicorn -k uvicorn.workers.UvicornWorker`. **Le vrai blocage n'etait
+     pas Azure mais Postgres** : `AZURE_POSTGRESQL_*` (config.py) doit
+     pointer sur une vraie base en ligne, or Azure Database for PostgreSQL
+     n'a aucun palier gratuit permanent (deja documente) -- resolu en
+     branchant [Neon](https://neon.tech) (palier gratuit permanent, hors
+     Azure) sur ces memes variables d'env, sans nouveau code. Voir
+     `data-pipeline/NEON_SETUP.md` pour la procedure complete.
+     **Ce qui reste a faire, et que seul l'utilisateur peut faire** (compte
+     tiers, secrets GitHub) : creer le compte/projet Neon, executer le
+     pipeline une fois contre Neon pour charger de vraies donnees, ajouter
+     les secrets GitHub (`GROQ_API_KEY`, `WG_ASSISTANT_DEMO_KEY`,
+     `NEON_HOST/DATABASE/USER/PASSWORD`), relancer `azure/setup.sh` dans
+     Cloud Shell (idempotent). **Ne pas dire "assistant deploye" tant que
+     l'utilisateur n'a pas confirme que l'URL Azure repond reellement.**
 10. **Documentation finale — FAIT.** `README.md` (démarrage rapide, stack,
     structure) et `ARCHITECTURE.md` (choix techniques, compromis, étude de cas
     du bug de concentration, tableau de correspondance offres — pensé comme
@@ -406,6 +440,11 @@ cd data-pipeline && pip install -e ".[assistant]"
 # Assistant NL (necessite GROQ_API_KEY -- gratuit -- ou ANTHROPIC_API_KEY
 # + WG_ASSISTANT_PROVIDER=anthropic ; jamais appele par les tests)
 cd data-pipeline && wg-ask "Quels clients ont une allocation obligataire superieure a 60% ?"
+# ou en service HTTP local :
+cd data-pipeline && python -m uvicorn wealthguard_pipeline.assistant.api:app --port 8090
+# -> http://localhost:8090/docs (Swagger). WG_ASSISTANT_DEMO_KEY absent en
+# local = pas d'en-tete requis ; verifie manuellement le 2026-09-15 (/health
+# et /docs en 200, /ask repond reellement via Groq + Postgres local).
 
 # Exporter la fixture pour le frontend (a refaire si le seed dataset change)
 cd data-pipeline && wg-export-frontend-fixture --as-of 2026-09-13

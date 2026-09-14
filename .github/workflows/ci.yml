@@ -218,6 +218,64 @@ jobs:
           app-name: wealthguard-quality-engine
           package: quality-engine/target/quality-engine-*.jar
 
+  deploy-azure-assistant:
+    name: Deploy — Azure (LangChain assistant)
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [test-java, test-python, test-frontend]
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      # Deployed package is deliberately narrower than the repo: just the
+      # importable package (its sql/*.sql resources included) plus a
+      # requirements.txt Oryx (App Service's Python build system) can install
+      # from -- no tests, no seed data, no dev/market/azure extras. See
+      # requirements-azure.txt for why it lists fewer packages than
+      # pyproject.toml's [assistant] extra.
+      - name: Package the assistant deployment
+        run: |
+          mkdir -p /tmp/assistant-deploy
+          cp -r data-pipeline/wealthguard_pipeline /tmp/assistant-deploy/
+          find /tmp/assistant-deploy -name __pycache__ -type d -prune -exec rm -rf {} +
+          cp data-pipeline/requirements-azure.txt /tmp/assistant-deploy/requirements.txt
+          cd /tmp/assistant-deploy && zip -rq /tmp/assistant.zip .
+
+      # Same OIDC federated login as deploy-azure above -- one identity,
+      # Contributor on the whole wealthguard-rg resource group, so it can
+      # also manage this second Web App (see azure/setup.sh).
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # Azure Database for PostgreSQL has no free tier (see ARCHITECTURE.md
+      # §8), so the deployed assistant points at Neon (neon.tech, Postgres
+      # with a genuine free tier) instead -- reusing the exact
+      # AZURE_POSTGRESQL_* variable names config.py already reads, so no
+      # code branch exists for "which Postgres". Set once as GitHub secrets
+      # (see data-pipeline/NEON_SETUP.md), re-applied to the Web App on
+      # every deploy so rotating a secret takes effect on the next push.
+      - name: Set secrets as App Service settings
+        run: |
+          az webapp config appsettings set --name wealthguard-assistant --resource-group wealthguard-rg --settings \
+            GROQ_API_KEY="${{ secrets.GROQ_API_KEY }}" \
+            WG_ASSISTANT_DEMO_KEY="${{ secrets.WG_ASSISTANT_DEMO_KEY }}" \
+            AZURE_POSTGRESQL_HOST="${{ secrets.NEON_HOST }}" \
+            AZURE_POSTGRESQL_DATABASE="${{ secrets.NEON_DATABASE }}" \
+            AZURE_POSTGRESQL_USER="${{ secrets.NEON_USER }}" \
+            AZURE_POSTGRESQL_PASSWORD="${{ secrets.NEON_PASSWORD }}" \
+            -o none
+
+      - name: Deploy to Azure App Service (free F1 tier, shares the plan with quality-engine)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: wealthguard-assistant
+          package: /tmp/assistant.zip
+
   # Data-pipeline (Azure Functions) and Blob Storage are documented but not
   # deployed here -- the F1 App Service above already demonstrates a real,
   # working Azure deployment (and unblocks live data on the public GitHub
@@ -230,7 +288,7 @@ jobs:
     steps:
       - name: Deploy — documented, not wired up
         run: |
-          echo "::notice title=Deployment simulated::Wiring quality-engine to Azure (see deploy-azure above) covers the highest-value case for a portfolio demo without provisioning paid-tier services (PostgreSQL Flexible Server has no free tier)."
+          echo "::notice title=Deployment simulated::Wiring quality-engine to Azure (see deploy-azure above) covers the highest-value case for a portfolio demo without provisioning paid-tier services (PostgreSQL Flexible Server has no free tier). The LangChain assistant (deploy-azure-assistant) needed a real Postgres of its own for its read-only queries and uses Neon (a free-tier Postgres outside Azure) for exactly that reason -- see NEON_SETUP.md."
           echo "A real deployment from here would additionally:"
           echo "  - az functionapp deployment source config-zip ... (data-pipeline, as an Azure Function)"
           echo "  - az storage blob upload-batch ... (landing files / reports, to Azure Blob Storage)"

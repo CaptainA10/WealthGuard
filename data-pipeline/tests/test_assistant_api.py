@@ -6,6 +6,7 @@ money or needs external infrastructure to run.
 
 from __future__ import annotations
 
+import pytest
 from fastapi.testclient import TestClient
 
 from wealthguard_pipeline.assistant.api import app, get_assistant
@@ -69,6 +70,9 @@ class TestAskEndpoint:
         assert response.status_code == 422
         assert "Table non autorisee" in response.json()["detail"]
 
+    def test_health_endpoint_needs_no_auth(self):
+        assert TestClient(app).get("/health").status_code == 200
+
     def test_rejects_a_request_missing_the_question_field(self):
         fake = FakeAssistant(answer=AssistantAnswer("", "", [], []))
         _override(fake)
@@ -79,3 +83,35 @@ class TestAskEndpoint:
             _clear_override()
 
         assert response.status_code == 422
+
+
+class TestDemoKeyGate:
+    """WG_ASSISTANT_DEMO_KEY is unset in every TestAskEndpoint case above (and
+    in local dev) -- the gate must be a no-op then. It only activates once
+    the Azure deployment sets that app setting, to stop random internet
+    traffic from burning through the free-tier Groq quota."""
+
+    def test_no_op_when_unset(self, monkeypatch: pytest.MonkeyPatch):
+        monkeypatch.delenv("WG_ASSISTANT_DEMO_KEY", raising=False)
+        fake = FakeAssistant(answer=AssistantAnswer("q", "SELECT 1", ["x"], []))
+        _override(fake)
+        try:
+            response = TestClient(app).post("/ask", json={"question": "q"})
+        finally:
+            _clear_override()
+        assert response.status_code == 200
+
+    def test_rejects_missing_or_wrong_header_when_set(self, monkeypatch: pytest.MonkeyPatch):
+        monkeypatch.setenv("WG_ASSISTANT_DEMO_KEY", "secret123")
+        fake = FakeAssistant(answer=AssistantAnswer("q", "SELECT 1", ["x"], []))
+        _override(fake)
+        try:
+            client = TestClient(app)
+            missing = client.post("/ask", json={"question": "q"})
+            wrong = client.post("/ask", json={"question": "q"}, headers={"X-Demo-Key": "nope"})
+            right = client.post("/ask", json={"question": "q"}, headers={"X-Demo-Key": "secret123"})
+        finally:
+            _clear_override()
+        assert missing.status_code == 401
+        assert wrong.status_code == 401
+        assert right.status_code == 200

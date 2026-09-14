@@ -26,6 +26,7 @@ assistant = [
     "langchain-community>=0.3",
     "fastapi>=0.110",
     "uvicorn[standard]>=0.29",
+    "gunicorn>=22.0",
 ]
 azure = [
     "azure-functions>=1.18",

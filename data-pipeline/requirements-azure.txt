@@ -1,0 +1,22 @@
+# Runtime dependencies for the Azure App Service deployment of the LangChain
+# assistant ONLY (wealthguard_pipeline.assistant.api:app). Deliberately
+# narrower than pyproject.toml's [assistant] extra: the F1 (free) tier has
+# 1GB RAM and a shared CPU quota, so this list skips everything the rest of
+# the pipeline needs but the assistant's import chain does not (yfinance,
+# openpyxl, azure-functions/storage). See azure/setup.sh and
+# .github/workflows/ci.yml (deploy-azure-assistant job).
+#
+# Kept in sync by hand with pyproject.toml's [project.dependencies] +
+# [assistant] extra, minus the unused ones above, plus gunicorn (the
+# production ASGI entrypoint Oryx's default startup command expects).
+pandas>=2.1
+numpy>=1.26
+SQLAlchemy>=2.0
+psycopg[binary]>=3.1
+python-dotenv>=1.0
+langchain>=0.3
+langchain-groq>=0.2
+langchain-community>=0.3
+fastapi>=0.110
+uvicorn[standard]>=0.29
+gunicorn>=22.0

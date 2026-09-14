@@ -228,10 +228,20 @@ projet reste démontrable.
 choisi. Le "chain" LangChain est injectable ; tous les tests lui substituent
 un faux objet qui renvoie du SQL prédéfini sans appel réseau, y compris les
 tests d'intégration qui, eux, utilisent un vrai PostgreSQL local (gratuit)
-pour vérifier l'exécution et les deux couches de sécurité. Volontairement
-absent du `docker-compose.yml` par défaut et du déploiement GitHub Pages,
-pour la même raison — même gratuit, un appel LLM reste un appel réseau à un
-service tiers, pas quelque chose à câbler dans un chemin de démo public.
+pour vérifier l'exécution et les deux couches de sécurité. Reste absent du
+`docker-compose.yml` par défaut et du déploiement GitHub Pages — même
+gratuit, un appel LLM reste un appel réseau à un service tiers, pas quelque
+chose à câbler dans le chemin de démo principal — mais est déployé
+séparément sur Azure, en service HTTP autonome : voir §8.
+
+**Garde-fou anti-abus sur le déploiement public** (`WG_ASSISTANT_DEMO_KEY`,
+`api.py`) : une fois en ligne, `/ask` est un endpoint public qui déclenche un
+appel LLM à chaque requête — sans rien, n'importe qui sur Internet pourrait
+épuiser le quota gratuit Groq. Un en-tête `X-Demo-Key` partagé, comparé côté
+serveur, n'est pas de l'authentification réelle (une seule valeur pour tout
+le monde) mais un frein suffisant contre le trafic automatisé, sans ajouter
+un vrai système de comptes pour une démo. Absent (donc no-op) en local et
+dans tous les tests — n'existe que comme réglage de l'App Service Azure.
 
 ## 6. Monitoring vs reporting : deux outils, deux publics
 
@@ -259,22 +269,38 @@ surveillance à chaque push.
 
 ## 8. Déploiement Azure réel
 
-Le moteur de qualité Java tourne réellement sur Azure
-(`wealthguard-quality-engine.azurewebsites.net`), déployé automatiquement à
-chaque push sur `main` par le job `deploy-azure` du CI. **Un seul composant**
-déployé, pas toute la Phase 9 du cahier des charges — choix assumé de
+Deux composants tournent réellement sur Azure, tous deux déployés
+automatiquement à chaque push sur `main`, sur le **même** App Service Plan
+F1 (le quota gratuit est par plan, pas par application — deux petites
+applications le partagent sans surcoût) :
+
+- Le moteur de qualité Java
+  (`wealthguard-quality-engine.azurewebsites.net`, job `deploy-azure`).
+- L'assistant LangChain
+  (`wealthguard-assistant.azurewebsites.net`, job `deploy-azure-assistant`),
+  runtime Python 3.12, démarré par `gunicorn -k uvicorn.workers.UvicornWorker`
+  (voir `azure/setup.sh`). Documentation interactive Swagger sur `/docs`.
+
+Pas toute la Phase 9 du cahier des charges pour autant — choix assumé de
 périmètre plutôt qu'un défaut :
 
 - **App Service, palier F1 (gratuit, sans limite de temps)**, pas Azure
   Functions + PostgreSQL Flexible Server + Blob Storage comme envisagé
-  initialement. Raison : PostgreSQL managé n'a **aucun palier gratuit
-  permanent** sur Azure (contrairement à App Service F1 ou Functions
-  Consumption) — le déployer aurait consommé le crédit d'essai en continu
-  plutôt qu'une seule fois. Déployer uniquement le moteur Java suffit à
-  prouver un déploiement Azure réel et fonctionnel, et **débloque le mode
-  temps réel du dashboard public** (§4) sans ce risque de coût récurrent.
-  `data-pipeline` (Azure Functions) et le stockage Blob restent documentés
-  mais non câblés (job `deploy-pipeline-simulated`).
+  initialement pour le pipeline d'ingestion. Raison : PostgreSQL managé
+  **Azure** n'a **aucun palier gratuit permanent** (contrairement à App
+  Service F1 ou Functions Consumption) — le déployer aurait consommé le
+  crédit d'essai en continu plutôt qu'une seule fois. `data-pipeline` (Azure
+  Functions) et le stockage Blob restent documentés mais non câblés (job
+  `deploy-pipeline-simulated`).
+- **L'assistant a quand même besoin d'un vrai PostgreSQL en ligne** pour
+  répondre à ses questions — contrairement au moteur Java, il ne peut pas
+  s'en passer. Solution : [Neon](https://neon.tech), un PostgreSQL managé
+  *hors Azure* avec un vrai palier gratuit permanent, branché via les mêmes
+  variables `AZURE_POSTGRESQL_*` que `config.py` lit déjà pour Azure ou le
+  Docker local — aucune branche de code spécifique à Neon. Détail complet du
+  provisionnement dans `data-pipeline/NEON_SETUP.md`. Décision prise le
+  2026-09-15 à la demande explicite de l'utilisateur, qui voulait l'assistant
+  utilisable en ligne sans pour autant payer un Postgres managé Azure.
 - **Authentification sans secret stocké** : l'identité que GitHub Actions
   utilise pour se connecter est une *federated credential* OIDC
   (`azure/setup.sh`), pas un client secret classique — Azure fait confiance
@@ -297,7 +323,7 @@ périmètre plutôt qu'un défaut :
 
 ## 9. Ce qui n'est pas encore fait, et pourquoi
 
-- **Azure Functions / PostgreSQL managé / Blob Storage** : voir §8 —
+- **Azure Functions / PostgreSQL managé Azure / Blob Storage** : voir §8 —
   décision de périmètre, pas un oubli.
 - **Dashboards Power BI / Tableau** : délibérément laissés à la charge de
   l'auteur du projet, qui maîtrise déjà ces outils — construits à partir des

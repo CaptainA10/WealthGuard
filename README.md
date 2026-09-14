@@ -89,11 +89,15 @@ python -m wealthguard_pipeline.seed.generate --as-of 2026-09-13
 wg-export-frontend-fixture --as-of 2026-09-13   # regénère la fixture du frontend
 ```
 
-### Assistant en langage naturel (optionnel)
+### Assistant en langage naturel
 
 Le reste du projet (pipeline, moteur Java, frontend, Grafana, CI/CD, dashboard
 en ligne) fonctionne entièrement **sans** cette brique, donc elle n'est ni
-dans le `docker-compose.yml` par défaut, ni dans la démo GitHub Pages.
+dans le `docker-compose.yml` par défaut, ni dans la démo GitHub Pages — mais
+elle est **déployée en ligne séparément**, sur Azure :
+[wealthguard-assistant.azurewebsites.net/docs](https://wealthguard-assistant.azurewebsites.net/docs)
+(Swagger UI ; nécessite l'en-tête `X-Demo-Key`, garde-fou anti-abus décrit
+dans [ARCHITECTURE.md](ARCHITECTURE.md) §5 — demander la valeur si besoin).
 Fournisseur LLM par défaut : **Groq** (palier gratuit réel, pas un essai —
 clé sur [console.groq.com/keys](https://console.groq.com/keys)). LangChain
 étant agnostique du fournisseur, passer sur Claude (payant) ne change pas
@@ -154,6 +158,10 @@ client.
   sur un instantané figé (bannière visible) — voir
   [ARCHITECTURE.md](ARCHITECTURE.md) pour le détail du mode démo et du
   déploiement Azure.
+- **Assistant en langage naturel (LangChain)** : voir
+  [§ Assistant en langage naturel](#assistant-en-langage-naturel) —
+  déployé sur Azure, un PostgreSQL séparé ([Neon](https://neon.tech), voir
+  `data-pipeline/NEON_SETUP.md`).
 - **Power BI / Tableau** (reporting métier — valorisation, allocation,
   performance) : à construire à partir des indicateurs exposés par
   `data-pipeline/wealthguard_pipeline/indicators.py` /

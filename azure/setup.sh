@@ -18,6 +18,14 @@
 #   - CORS allow-listing the GitHub Pages origin so the deployed frontend can
 #     call this engine directly from the browser (see quality-engine's
 #     WebConfig).
+#   - A second Linux Web App, on the SAME free plan (F1 quota is per plan,
+#     not per app -- two small apps share it fine for a demo), running
+#     Python 3.12 for the LangChain assistant
+#     (wealthguard_pipeline.assistant.api:app). Its secrets (GROQ_API_KEY,
+#     and the Neon Postgres credentials it needs since Azure Database for
+#     PostgreSQL has no free tier -- see ARCHITECTURE.md §8) are set by the
+#     CI job (deploy-azure-assistant in ci.yml), not by this script, the
+#     same way the Java secrets never touch this script either.
 #
 # After running, copy the three printed values into
 # GitHub -> Settings -> Secrets and variables -> Actions -> New repository
@@ -34,6 +42,7 @@ REPO_NAME="WealthGuard"
 APP_REG_NAME="wealthguard-github-actions"
 PLAN_NAME="wealthguard-plan"
 WEBAPP_NAME="${WEBAPP_NAME:-wealthguard-quality-engine}"
+ASSISTANT_WEBAPP_NAME="${ASSISTANT_WEBAPP_NAME:-wealthguard-assistant}"
 GH_PAGES_ORIGIN="https://captaina10.github.io"
 
 echo "== Subscription courante =="
@@ -89,15 +98,42 @@ if ! az webapp create --name "$WEBAPP_NAME" --resource-group "$RESOURCE_GROUP" \
   exit 1
 fi
 
-echo "== 5/5 CORS pour le dashboard GitHub Pages =="
+echo "== 5/6 CORS pour le dashboard GitHub Pages =="
 az webapp config appsettings set --name "$WEBAPP_NAME" --resource-group "$RESOURCE_GROUP" \
   --settings WEALTHGUARD_CORS_ALLOWED_ORIGINS="$GH_PAGES_ORIGIN" -o none
+
+echo "== 6/6 Web App Python (assistant LangChain), meme plan F1 =="
+if ! az webapp create --name "$ASSISTANT_WEBAPP_NAME" --resource-group "$RESOURCE_GROUP" \
+     --plan "$PLAN_NAME" --runtime "PYTHON:3.12" -o none 2>/tmp/webapp_assistant_err; then
+  echo "  Le runtime string a peut-etre change de syntaxe selon la version d'az. Runtimes Python disponibles :"
+  az webapp list-runtimes --os linux --query "[?contains(@, 'python')]" -o table
+  echo "  Relance avec : az webapp create --name $ASSISTANT_WEBAPP_NAME --resource-group $RESOURCE_GROUP --plan $PLAN_NAME --runtime '<runtime-ci-dessus>'"
+  cat /tmp/webapp_assistant_err
+  exit 1
+fi
+
+# Oryx (le build system d'App Service) doit vraiment pip install le contenu
+# du zip deploye par la CI -- sans ce flag il sert le code source tel quel.
+# WEBSITES_PORT doit correspondre au --bind du gunicorn lance par le
+# startup command ci-dessous. Les secrets (GROQ_API_KEY, les identifiants
+# Neon) sont fixes par le job deploy-azure-assistant de la CI, pas ici.
+az webapp config appsettings set --name "$ASSISTANT_WEBAPP_NAME" --resource-group "$RESOURCE_GROUP" \
+  --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true WEBSITES_PORT=8000 \
+             WG_ASSISTANT_PROVIDER=groq WG_DB_SCHEMA=wealthguard AZURE_POSTGRESQL_SSL=true \
+             WEALTHGUARD_CORS_ALLOWED_ORIGINS="$GH_PAGES_ORIGIN" -o none
+
+az webapp config set --name "$ASSISTANT_WEBAPP_NAME" --resource-group "$RESOURCE_GROUP" \
+  --startup-file "gunicorn -w 2 -k uvicorn.workers.UvicornWorker --timeout 120 --bind=0.0.0.0:8000 wealthguard_pipeline.assistant.api:app" \
+  -o none
 
 cat <<EOF
 
 ================================================================
- URL du moteur (une fois deploye par la CI) :
+ URL du moteur qualite Java (une fois deploye par la CI) :
    https://$WEBAPP_NAME.azurewebsites.net
+
+ URL de l'assistant LangChain (une fois deploye par la CI) :
+   https://$ASSISTANT_WEBAPP_NAME.azurewebsites.net/docs
 
  A copier dans GitHub -> Settings -> Secrets and variables -> Actions
  (un secret par ligne) :
@@ -105,7 +141,16 @@ cat <<EOF
    AZURE_TENANT_ID       = $TENANT_ID
    AZURE_SUBSCRIPTION_ID = $SUBSCRIPTION_ID
 
- Nom de la Web App utilise : $WEBAPP_NAME
- (donne ce nom si different de "wealthguard-quality-engine")
+ Secrets supplementaires requis pour le job deploy-azure-assistant
+ (voir data-pipeline/NEON_SETUP.md pour obtenir les 4 valeurs Neon) :
+   GROQ_API_KEY
+   WG_ASSISTANT_DEMO_KEY   (choisis une valeur toi-meme, ex: openssl rand -hex 16)
+   NEON_HOST
+   NEON_DATABASE
+   NEON_USER
+   NEON_PASSWORD
+
+ Noms des Web Apps utilises : $WEBAPP_NAME / $ASSISTANT_WEBAPP_NAME
+ (donne ces noms si differents des valeurs par defaut)
 ================================================================
 EOF
