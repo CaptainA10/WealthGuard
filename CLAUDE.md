@@ -194,10 +194,21 @@ Phases du cahier des charges §6 :
 7. **Assistant LangChain** — pas commencé (`assistant/` existe dans
    `wealthguard_pipeline/` mais est vide ; dépendances déclarées dans
    `pyproject.toml[assistant]`).
-8. **CI/CD GitLab** — pas commencé, pas de `.gitlab-ci.yml`.
-9. **Déploiement Azure** — pas commencé.
-10. **Documentation finale** (`README.md`, `ARCHITECTURE.md` à la racine) — pas
-    encore écrite.
+8. **CI/CD — FAIT, sur GitHub Actions (pas GitLab)** — `.github/workflows/ci.yml` :
+   `test-java` (`mvn verify`), `test-python` (démarre le vrai jar Spring Boot +
+   un vrai conteneur service Postgres, lance toute la suite pytest y compris
+   les tests d'intégration -- rien n'est mocké), `test-frontend` (`oxlint` +
+   `tsc` + `vite build`), `build` (jar + wheel + bundle frontend en artefacts,
+   `main` uniquement), `deploy` (documenté/simulé, pas d'abonnement Azure).
+   Vérifié localement avant push (`npm run lint`, `npm run build`,
+   `python -m build`) ; premier run déclenché sur push, statut à vérifier
+   (`https://github.com/CaptainA10/WealthGuard/actions`).
+9. **Déploiement Azure** — pas commencé (l'étape `deploy` du CI documente ce
+   qu'il faudrait faire, sans l'exécuter).
+10. **Documentation finale — FAIT.** `README.md` (démarrage rapide, stack,
+    structure) et `ARCHITECTURE.md` (choix techniques, compromis, étude de cas
+    du bug de concentration, tableau de correspondance offres — pensé comme
+    support d'entretien) à la racine.
 
 Avant de dire qu'une phase est terminée, vérifier l'état réel des fichiers
 (`Glob`), ne pas se fier à ce tableau seul — il peut devenir obsolète.
@@ -318,9 +329,12 @@ Python.
   branche `main` — malgré le cahier des charges §2.7 qui demandait GitLab
   ("pour une fois") ; l'utilisateur a explicitement donné une URL GitHub le
   2026-09-14, donc GitHub prime sur la préférence écrite dans le cahier des
-  charges. Si le CI/CD GitLab (Phase 8) est abordé plus tard, clarifier avec
-  l'utilisateur s'il veut un miroir GitLab ou adapter la Phase 8 à GitHub
-  Actions.
+  charges. **Résolu** : la Phase 8 (CI/CD) a été adaptée à GitHub Actions
+  (`.github/workflows/ci.yml`) plutôt qu'un `.gitlab-ci.yml` — décision prise
+  sans reconfirmer avec l'utilisateur vu le signal déjà fort (deux push sur
+  GitHub, aucune mention de GitLab). Si l'utilisateur veut quand même un
+  miroir GitLab pour le pitch d'entretien Sopra Steria/Bel, ce sera une tâche
+  séparée, pas une modification de ce workflow.
 - `docker-compose.yml` monte `data-pipeline/wealthguard_pipeline/sql/schema.sql`
   dans `/docker-entrypoint-initdb.d/` — ce script ne s'exécute qu'à la
   **création** du volume Postgres. Après une modification du schéma, il faut
