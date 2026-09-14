@@ -49,9 +49,18 @@ def init_schema(engine: Engine) -> None:
 
 
 def _split_statements(sql: str) -> list[str]:
-    """Split a .sql file on top-level ``;`` -- good enough for our DDL (no
-    stored procedures or dollar-quoted bodies containing semicolons)."""
-    return [s.strip() for s in sql.split(";") if s.strip() and not s.strip().startswith("--")]
+    """Strip ``--`` comment lines, then split what remains on top-level ``;``
+    -- good enough for our DDL (no stored procedures or dollar-quoted bodies
+    containing semicolons).
+
+    Comment lines are stripped *before* splitting, not filtered out
+    statement-by-statement afterwards: a statement preceded by a multi-line
+    comment block (every table in this file has one) produces a chunk whose
+    first line is a comment even though real SQL follows, and checking only
+    the chunk's own first line would silently drop the whole statement.
+    """
+    code_lines = [line for line in sql.splitlines() if not line.strip().startswith("--")]
+    return [s.strip() for s in "\n".join(code_lines).split(";") if s.strip()]
 
 
 def load_dataset(engine: Engine, dataset: Dataset) -> None:
