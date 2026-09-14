@@ -1,0 +1,185 @@
+# WealthGuard CI/CD (cahier des charges §2.7): test -> build -> deploy.
+#
+# Runs on GitHub Actions, not GitLab CI, because the repository lives on
+# GitHub (an explicit choice by the project owner -- see CLAUDE.md's
+# "Pieges connus"). The three-stage shape the cahier des charges asks for
+# (test / build / deploy) is kept regardless of platform.
+#
+# The `test-python` job is the one worth reading closely: it builds and boots
+# the real Spring Boot jar and spins up a real PostgreSQL service container,
+# then runs the *entire* pytest suite -- unit and integration alike. Nothing
+# here is mocked: this is the same coverage the developer environment gets
+# once Postgres and the quality engine are both up, just running unattended.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-java:
+    name: Test — Java quality engine
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: quality-engine
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: mvn verify (JUnit 5 + JaCoCo 85% branch-coverage gate)
+        run: mvn -B verify
+      - name: Upload JaCoCo report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: quality-engine/target/site/jacoco
+          retention-days: 7
+
+  test-python:
+    name: Test — Python pipeline (unit + integration)
+    runs-on: ubuntu-latest
+    needs: test-java
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: wealthguard
+          POSTGRES_USER: wealthguard
+          POSTGRES_PASSWORD: wealthguard
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U wealthguard"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      AZURE_POSTGRESQL_HOST: localhost
+      AZURE_POSTGRESQL_PORT: 5432
+      AZURE_POSTGRESQL_DATABASE: wealthguard
+      AZURE_POSTGRESQL_USER: wealthguard
+      AZURE_POSTGRESQL_PASSWORD: wealthguard
+      AZURE_POSTGRESQL_SSL: "false"
+      WG_QUALITY_API_URL: http://localhost:8080
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Build the quality engine jar (tests already ran in test-java)
+        working-directory: quality-engine
+        run: mvn -B -DskipTests package
+
+      - name: Start the quality engine in the background
+        working-directory: quality-engine
+        run: |
+          nohup java -jar target/quality-engine-*.jar > /tmp/quality-engine.log 2>&1 &
+          timeout 60 bash -c 'until curl -sf http://localhost:8080/actuator/health; do sleep 2; done'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: data-pipeline/pyproject.toml
+
+      - name: Install the pipeline package
+        working-directory: data-pipeline
+        run: pip install -e ".[dev]"
+
+      - name: pytest (unit + integration -- Postgres and the engine are both live)
+        working-directory: data-pipeline
+        run: pytest -v
+
+      - name: Quality engine logs
+        if: always()
+        run: cat /tmp/quality-engine.log
+
+  test-frontend:
+    name: Test — React frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - name: Build (runs tsc -b then vite build)
+        run: npm run build
+
+  build:
+    name: Build artifacts
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [test-java, test-python, test-frontend]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: Package the Spring Boot jar
+        working-directory: quality-engine
+        run: mvn -B -DskipTests package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: quality-engine-jar
+          path: quality-engine/target/quality-engine-*.jar
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: data-pipeline/pyproject.toml
+      - name: Package the pipeline wheel
+        working-directory: data-pipeline
+        run: |
+          pip install build
+          python -m build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wealthguard-pipeline-wheel
+          path: data-pipeline/dist/*
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Build the frontend bundle
+        working-directory: frontend
+        run: npm ci && npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist
+
+  deploy:
+    name: Deploy (simulated)
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    steps:
+      - name: Deploy — documented, not wired up
+        run: |
+          echo "::notice title=Deployment simulated::No Azure subscription is available for this portfolio project (cahier des charges Phase 9, not yet implemented)."
+          echo "A real deployment from here would:"
+          echo "  - az functionapp deployment source config-zip ... (data-pipeline, as an Azure Function)"
+          echo "  - az webapp deploy ... (quality-engine jar, as an App Service / Container App)"
+          echo "  - az storage blob upload-batch ... (frontend/dist, to Azure Blob Storage static hosting)"
