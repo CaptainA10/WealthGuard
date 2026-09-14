@@ -93,7 +93,7 @@ jobs:
 
       - name: Install the pipeline package
         working-directory: data-pipeline
-        run: pip install -e ".[dev]"
+        run: pip install -e ".[dev,assistant]"
 
       - name: pytest (unit + integration -- Postgres and the engine are both live)
         working-directory: data-pipeline
