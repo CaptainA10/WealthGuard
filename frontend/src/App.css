@@ -26,6 +26,17 @@
   color: var(--bloquant);
 }
 
+.status-demo {
+  background: var(--avertissement-bg);
+  color: var(--avertissement);
+  margin-bottom: 20px;
+}
+
+.status-demo code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9em;
+}
+
 /* --- Summary bar --- */
 
 .summary-bar {

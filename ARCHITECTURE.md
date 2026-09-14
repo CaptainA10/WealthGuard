@@ -165,6 +165,21 @@ réutilise la même fonction de mapping snake_case → camelCase que le client
 Python (`quality_client.build_validate_payload`) — un seul endroit connaît le
 contrat JSON du moteur, jamais dupliqué.
 
+### Mode démo (déploiement GitHub Pages)
+
+GitHub Pages n'héberge que des fichiers statiques : il ne peut pas faire
+tourner le moteur Java. Le frontend déployé (`captaina10.github.io/WealthGuard`)
+tente donc l'appel API en direct en premier (avec un timeout de 4 s pour ne
+pas faire attendre un visiteur qui n'a aucune chance d'obtenir une réponse) ;
+en cas d'échec, il retombe sur `demo-report.json`, un instantané figé mais
+**réel** (généré en POSTant la même fixture à une instance locale du moteur),
+avec une bannière explicite plutôt qu'un silence trompeur sur le fait que la
+donnée n'est plus temps réel. L'architecture "appel direct navigateur → API
+Java" reste donc valable et démontrable en local ; le déploiement public est
+une dégradation gracieuse, pas un second chemin de code parallèle à
+maintenir — `loadReport()` (`src/api.ts`) est le seul endroit qui connaît les
+deux sources.
+
 ## 5. Monitoring vs reporting : deux outils, deux publics
 
 - **Power BI / Tableau** répondent à une question métier : « comment se

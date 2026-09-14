@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { fetchValidationReport } from "./api";
+import { loadReport, type ReportSource } from "./api";
 import { AnomalyTable } from "./components/AnomalyTable";
 import { SeverityFilter } from "./components/SeverityFilter";
 import { SummaryBar } from "./components/SummaryBar";
@@ -9,7 +9,7 @@ import "./App.css";
 type LoadState =
   | { status: "loading" }
   | { status: "error"; message: string }
-  | { status: "ready"; report: ValidationReport };
+  | { status: "ready"; report: ValidationReport; source: ReportSource };
 
 function App() {
   const [state, setState] = useState<LoadState>({ status: "loading" });
@@ -17,9 +17,9 @@ function App() {
 
   useEffect(() => {
     let cancelled = false;
-    fetchValidationReport()
-      .then((report) => {
-        if (!cancelled) setState({ status: "ready", report });
+    loadReport()
+      .then(({ report, source }) => {
+        if (!cancelled) setState({ status: "ready", report, source });
       })
       .catch((error: unknown) => {
         if (!cancelled) {
@@ -62,12 +62,20 @@ function App() {
 
       {state.status === "error" && (
         <p className="status-message status-error">
-          Impossible de contacter le moteur de qualité : {state.message}
+          Impossible de contacter le moteur de qualité, et impossible de charger l'instantané de
+          démo non plus : {state.message}
         </p>
       )}
 
       {state.status === "ready" && (
         <>
+          {state.source === "demo" && (
+            <p className="status-message status-demo">
+              Moteur de qualité injoignable — affichage d'un instantané figé (données réelles,
+              non temps réel). Lance <code>quality-engine</code> et <code>data-pipeline</code> en
+              local pour la validation en direct — voir le README du dépôt.
+            </p>
+          )}
           <SummaryBar report={state.report} />
           <SeverityFilter
             active={activeSeverities}
