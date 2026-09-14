@@ -151,7 +151,7 @@ class StorageConfig:
 #: model underneath the same prompt/parser chain is a one-line change, not a
 #: rewrite (see nl_query.py's _build_chain).
 _ASSISTANT_PROVIDERS: dict[str, tuple[str, str]] = {
-    "groq": ("GROQ_API_KEY", "llama-3.3-70b-versatile"),
+    "groq": ("GROQ_API_KEY", "openai/gpt-oss-120b"),
     "anthropic": ("ANTHROPIC_API_KEY", "claude-sonnet-5"),
 }
 
