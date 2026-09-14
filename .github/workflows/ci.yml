@@ -19,6 +19,15 @@ on:
   pull_request:
     branches: [main]
 
+# A push that lands while a previous run for the same branch is still going
+# cancels that older run rather than leaving it to finish and fail for
+# reasons the next push already fixed -- exactly what happened once here
+# (see CLAUDE.md): a run started right before a fix landed stayed visible
+# as a stale "failure" in the Actions list, superseded but not cancelled.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test-java:
     name: Test — Java quality engine
