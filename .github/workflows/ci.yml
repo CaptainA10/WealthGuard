@@ -97,7 +97,15 @@ jobs:
 
       - name: pytest (unit + integration -- Postgres and the engine are both live)
         working-directory: data-pipeline
-        run: pytest -v
+        run: pytest -v --cov --cov-report=term-missing --cov-report=xml
+
+      - name: Upload Python coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-coverage-report
+          path: data-pipeline/coverage.xml
+          retention-days: 7
 
       - name: Quality engine logs
         if: always()
