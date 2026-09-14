@@ -29,7 +29,8 @@ set -euo pipefail
 
 RESOURCE_GROUP="wealthguard-rg"
 LOCATION="francecentral"
-REPO="CaptainA10/WealthGuard"
+OWNER="CaptainA10"
+REPO_NAME="WealthGuard"
 APP_REG_NAME="wealthguard-github-actions"
 PLAN_NAME="wealthguard-plan"
 WEBAPP_NAME="${WEBAPP_NAME:-wealthguard-quality-engine}"
@@ -47,12 +48,28 @@ az group create --name "$RESOURCE_GROUP" --location "$LOCATION" -o none
 echo "== 2/5 Identite pour GitHub Actions (OIDC, sans secret) =="
 APP_ID=$(az ad app create --display-name "$APP_REG_NAME" --query appId -o tsv)
 az ad sp create --id "$APP_ID" -o none 2>/dev/null || echo "  (service principal deja existant, on continue)"
+
+# GitHub's OIDC "sub" claim includes the numeric owner/repo IDs
+# ("repo:OWNER@OWNER_ID/REPO@REPO_ID:ref:...", not just the names) -- derived
+# from the public API rather than hardcoded, so this keeps working if the
+# repo is ever renamed or transferred.
+OWNER_ID=$(curl -s "https://api.github.com/users/$OWNER" | grep -o '"id": *[0-9]*' | head -1 | grep -o '[0-9]*')
+REPO_ID=$(curl -s "https://api.github.com/repos/$OWNER/$REPO_NAME" | grep -o '"id": *[0-9]*' | head -1 | grep -o '[0-9]*')
+SUBJECT="repo:${OWNER}@${OWNER_ID}/${REPO_NAME}@${REPO_ID}:ref:refs/heads/main"
+echo "  subject OIDC attendu : $SUBJECT"
+
+# Delete-then-create rather than a plain create: makes this step idempotent
+# even when a credential with the same name already exists but with a
+# now-wrong subject (exactly what happened the first time this was run,
+# before GitHub's numeric-ID subject format was accounted for).
+az ad app federated-credential delete --id "$APP_ID" \
+  --federated-credential-id "wealthguard-main-branch" -o none 2>/dev/null || true
 az ad app federated-credential create --id "$APP_ID" --parameters '{
   "name": "wealthguard-main-branch",
   "issuer": "https://token.actions.githubusercontent.com",
-  "subject": "repo:'"$REPO"':ref:refs/heads/main",
+  "subject": "'"$SUBJECT"'",
   "audiences": ["api://AzureADTokenExchange"]
-}' -o none 2>/dev/null || echo "  (federated credential deja existant, on continue)"
+}' -o none
 
 echo "== 3/5 Role Contributor, limite a ce groupe de ressources =="
 az role assignment create --assignee "$APP_ID" --role Contributor \
