@@ -247,18 +247,55 @@ Rien n'est simulé : c'est la même couverture qu'un environnement de
 développement local une fois Postgres et le moteur Java lancés, exécutée sans
 surveillance à chaque push.
 
-## 8. Ce qui n'est pas encore fait, et pourquoi
+## 8. Déploiement Azure réel
 
-- **Déploiement Azure réel** : documenté (étape « deploy » du pipeline CI,
-  commentée) mais non câblé — aucun abonnement Azure disponible pour ce
-  projet portfolio.
+Le moteur de qualité Java tourne réellement sur Azure
+(`wealthguard-quality-engine.azurewebsites.net`), déployé automatiquement à
+chaque push sur `main` par le job `deploy-azure` du CI. **Un seul composant**
+déployé, pas toute la Phase 9 du cahier des charges — choix assumé de
+périmètre plutôt qu'un défaut :
+
+- **App Service, palier F1 (gratuit, sans limite de temps)**, pas Azure
+  Functions + PostgreSQL Flexible Server + Blob Storage comme envisagé
+  initialement. Raison : PostgreSQL managé n'a **aucun palier gratuit
+  permanent** sur Azure (contrairement à App Service F1 ou Functions
+  Consumption) — le déployer aurait consommé le crédit d'essai en continu
+  plutôt qu'une seule fois. Déployer uniquement le moteur Java suffit à
+  prouver un déploiement Azure réel et fonctionnel, et **débloque le mode
+  temps réel du dashboard public** (§4) sans ce risque de coût récurrent.
+  `data-pipeline` (Azure Functions) et le stockage Blob restent documentés
+  mais non câblés (job `deploy-pipeline-simulated`).
+- **Authentification sans secret stocké** : l'identité que GitHub Actions
+  utilise pour se connecter est une *federated credential* OIDC
+  (`azure/setup.sh`), pas un client secret classique — Azure fait confiance
+  à un jeton émis par GitHub pour ce dépôt précis et cette branche précise
+  (`main`), sans qu'aucun mot de passe ne transite ni ne soit stocké en
+  secret GitHub. Le rôle accordé (`Contributor`) est limité au seul groupe
+  de ressources du projet, jamais à toute la souscription.
+- **Un vrai bug de configuration trouvé en déployant** : la première
+  tentative de connexion OIDC a échoué avec `AADSTS700213: No matching
+  federated identity record found`. Cause : le `subject` du jeton que
+  GitHub émet réellement est
+  `repo:OWNER@OWNER_ID/REPO@REPO_ID:ref:refs/heads/main` (avec les
+  identifiants numériques du compte et du dépôt), pas le format
+  `repo:OWNER/REPO:ref:refs/heads/main` habituellement documenté comme
+  référence rapide. `azure/setup.sh` dérive maintenant ces identifiants
+  depuis l'API publique GitHub plutôt que de les coder en dur, pour rester
+  correct si le dépôt est renommé ou transféré. Bon rappel que la
+  documentation de reference simplifie parfois un détail qui casse tout en
+  pratique — seul le message d'erreur réel a permis de le diagnostiquer.
+
+## 9. Ce qui n'est pas encore fait, et pourquoi
+
+- **Azure Functions / PostgreSQL managé / Blob Storage** : voir §8 —
+  décision de périmètre, pas un oubli.
 - **Dashboards Power BI / Tableau** : délibérément laissés à la charge de
   l'auteur du projet, qui maîtrise déjà ces outils — construits à partir des
   indicateurs exposés par `indicators.py`.
 - **Whitelisting de colonnes** dans l'assistant en langage naturel : limité
   par conception à ce qu'une regex peut faire raisonnablement — voir §5.
 
-## 9. Correspondance avec les manques identifiés en entretien
+## 10. Correspondance avec les manques identifiés en entretien
 
 | Choix technique | Manque comblé |
 |---|---|

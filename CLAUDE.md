@@ -202,7 +202,11 @@ Phases du cahier des charges §6 :
      `public/data/demo-report.json` (instantane fige mais **reel**, genere
      via `curl -X POST` contre un moteur local, voir
      `public/data/README.md` pour la regenerer) avec une banniere explicite
-     dans l'UI plutot qu'un faux temps reel silencieux. **Necessitait
+     dans l'UI plutot qu'un faux temps reel silencieux. **Depuis le
+     deploiement Azure reel (Phase 9 ci-dessous), l'appel en direct
+     reussit** : le dashboard public montre desormais la vraie validation
+     temps reel pour un visiteur normal, le mode demo n'etant plus qu'un
+     repli pour le cas ou le moteur Azure serait down. **Necessitait
      l'activation manuelle, une seule fois, de Settings -> Pages -> Source =
      "GitHub Actions"** sur le depot -- echoue sinon a l'etape
      `actions/configure-pages@v5` avec un message clair ; deja fait par
@@ -265,8 +269,39 @@ Phases du cahier des charges §6 :
    Vérifié localement avant push (`npm run lint`, `npm run build`,
    `python -m build`) ; premier run déclenché sur push, statut à vérifier
    (`https://github.com/CaptainA10/WealthGuard/actions`).
-9. **Déploiement Azure** — pas commencé (l'étape `deploy` du CI documente ce
-   qu'il faudrait faire, sans l'exécuter).
+9. **Déploiement Azure — FAIT (partiellement, par choix)** : le moteur Java
+   tourne réellement sur Azure App Service, palier F1 gratuit
+   (`wealthguard-quality-engine.azurewebsites.net`), déployé automatiquement
+   par le job `deploy-azure` du CI à chaque push sur `main`. Le dashboard
+   public GitHub Pages pointe dessus (`VITE_QUALITY_API_URL` fixé au build
+   dans `deploy-pages`) -- **validation en temps réel pour un vrai visiteur
+   externe**, plus seulement le mode démo (qui reste le repli si le moteur
+   est down). `data-pipeline` (Azure Functions), Blob Storage et PostgreSQL
+   managé restent documentés mais non câblés (job
+   `deploy-pipeline-simulated`) -- décision assumée : Postgres managé n'a
+   aucun palier gratuit permanent sur Azure, contrairement a App Service F1,
+   et l'utilisateur a un budget de credit (`Azure for Students`, 86$) qu'il
+   ne veut pas voir grignote par une ressource qui tourne en continu.
+   - `azure/setup.sh` : script one-shot, a lancer dans Azure Cloud Shell
+     (aucun outil Azure disponible dans cet environnement agent -- ni `az`
+     CLI installe, ni token API). Idempotent (peut se relancer sans erreur).
+     Cree un resource group, une identite GitHub Actions en **OIDC
+     (federated credential), sans aucun secret client stocke**, role
+     `Contributor` limite a ce seul resource group, le plan App Service F1 +
+     la Web App Java 17, et le CORS pour l'origine GitHub Pages.
+   - **Bug reel de configuration trouve en deployant** : premiere tentative
+     de connexion OIDC echouee avec `AADSTS700213: No matching federated
+     identity record found`. Le `subject` reellement emis par GitHub est
+     `repo:OWNER@OWNER_ID/REPO@REPO_ID:ref:refs/heads/main` (avec les IDs
+     numeriques du compte/repo), **pas** le format
+     `repo:OWNER/REPO:ref:refs/heads/main` de la doc de reference rapide.
+     Corrige en derivant `OWNER_ID`/`REPO_ID` depuis l'API publique GitHub
+     dans le script plutot que de coder en dur l'ancien format. Voir
+     ARCHITECTURE.md §8 pour le recit complet -- utile en entretien.
+   - Aucun acces agent a l'API GitHub Actions dans cette session (pas de
+     `gh` CLI, pas de `GH_TOKEN`/`GITHUB_TOKEN`, credential.helper=manager
+     non exploitable pour l'API) -- chaque "Re-run failed jobs" a du etre
+     declenche manuellement par l'utilisateur dans l'UI GitHub.
 10. **Documentation finale — FAIT.** `README.md` (démarrage rapide, stack,
     structure) et `ARCHITECTURE.md` (choix techniques, compromis, étude de cas
     du bug de concentration, tableau de correspondance offres — pensé comme

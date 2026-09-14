@@ -141,10 +141,13 @@ client.
 - **Dashboard React en ligne** :
   [captaina10.github.io/WealthGuard](https://captaina10.github.io/WealthGuard/)
   (déployé automatiquement par `.github/workflows/ci.yml` à chaque push sur
-  `main`). Sans moteur Java accessible publiquement, la page affiche un
-  **instantané figé** de vraies anomalies (bannière visible) plutôt que la
-  validation en direct — voir [ARCHITECTURE.md](ARCHITECTURE.md) pour le
-  détail du mode démo.
+  `main`) — connecté au **moteur de qualité Java réellement déployé sur
+  Azure** (`wealthguard-quality-engine.azurewebsites.net`, App Service,
+  palier gratuit F1), donc validation en **temps réel**, pas un instantané.
+  Si le moteur venait à être indisponible, la page retombe automatiquement
+  sur un instantané figé (bannière visible) — voir
+  [ARCHITECTURE.md](ARCHITECTURE.md) pour le détail du mode démo et du
+  déploiement Azure.
 - **Power BI / Tableau** (reporting métier — valorisation, allocation,
   performance) : à construire à partir des indicateurs exposés par
   `data-pipeline/wealthguard_pipeline/indicators.py` /
