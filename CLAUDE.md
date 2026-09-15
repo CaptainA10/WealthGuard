@@ -321,30 +321,44 @@ Phases du cahier des charges §6 :
      `gh` CLI, pas de `GH_TOKEN`/`GITHUB_TOKEN`, credential.helper=manager
      non exploitable pour l'API) -- chaque "Re-run failed jobs" a du etre
      declenche manuellement par l'utilisateur dans l'UI GitHub.
-   - **Assistant LangChain sur Azure -- CODE/INFRA PRET, DEPLOIEMENT REEL A
-     FINALISER PAR L'UTILISATEUR** (demande explicite du 2026-09-15 : "je
-     veux deployer l'assistant... pour qu'il soit utilisable en ligne").
-     Cote code, tout est fait et teste localement (voir point 7) :
-     `azure/setup.sh` etend maintenant l'etape 6/6 pour creer une deuxieme
-     Web App Linux Python 3.12 (`wealthguard-assistant`) sur le **meme** plan
-     F1 (le quota gratuit est par plan, pas par app) ; `ci.yml` ajoute le job
-     `deploy-azure-assistant` (zippe `wealthguard_pipeline/` +
+   - **Assistant LangChain sur Azure -- deploiement reel en cours de
+     finalisation** (demande explicite du 2026-09-15 : "je veux deployer
+     l'assistant... pour qu'il soit utilisable en ligne"). Cote code, tout
+     est fait et teste localement (voir point 7) : `azure/setup.sh` cree une
+     deuxieme Web App Linux Python 3.12 (`wealthguard-assistant`) ; `ci.yml`
+     ajoute le job `deploy-azure-assistant` (zippe `wealthguard_pipeline/` +
      `requirements-azure.txt` -- liste volontairement plus etroite que
      l'extra `[assistant]` de `pyproject.toml`, sans yfinance/openpyxl/azure
      -- et applique les secrets a chaque deploiement) ; startup command
-     `gunicorn -k uvicorn.workers.UvicornWorker`. **Le vrai blocage n'etait
-     pas Azure mais Postgres** : `AZURE_POSTGRESQL_*` (config.py) doit
-     pointer sur une vraie base en ligne, or Azure Database for PostgreSQL
-     n'a aucun palier gratuit permanent (deja documente) -- resolu en
-     branchant [Neon](https://neon.tech) (palier gratuit permanent, hors
-     Azure) sur ces memes variables d'env, sans nouveau code. Voir
-     `data-pipeline/NEON_SETUP.md` pour la procedure complete.
-     **Ce qui reste a faire, et que seul l'utilisateur peut faire** (compte
-     tiers, secrets GitHub) : creer le compte/projet Neon, executer le
-     pipeline une fois contre Neon pour charger de vraies donnees, ajouter
-     les secrets GitHub (`GROQ_API_KEY`, `WG_ASSISTANT_DEMO_KEY`,
-     `NEON_HOST/DATABASE/USER/PASSWORD`), relancer `azure/setup.sh` dans
-     Cloud Shell (idempotent). **Ne pas dire "assistant deploye" tant que
+     `gunicorn -k uvicorn.workers.UvicornWorker`. Le blocage Postgres a ete
+     resolu en branchant [Neon](https://neon.tech) (palier gratuit
+     permanent, hors Azure, contrairement a Azure Database for PostgreSQL)
+     sur les memes variables `AZURE_POSTGRESQL_*` que `config.py` lit deja
+     -- teste en reel le 2026-09-15 (`wg-ask` en local contre Neon repond
+     correctement, vraies donnees chargees : 44 clients/409 positions). Voir
+     `data-pipeline/NEON_SETUP.md`.
+     ### Bug reel trouve en deployant : plan App Service F1 partage -> quota depasse
+     La premiere version de `azure/setup.sh` mettait les deux Web Apps
+     (moteur Java + assistant) sur le **meme** plan F1, en partant du
+     principe que "le quota gratuit est par plan, deux petites apps le
+     partagent sans surcout". Mecanisme juste (le quota de 60 min CPU/jour
+     du palier F1 est bien au niveau du plan), conclusion fausse : le moteur
+     Java tournait deja depuis des heures sur ce plan, et `deploy-azure-assistant`
+     a echoue avec `Site Disabled (CODE: 403)` -- le portail Azure confirmait
+     `Etat: Quota depasse` sur `wealthguard-plan`. Corrige en donnant a
+     l'assistant son **propre** plan F1 (`wealthguard-assistant-plan`,
+     toujours gratuit -- la limite Azure porte sur le nombre de plans
+     gratuits par region/abonnement, pas sur un seul plan par abonnement) ;
+     `azure/setup.sh` supprime maintenant l'ancienne Web App avant de la
+     recreer sur ce nouveau plan (aucune perte : le code est de toute facon
+     redeploye par la CI a chaque push). **Retenue generale** : ne pas
+     supposer qu'un palier "gratuit" partage entre plusieurs apps reelles
+     (pas juste testees ponctuellement) tiendra sans verification -- le
+     quota se mesure a l'usage cumule, pas a la taille de l'app.
+     **Ce qui reste a faire, et que seul l'utilisateur peut faire** :
+     relancer `azure/setup.sh` (idempotent, cree le nouveau plan + recree la
+     Web App dessus) puis re-declencher `deploy-azure-assistant` (push ou
+     "Re-run failed jobs"). **Ne pas dire "assistant deploye" tant que
      l'utilisateur n'a pas confirme que l'URL Azure repond reellement.**
 10. **Documentation finale — FAIT.** `README.md` (démarrage rapide, stack,
     structure) et `ARCHITECTURE.md` (choix techniques, compromis, étude de cas

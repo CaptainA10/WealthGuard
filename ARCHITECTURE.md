@@ -270,16 +270,31 @@ surveillance à chaque push.
 ## 8. Déploiement Azure réel
 
 Deux composants tournent réellement sur Azure, tous deux déployés
-automatiquement à chaque push sur `main`, sur le **même** App Service Plan
-F1 (le quota gratuit est par plan, pas par application — deux petites
-applications le partagent sans surcoût) :
+automatiquement à chaque push sur `main`, chacun sur son **propre** App
+Service Plan F1 :
 
 - Le moteur de qualité Java
-  (`wealthguard-quality-engine.azurewebsites.net`, job `deploy-azure`).
+  (`wealthguard-quality-engine.azurewebsites.net`, job `deploy-azure`,
+  plan `wealthguard-plan`).
 - L'assistant LangChain
-  (`wealthguard-assistant.azurewebsites.net`, job `deploy-azure-assistant`),
-  runtime Python 3.12, démarré par `gunicorn -k uvicorn.workers.UvicornWorker`
-  (voir `azure/setup.sh`). Documentation interactive Swagger sur `/docs`.
+  (`wealthguard-assistant.azurewebsites.net`, job `deploy-azure-assistant`,
+  plan `wealthguard-assistant-plan`), runtime Python 3.12, démarré par
+  `gunicorn -k uvicorn.workers.UvicornWorker` (voir `azure/setup.sh`).
+  Documentation interactive Swagger sur `/docs`.
+
+**Bug réel trouvé en déployant, une deuxième fois** : la première version de
+`azure/setup.sh` faisait partager le **même** plan F1 aux deux applications,
+en partant du principe que « le quota gratuit est par plan, deux petites
+applications le partagent sans surcoût ». Le mécanisme était juste décrit
+(le quota de 60 minutes CPU/jour du palier F1 est bien au niveau du plan, pas
+de l'application) — mais la conclusion était fausse : le moteur Java tournait
+déjà depuis des heures sur ce plan au moment du premier déploiement de
+l'assistant, et le plan est passé en **`État : Quota dépassé`** (visible dans
+le portail Azure), avec un échec de déploiement `Site Disabled (CODE: 403)`
+côté CI. Corrigé en donnant à l'assistant son **propre** plan F1 —
+toujours gratuit (la limite Azure porte sur le nombre de plans gratuits par
+région/abonnement, pas sur un seul plan par abonnement), et son quota CPU
+est désormais indépendant de celui du moteur Java.
 
 Pas toute la Phase 9 du cahier des charges pour autant — choix assumé de
 périmètre plutôt qu'un défaut :

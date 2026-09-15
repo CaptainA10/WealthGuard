@@ -18,10 +18,15 @@
 #   - CORS allow-listing the GitHub Pages origin so the deployed frontend can
 #     call this engine directly from the browser (see quality-engine's
 #     WebConfig).
-#   - A second Linux Web App, on the SAME free plan (F1 quota is per plan,
-#     not per app -- two small apps share it fine for a demo), running
-#     Python 3.12 for the LangChain assistant
-#     (wealthguard_pipeline.assistant.api:app). Its secrets (GROQ_API_KEY,
+#   - A second Linux Web App, on its OWN separate F1 plan, running Python
+#     3.12 for the LangChain assistant (wealthguard_pipeline.assistant.api:app).
+#     NOT sharing wealthguard-plan with the Java engine: the free F1 quota
+#     (60 CPU-minutes/day) is enforced per PLAN, not per app, and the first
+#     attempt at sharing one plan between both apps put it in "Quota
+#     depasse" within a day of real use -- found by actually deploying it
+#     on 2026-09-15 (see CLAUDE.md). A second F1 plan is still free (Azure's
+#     limit is ~10 free plans per region per subscription, not 1), and gives
+#     the assistant its own independent quota. Its secrets (GROQ_API_KEY,
 #     and the Neon Postgres credentials it needs since Azure Database for
 #     PostgreSQL has no free tier -- see ARCHITECTURE.md §8) are set by the
 #     CI job (deploy-azure-assistant in ci.yml), not by this script, the
@@ -41,6 +46,7 @@ OWNER="CaptainA10"
 REPO_NAME="WealthGuard"
 APP_REG_NAME="wealthguard-github-actions"
 PLAN_NAME="wealthguard-plan"
+ASSISTANT_PLAN_NAME="wealthguard-assistant-plan"
 WEBAPP_NAME="${WEBAPP_NAME:-wealthguard-quality-engine}"
 ASSISTANT_WEBAPP_NAME="${ASSISTANT_WEBAPP_NAME:-wealthguard-assistant}"
 GH_PAGES_ORIGIN="https://captaina10.github.io"
@@ -102,12 +108,24 @@ echo "== 5/6 CORS pour le dashboard GitHub Pages =="
 az webapp config appsettings set --name "$WEBAPP_NAME" --resource-group "$RESOURCE_GROUP" \
   --settings WEALTHGUARD_CORS_ALLOWED_ORIGINS="$GH_PAGES_ORIGIN" -o none
 
-echo "== 6/6 Web App Python (assistant LangChain), meme plan F1 =="
+echo "== 6/6 Web App Python (assistant LangChain), plan F1 dedie =="
+# Plan separe du moteur Java -- voir le commentaire en tete de fichier :
+# le quota gratuit F1 est par plan, pas par app, et le partager a fait
+# passer wealthguard-plan en "Quota depasse" en pratique.
+az appservice plan create --name "$ASSISTANT_PLAN_NAME" --resource-group "$RESOURCE_GROUP" \
+  --location "$LOCATION" --sku F1 --is-linux -o none
+
+# Si l'app existe deja sur l'ancien plan partage (etat "Quota depasse" reel
+# observe le 2026-09-15), on la supprime pour la recreer sur son propre
+# plan -- aucune perte : le code est de toute facon redeploye par la CI a
+# chaque push, rien n'est stocke sur l'app elle-meme.
+az webapp delete --name "$ASSISTANT_WEBAPP_NAME" --resource-group "$RESOURCE_GROUP" -o none 2>/dev/null || true
+
 if ! az webapp create --name "$ASSISTANT_WEBAPP_NAME" --resource-group "$RESOURCE_GROUP" \
-     --plan "$PLAN_NAME" --runtime "PYTHON:3.12" -o none 2>/tmp/webapp_assistant_err; then
+     --plan "$ASSISTANT_PLAN_NAME" --runtime "PYTHON:3.12" -o none 2>/tmp/webapp_assistant_err; then
   echo "  Le runtime string a peut-etre change de syntaxe selon la version d'az. Runtimes Python disponibles :"
   az webapp list-runtimes --os linux --query "[?contains(@, 'python')]" -o table
-  echo "  Relance avec : az webapp create --name $ASSISTANT_WEBAPP_NAME --resource-group $RESOURCE_GROUP --plan $PLAN_NAME --runtime '<runtime-ci-dessus>'"
+  echo "  Relance avec : az webapp create --name $ASSISTANT_WEBAPP_NAME --resource-group $RESOURCE_GROUP --plan $ASSISTANT_PLAN_NAME --runtime '<runtime-ci-dessus>'"
   cat /tmp/webapp_assistant_err
   exit 1
 fi
